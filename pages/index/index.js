@@ -11,10 +11,31 @@ const kkpromise = require("../../libs/yc/yc-promise.js")
 
 Page({
   data: {
-   
+    isshow: false,
+    index: 0,
+    tabInfos: [{
+      text: '精选',
+      iconPath: '../../assets/images/tab-index.png',
+      selectedIconPath: '../../assets/images/tab-index-selected.png'
+    },
+    {
+      text: '我的',
+      iconPath: '../../assets/images/tab-my.png',
+      selectedIconPath: '../../assets/images/tab-my-selected.png',
+    }
+    ]
   },
   onLoad: function () {
      
+  },
+  tab(e) {
+    let index = e.currentTarget.dataset.index
+    if (index == app.tabIndex) return
+    app.tabIndex = index
+    this.setData({
+        index: index,
+        tabInfos: this.data.tabInfos
+    })
   },
   scroll(e){
     console.log(e)

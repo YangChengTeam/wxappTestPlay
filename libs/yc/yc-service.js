@@ -66,6 +66,43 @@ function getUserInfo() {
   })()
 }
 
+function setScore(sex, username){
+  return co.wrap(function* () {
+    return yield kknet.post(kkconfig.setScoreUrl, {
+      sex: sex,
+      username: username
+    })
+  })()
+}
+
+function waterInit(xing, headimg) {
+  return co.wrap(function* () {
+    return yield kknet.post(kkconfig.waterInitUrl, {
+      xing: xing,
+      headimg: headimg
+    })
+  })()
+}
+
+function waterRenge(headimg, username) {
+  return co.wrap(function* () {
+    return yield kknet.post(kkconfig.waterRengeUrl, {
+      headimg: headimg,
+      username: username
+    })
+  })()
+}
+
+function starIndex(star, day, sex) {
+  return co.wrap(function* () {
+    return yield kknet.post(kkconfig.starIndexUrl, {
+      star: star,
+      day: day,
+      sex: sex
+    })
+  })()
+}
+
 
 
 
@@ -73,5 +110,9 @@ module.exports = {
   authPermission: authPermission,
   login: login,
   reLogin: reLogin,
-  getUserInfo: getUserInfo
+  getUserInfo: getUserInfo,
+  setScore: setScore,
+  waterInit: waterInit,
+  waterRenge: waterRenge,
+  starIndex: starIndex
 }

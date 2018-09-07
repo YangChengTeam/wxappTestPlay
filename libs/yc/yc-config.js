@@ -32,7 +32,7 @@ const status = {
 const net = {
   defaultParams: {
     app_type: 'wx',
-    app_id: 46
+    app_id: 37
   }
 }
 
@@ -40,12 +40,15 @@ module.exports = {
   global: global,
   status: status,
   net: net,
-  isSign: false,
+  issign: false,
 
   loginUrl: getUrl("/v1.user/login"),
   getUserInfoUrl: getUrl("/v1.game/getUserInfo"),
-  
-  topListUrl: getUrl("/v1.game/topList"),
-  appInfoUrl: getUrl("/v1.game/getAppInfo")
+  appInfoUrl: getUrl("/v1.game/getAppInfo"),
+
+  setScoreUrl: getUrl("/v1.test/setScore"),
+  waterInitUrl: getUrl("/water/init"),
+  waterRengeUrl: getUrl("/water/renge"),
+  starIndexUrl: getUrl("/star/index"),
 }
 

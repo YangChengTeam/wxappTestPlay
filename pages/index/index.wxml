@@ -1,5 +1,28 @@
 <!--index.wxml-->
-<content bindscroll="scroll" bindscrolltolower="scrolltolower" isshowtop>
-    <nav title="心理测试库"></nav>
-    <stateview state="1" title="sssssss"></stateview> 
+<content hidden='{{isshow && index==1}}' bindscroll="scroll" bindscrolltolower="scrolltolower" isshowtop>
+  <nav title="心理测试库"></nav>
+
+
+  <stateview state="1" title="sssssss"></stateview>
+  <swiper>
+    <swiper-item>
+      <image src=''></image>
+    </swiper-item>
+  </swiper>
+
 </content>
+
+<content hidden='{{isshow && index==0}}' bindscroll="scroll" bindscrolltolower="scrolltolower" isshowtop>
+
+</content>
+
+<view class="tab" hidden='{{isshow}}'>
+  <view class="main-tab">
+    <block wx:for="{{tabInfos}}" wx:key="text" wx:for-index="cindex" wx:for-item="item">
+      <view class="tab-item tab-item-{{cindex == index ? 'selected' : '' }}" data-index='{{cindex}}' bindtap='tab'>
+        <image src="{{cindex == index ? item.selectedIconPath :item.iconPath }}"></image>
+        <view class="text">{{item.text}}</view>
+      </view>
+    </block>
+  </view>
+</view>

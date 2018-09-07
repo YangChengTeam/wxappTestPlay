@@ -1,1 +1,38 @@
 /**index.wxss**/
+.tab {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   border-top: solid 1px #ddd;
+   justify-content: center;
+   align-items: center;
+   display: flex;
+   width: 100%;
+   height: 100rpx;
+}
+
+.main-tab {
+   display: flex;
+   width: 80%;
+   height: 100rpx;
+}
+
+.tab-item {
+   display: flex;
+   width: 50%;
+   height: 100%;
+   font-size: 20rpx;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   color: #000;
+}
+
+.tab-item-selected {
+   color: #7234e1;
+}
+
+.tab-item image {
+   width: 43rpx;
+   height: 43rpx;
+}
