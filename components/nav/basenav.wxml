@@ -1,0 +1,10 @@
+<!--components/nav/nav.wxml-->
+<view style='height: {{totalTopHeight}}px; width:750rpx;'>
+</view>
+<view class="bar" style='background:{{background}}; height: {{totalTopHeight}}px;'>
+  <view class="statusBar" style='height: {{statusBarHeight}}px; width:750rpx;'>
+  </view>
+  <view class="navBar" style='color:{{color}};background:{{background}};line-height: {{titleBarHeight}}px;height: {{titleBarHeight}}px; width:750rpx;'>
+      <slot></slot>
+  </view>
+</view>

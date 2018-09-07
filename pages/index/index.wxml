@@ -1,0 +1,5 @@
+<!--index.wxml-->
+<content bindscroll="scroll" bindscrolltolower="scrolltolower" isshowtop>
+    <nav title="心理测试库"></nav>
+    <stateview state="1" title="sssssss"></stateview> 
+</content>

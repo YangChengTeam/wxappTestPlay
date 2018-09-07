@@ -1,0 +1,9 @@
+<!--components/stateview/stateview.wxml-->
+<view class="state loading" wx:if="{{state == 0}}">
+    <image src="{{loading_img}}"></image>
+</view>
+
+<view class="state nodata" wx:if="{{state == 1}}">
+    <image  src="../../assets/images/nodata.png"></image>
+    <view>{{title && title.length ? title : "暂无数据"}}</view>
+</view>

@@ -1,0 +1,7 @@
+<!--components/content.wxml-->
+<view class="top" wx:if="{{isShowTop}}" bindtap='scroll2top'>
+   <image src="../../assets/images/top.png"></image>
+</view>
+<scroll-view scroll-top="{{scrollTop}}"	scroll-with-animation scroll-y class="content" bindscroll="scroll" bindscrolltolower="scrolltolower">
+   <slot></slot>
+</scroll-view>
