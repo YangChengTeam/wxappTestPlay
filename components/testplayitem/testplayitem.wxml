@@ -1,2 +1,13 @@
 <!--components/testplayitem/testplayitem.wxml-->
-<text>components/testplayitem/testplayitem.wxml</text>
+<view class="test-play-item">
+    <image src=''></image>
+    <view class="test-play-item-info">
+      <view class="test-play-item-info-title">你的五大优点</view>
+      <view class="test-play-item-info-desp">我喜欢你身上，别人都不曾的优点</view>
+    </view>
+    <view class="test-play-item-btn">
+      <image src='../../assets/images/test-play-btn.png'></image>
+      <view>去测</view>
+    </view>
+</view>
+<view class="test-play-item-bottom"></view>

@@ -24,7 +24,7 @@ Component({
   ready(){
     if (app.totalTopHeight && app.statusBarHeight && app.titleBarHeight){
       this.setData({
-        totalTopHeight: totalTopHeight,
+        totalTopHeight: app.totalTopHeight,
         statusBarHeight: app.statusBarHeight,
         titleBarHeight: app.titleBarHeight,
         ...this.properties
@@ -45,7 +45,7 @@ Component({
         app.statusBarHeight = res.statusBarHeight
         app.titleBarHeight = totalTopHeight - res.statusBarHeight
         thiz.setData({
-          totalTopHeight: totalTopHeight,
+          totalTopHeight: app.totalTopHeight,
           statusBarHeight: app.statusBarHeight,
           titleBarHeight: app.titleBarHeight
         })

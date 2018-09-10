@@ -1,21 +1,165 @@
 <!--index.wxml-->
-<content hidden='{{isshow && index==1}}' bindscroll="scroll" bindscrolltolower="scrolltolower" isshowtop>
-  <nav title="心理测试库"></nav>
+<view class="index" hidden='{{index==1}}'>
+  <content hidden='{{isshow}}'>
+    <nav title="心理测试库"></nav>
+    <stateview state="2" title="sssssss"></stateview>
+    <swiper>
+      <swiper-item>
+        <image class="pulse-loading" src=''></image>
+      </swiper-item>
+    </swiper>
 
+    <view class="menu">
+      <view class="meun-item" wx:for="{{menuInfo}}" wx:for-index="index" wx:for-item="item" wx:key="id" bindtap='nav2test' data-index='{{index}}'>
+        <image src='{{item.iconPath}}'></image>
+        <view>{{item.text}}</view>
+      </view>
+    </view>
 
-  <stateview state="1" title="sssssss"></stateview>
-  <swiper>
-    <swiper-item>
-      <image src=''></image>
-    </swiper-item>
-  </swiper>
+    <view class="top">
+      <view class="header">
+        <image class='header-img' src='../../assets/images/top-header.png'></image>
+        <image class='header-img2' src='../../assets/images/top-header2.png'></image>
+      </view>
+      <view class="top-list">
+        <view class="top-list-wrapper">
+             <view class="top-item top-item1" style='z-index: {{zindex1}};' wx:for="{{[topItemInfos[0]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
+            <view class="top-item-wrapper" animation="{{item.animation2}}" bindtouchmove='touchmove' bindtouchstart='touchstart' bindtouchend='touchend'>
+              <image src=''></image>
+              <view class="top-item-info">
+                <view class="top-item-info-title">你的五大优点</view>
+                <view class="top-item-info-desp">我喜欢你身上，别人都不曾的优点</view>
+              </view>
+              <view class="top-item-btn">
+                <image src='../../assets/images/top-btn.png'></image>
+                <view>去测</view>
+              </view>
+            </view>
+          </view>
+           <view class="top-item top-item2" style='z-index: {{zindex2}};' wx:for="{{[topItemInfos[1]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
+            <view animation="{{item.animation2}}" class="top-item-wrapper" bindtouchmove='touchmove' bindtouchstart='touchstart' bindtouchend='touchend'>
+              <image src=''></image>
+              <view class="top-item-info">
+                <view class="top-item-info-title">你的五大优点</view>
+                <view class="top-item-info-desp">我喜欢你身上，别人都不曾的优点</view>
+              </view>
+              <view class="top-item-btn">
+                <image src='../../assets/images/top-btn.png'></image>
+                <view>去测</view>
+              </view>
+            </view>
+          </view>
+           <view class="top-item top-item3" style='z-index: {{zindex3}};' wx:for="{{[topItemInfos[2]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
+            <view animation="{{item.animation2}}" class="top-item-wrapper" bindtouchmove='touchmove' bindtouchstart='touchstart' bindtouchend='touchend'>
+              <image src=''></image>
+              <view class="top-item-info">
+                <view class="top-item-info-title">你的五大优点</view>
+                <view class="top-item-info-desp">我喜欢你身上，别人都不曾的优点</view>
+              </view>
+              <view class="top-item-btn">
+                <image src='../../assets/images/top-btn.png'></image>
+                <view>去测</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="hot">
+      <view class="hot-header">
+        <image src='../../assets/images/hot-header.png'></image>
+        <view>查看更多></view>
+      </view>
+      <item></item>
+      <item></item>
+      <item></item>
+      <item></item>
+    </view>
+    <view style='height: 100rpx;'></view>
+  </content>
+</view>
 
-</content>
+<view class="my" hidden='{{index==0}}'>
+  <content hidden='{{isshow}}' bindscroll="scroll">
+    <image class="my-header-bg" src='../../assets/images/my-header-bg.png'></image>
+    <basenav background="rgba(68,33,144,{{navopacity}})" color="#fff">
+      <view class="user">
+        <view class="avatar">
+          <open-data type="userAvatarUrl"></open-data>
+        </view>
+        <view class="switch" wx:if="{{isswitch}}">
+          <image src='../../assets/images/constellation-switch.png'></image>
+          <view>切换星座</view>
+        </view>
+      </view>
+      <view>心理测试库</view>
+    </basenav>
+    <view class="my-wrapper">
+      <view class="constellation-no-switch" wx:if="{{!isswitch}}">
+        <view class="constellation-header">
+          <image src='../../assets/images/constellation-header.png'></image>
+          <view class="constellation-btn">
+            <image src="../../assets/images/constellation-btn.png"></image>
+            <view>查看今日运势</view>
+          </view>
+        </view>
+      </view>
+      <view class="constellation-switch" wx:if="{{isswitch}}">
+        <view class="constellation-switch-wrapper">
+          <view class="constellation-switch-img">
+            <image src='../../assets/images/constellation.png' class="constellation-img"></image>
+            <view class="constellation-switch-time">
+              <image src='../../assets/images/constellation-time-bg.png'></image>
+              <view class='constellation-switch-time-info'>
+                <view>处女座</view>
+                <view>8月23日-9月22日</view>
+              </view>
+            </view>
+          </view>
+          <view class="constellation-switch-info">
+            <view class="constellation-switch-info-item">
+              <view class="constellation-switch-info-item-header">速配星座</view>
+              <view class="constellation-switch-info-item-info-1">天蝎座</view>
+            </view>
+            <view class="constellation-switch-info-item">
+              <view class="constellation-switch-info-item-header">幸运颜色</view>
+              <view class="constellation-switch-info-item-info-2">粉红色</view>
+            </view>
+            <view class="constellation-switch-info-item">
+              <view class="constellation-switch-info-item-header">健康指数</view>
+              <view class="constellation-switch-info-item-info-1">78%</view>
+            </view>
+            <view class="constellation-switch-info-item">
+              <view class="constellation-switch-info-item-header">幸运数字</view>
+              <view class="constellation-switch-info-item-info-1">5</view>
+            </view>
+          </view>
 
-<content hidden='{{isshow && index==0}}' bindscroll="scroll" bindscrolltolower="scrolltolower" isshowtop>
-
-</content>
-
+          <view class="constellation-detail-btn">
+            <view class="constellation-btn ">
+              <image src='../../assets/images/constellation-btn.png'></image>
+              <view>查看详情</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="ad" style='margin-top:{{isswitch ? "20rpx;" : "0;"}}'>
+        <image></image>
+      </view>
+      <view class="hot">
+        <view class="hot-header">
+          <image src='../../assets/images/like-header.png'></image>
+          <view>换一换</view>
+        </view>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+      </view>
+    </view>
+    <view style='height: 100rpx;'></view>
+  </content>
+</view>
 <view class="tab" hidden='{{isshow}}'>
   <view class="main-tab">
     <block wx:for="{{tabInfos}}" wx:key="text" wx:for-index="cindex" wx:for-item="item">

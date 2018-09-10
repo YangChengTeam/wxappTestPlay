@@ -9,6 +9,8 @@
    display: flex;
    width: 100%;
    height: 100rpx;
+   background: #fff;
+   z-index: 3;
 }
 
 .main-tab {
@@ -35,4 +37,407 @@
 .tab-item image {
    width: 43rpx;
    height: 43rpx;
+}
+
+.my, .index {
+   width: 100%;
+   height: 100%;
+}
+
+swiper {
+   width: 100%;
+   height: 240rpx;
+}
+
+swiper image {
+   width: 100%;
+   height: 240rpx;
+}
+
+.menu {
+  width: 100%;
+  height: 200rpx;
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+}
+
+.meun-item {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-size: 26rpx;
+}
+
+.meun-item image {
+   width: 102rpx;
+   height: 102rpx;
+   margin-bottom: 12rpx;
+}
+
+.top {
+   width: 100%;
+   height: 170rpx;
+   display: flex;
+   flex-direction: row;
+}
+
+.header {
+   width: 145rpx;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.header-img {
+  width: 76rpx;
+  height: 76rpx;
+  margin-bottom: 10rpx;
+}
+
+.header-img2 {
+  width: 77rpx;
+  height: 37rpx;
+}
+
+.top-list {
+   width: 605rpx;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+}
+
+
+.top-list-wrapper {
+   width: 550rpx;
+   height: 120rpx;
+   position: relative;
+   margin-top: 20rpx;
+}
+
+.top-item {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  box-shadow: 5rpx 10rpx 5rpx rgba(0, 0, 0, .1);
+  border-radius: 5rpx;
+  display: flex;
+}
+
+
+.top-item1 {
+  left: 0;
+  top: 0;
+  z-index: 2;
+  height: 100%;
+}
+
+.top-item2 {
+  top: 10rpx;
+  left: 20rpx;
+  height: 100rpx;
+  z-index: 1;
+}
+
+.top-item3 {
+  z-index: 0;
+  top: 20rpx;
+  left: 35rpx;
+  height: 80rpx;
+}
+
+.top-item-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+}
+
+.top-item-wrapper > image {
+   width: 80rpx;
+   height: 80rpx;
+   border: solid 1rpx #cecece;
+   border-radius: 5rpx;
+}
+
+.top-item-info {
+   width: 300rpx;
+   display: flex;
+   flex-direction: column;
+}
+
+.top-item-info-title {
+   color: #000;
+   font-size: 30rpx;
+   margin-bottom: 5rpx
+}
+
+.top-item-info-desp {
+  color: #cecece;
+  font-size: 24rpx;
+  overflow: hidden;
+  height: 32rpx;
+}
+
+.top-item-btn {
+  width: 92rpx;
+  height: 47rpx;
+  position: relative;
+}
+
+.top-item-btn > image, .top-item-btn > view {
+  width: 92rpx;
+  height: 47rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.top-item-btn > view {
+   text-align: center;
+   color: #7234e1;
+   font-size: 26rpx;
+   line-height: 47rpx;
+}
+
+.hot {
+   width: 100%;
+   background: #fff;
+}
+
+.hot-header {
+   display: flex;
+   height: 80rpx;
+   justify-content: space-between;
+   font-size: 26rpx;
+   color: #bdbdbd;
+}
+
+.hot-header image {
+  width: 145rpx;
+  height: 39rpx;
+  margin-left: 20rpx;
+  margin-top: 30rpx;
+}
+
+.hot-header view {
+  margin-right: 20rpx;
+  margin-top: 40rpx;
+}
+
+
+.my-header-bg {
+   position: fixed;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 300rpx;
+}
+
+.user {
+   position: absolute;
+   left: 0;
+   top: 0;
+   display: flex;
+   width: 100%;
+   height: 100%;
+   align-items: center;
+    
+
+}
+
+view.avatar {
+   height: 60rpx;
+   width: 60rpx;
+   overflow: hidden;
+   border-radius: 50%;
+   margin-left: 20rpx;
+   position: relative;
+}
+
+.switch {
+   display: flex;
+   align-items: center;
+}
+
+.switch image {
+   width: 32rpx;
+   height: 32rpx;
+   margin-left: 10rpx;
+}
+
+.switch view {
+   color: #fff;
+   font-size: 26rpx;
+   margin-left: 5rpx;
+}
+
+.constellation-no-switch {
+   display: flex;
+   width: 100%;
+   height: 264rpx;
+   justify-content: center;
+   align-items: center;
+}
+
+.constellation-header {
+   display: flex;
+   width: 722rpx;
+   height: 100%;
+   position: relative;
+   justify-content: center;
+   align-items: center;
+}
+
+.constellation-header > image {
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 722rpx;
+   height: 100%;
+}
+
+.constellation-btn {
+   position: relative;
+   width: 402rpx;
+   height: 82rpx;
+}
+
+.constellation-btn > image, .constellation-btn > view {
+   position: absolute;
+   width: 402rpx;
+   height: 82rpx;
+   left: 0;
+   top: 0;
+}
+
+.constellation-btn > view {
+   text-align: center;
+   line-height: 82rpx;
+   color: #fff;
+   font-size: 30rpx;
+   box-shadow: 5rpx 10rpx 5xp rgba(0, 0, 0, .1);
+}
+
+.ad {
+   margin-bottom: 20rpx;
+   margin-left: 20rpx;
+   width: 710rpx;
+   height: 200rpx;
+}
+
+.ad > image {
+   width: 710rpx;
+   height: 200rpx;
+   background: #cecece;
+   border-radius: 10rpx;
+}
+
+.my-wrapper {
+   position: relative;
+   width: 100%;
+   z-index: 1;
+}
+
+.constellation-switch {
+   display: flex;
+   width: 100%;
+   height: 500rpx;
+   justify-content: center;
+   align-items: center;
+ 
+}
+
+.constellation-switch-wrapper {
+   display: flex;
+   width: 710rpx;
+   height: 100%;
+   border-radius: 10rpx;
+   flex-direction: column;
+   background: #fff;
+   box-shadow: 5rpx 10rpx 5rpx rgba(0, 0, 0, .1);
+}
+
+.constellation-switch-img {
+   display: flex;
+   width: 100%;
+   height: 280rpx;
+   align-items: center;
+   justify-content: space-around;
+}
+
+.constellation-img {
+   width: 255rpx;
+   height: 253rpx; 
+}
+
+.constellation-switch-time {
+   width: 322rpx;
+   height: 202rpx;
+   position: relative;
+}
+
+.constellation-switch-time-info {
+   display: flex;
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 322rpx;
+   height: 202rpx;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   color: #fff;
+   font-size: 30rpx;
+}
+
+.constellation-switch-time > image {
+   width: 322rpx;
+   height: 202rpx;
+   position: absolute;
+   left: 0;
+   top: 0;
+}
+
+.constellation-switch-info {
+   display: flex;
+   width: 100%;
+}
+
+.constellation-switch-info-item {
+   width: 25%;
+   font-size: 30rpx;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.constellation-detail-btn {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-top: 20rpx;
+}
+
+.constellation-switch-info-item-info-1 {
+   font-size: 38rpx;
+   color: #7234e1;
+   font-weight: bold;
+}
+
+.constellation-switch-info-item-info-2 {
+  color: #f993bc;
+  font-size: 38rpx;
+  font-weight: bold;
 }

@@ -1,1 +1,88 @@
 /* components/testplayitem/testplayitem.wxss */
+.test-play-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 160rpx;
+}
+
+.test-play-item > image {
+   width: 100rpx;
+   height: 100rpx;
+   background: rgba(165, 165, 165, 0.3);
+   border-radius: 5rpx;
+}
+
+.test-play-item-info {
+   width: 380rpx;
+   display: flex;
+   flex-direction: column;
+}
+
+.test-play-item-info-title {
+   color: #000;
+   font-size: 32rpx;
+   margin-bottom: 5rpx
+}
+
+.test-play-item-info-desp {
+  color: #999;
+  font-size: 26rpx;
+  overflow: hidden;
+  height: 32rpx;
+}
+
+.test-play-item-btn {
+  width: 122rpx;
+  height: 62rpx;
+  position: relative;
+}
+
+.test-play-item-btn > image, .test-play-item-btn > view {
+  width: 122rpx;
+  height: 62rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.test-play-item-btn > view {
+   text-align: center;
+   color: #7234e1;
+   font-size: 26rpx;
+   line-height: 62rpx;
+}
+
+.hot {
+   width: 100%;
+   background: #fff;
+}
+
+.hot-header {
+   display: flex;
+   height: 100rpx;
+   justify-content: space-between;
+   font-size: 26rpx;
+   color: #bdbdbd;
+}
+
+.hot-header image {
+  width: 145rpx;
+  height: 39rpx;
+  margin-left: 20rpx;
+  margin-top: 30rpx;
+}
+
+.hot-header view {
+  margin-right: 20rpx;
+  margin-top: 40rpx;
+}
+
+.test-play-item-bottom {
+   background: #eee;
+   width: 710rpx;
+   margin-left: 20rpx;
+   height: 1rpx;
+}
