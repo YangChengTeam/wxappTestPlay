@@ -111,10 +111,13 @@ Page({
   },
   touchend(e) {
     if (this.moving){
+      if (this.clear){
+        clearTimeout(this.clear)
+      }
       this.clearAnimation()
       this.topAnimate()
       this.moving = false
-      setTimeout(()=>{
+      this.clear = setTimeout(()=>{
         this.startAnimation()
       }, 500)
     }
