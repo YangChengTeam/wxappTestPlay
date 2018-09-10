@@ -84,11 +84,7 @@ Page({
       
   },
   onShow(e){
-    if (!this.animationTimer ){
-      this.animationTimer = setInterval(() => {
-        this.topAnimate()
-      }, 3000)
-    }
+    this.startAnimation()
   },
   tab(e) {
     let index = e.currentTarget.dataset.index
@@ -115,15 +111,29 @@ Page({
   },
   touchend(e) {
     if (this.moving){
+      this.clearAnimation()
       this.topAnimate()
       this.moving = false
+      setTimeout(()=>{
+        this.startAnimation()
+      }, 500)
+    }
+  },
+  startAnimation(){
+    if (!this.animationTimer) {
+      this.animationTimer = setInterval(() => {
+        this.topAnimate()
+      }, 3000)
+    }
+  },
+  clearAnimation(){
+    if (this.animationTimer) {
+      clearInterval(this.animationTimer)
+      this.animationTimer = undefined
     }
   },
   onHide(){
-     if(this.animationTimer){
-       clearInterval(this.animationTimer)
-       this.animationTimer = undefined
-     }
+    this.clearAnimation()
   },
   topAnimate(){
     this.animations = []
