@@ -7,17 +7,17 @@ const kkpromise = require('yc-promise')
 const kknet = require('yc-net')
 
 function authPermission(scope) {
-  return co.wrap(function* () {
+  return co.wrap(function*() {
     let res = yield kkpromise.getSetting()
     if (res && res.authSetting[scope]) {
-      return kkconfig.status.authStatus.authOK  //已授权
+      return kkconfig.status.authStatus.authOK //已授权
     }
-    return kkconfig.status.authStatus.authFail  //未授权
+    return kkconfig.status.authStatus.authFail //未授权
   })()
 }
 
 function reLogin() {
-  return co.wrap(function* () {
+  return co.wrap(function*() {
     if (kkconfig.global.token.length > 0) {
       return true
     }
@@ -33,7 +33,7 @@ function reLogin() {
 }
 
 function login() {
-  return co.wrap(function* () {
+  return co.wrap(function*() {
     let res = yield kkpromise.login()
     if (!res || !res.code) {
       return false
@@ -61,21 +61,21 @@ function login() {
 }
 
 function getUserInfo() {
-  return co.wrap(function* () {
+  return co.wrap(function*() {
     return yield kknet.post(kkconfig.getUserInfoUrl)
   })()
 }
 
 function getAppInfo() {
-  return co.wrap(function* () {
+  return co.wrap(function*() {
     return yield kknet.post(kkconfig.appInfoUrl)
   })()
 }
 
 function testTypeInfoList(type_id) {
-  return co.wrap(function* () {
+  return co.wrap(function*() {
     return yield kknet.post(kkconfig.testTypeInfoListUrl, {
-        type_id: type_id
+      type_id: type_id
     })
   })()
 }
@@ -83,8 +83,8 @@ function testTypeInfoList(type_id) {
 
 
 
-function setScore(sex, username){
-  return co.wrap(function* () {
+function setScore(sex, username) {
+  return co.wrap(function*() {
     return yield kknet.post(kkconfig.setScoreUrl, {
       sex: sex,
       username: username
@@ -93,7 +93,7 @@ function setScore(sex, username){
 }
 
 function waterInit(xing, headimg) {
-  return co.wrap(function* () {
+  return co.wrap(function*() {
     return yield kknet.post(kkconfig.waterInitUrl, {
       xing: xing,
       headimg: headimg
@@ -102,7 +102,7 @@ function waterInit(xing, headimg) {
 }
 
 function waterRenge(headimg, username) {
-  return co.wrap(function* () {
+  return co.wrap(function*() {
     return yield kknet.post(kkconfig.waterRengeUrl, {
       headimg: headimg,
       username: username
@@ -111,7 +111,7 @@ function waterRenge(headimg, username) {
 }
 
 function starIndex(star, day, sex) {
-  return co.wrap(function* () {
+  return co.wrap(function*() {
     return yield kknet.post(kkconfig.starIndexUrl, {
       star: star,
       day: day,
@@ -120,8 +120,26 @@ function starIndex(star, day, sex) {
   })()
 }
 
+function testTypeInfoView(id, test_type) {
+  return co.wrap(function*() {
+    return yield kknet.post(kkconfig.testTypeInfoViewUrl, {
+      id: id,
+      test_type: test_type
+    })
+  })()
+}
 
-
+function testTextResult(id, test_type, result_id, nickname, headimg) {
+  return co.wrap(function*() {
+    return yield kknet.post(kkconfig.testTextResultUrl, {
+      id: id,
+      test_type: test_type,
+      result_id: result_id,
+      nickname: nickname,
+      headimg: headimg
+    })
+  })()
+}
 
 module.exports = {
   authPermission: authPermission,
@@ -133,5 +151,7 @@ module.exports = {
   waterRenge: waterRenge,
   starIndex: starIndex,
   getAppInfo: getAppInfo,
-  testTypeInfoList: testTypeInfoList
+  testTypeInfoList: testTypeInfoList,
+  testTypeInfoView: testTypeInfoView,
+  testTextResult: testTextResult
 }

@@ -11,6 +11,10 @@ Component({
     isshowtop: {
         type: Boolean,
         value: false
+    },
+    background: {
+        type: String,
+        value: "#f5f5f5",
     }
   },
 
@@ -20,7 +24,11 @@ Component({
   data: { 
     scrollTop: 0
   },
-
+  ready(){
+     this.setData({
+       ...this.properties
+     })
+  },
   /**
    * 组件的方法列表
    */

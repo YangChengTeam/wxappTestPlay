@@ -129,12 +129,12 @@
       <view class="constellation-switch" wx:if="{{isswitch}}">
         <view class="constellation-switch-wrapper">
           <view class="constellation-switch-img">
-            <image src='{{starInfo.img}}' class="constellation-img"></image>
+            <image mode='aspectFit' src='{{starInfo.img}}' class="constellation-img"></image>
             <view class="constellation-switch-time">
               <image src='../../assets/images/constellation-time-bg.png'></image>
               <view class='constellation-switch-time-info'>
                 <view>{{starInfo.name}}</view>
-                <view>{{starInfo.date}}</view>
+                <view>{{starInfo.date2}}</view>
               </view>
             </view>
           </view>

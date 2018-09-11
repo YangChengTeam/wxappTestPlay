@@ -55,6 +55,8 @@ module.exports = {
   waterInitUrl: getUrl("/water/init"),
   waterRengeUrl: getUrl("/water/renge"),
   starIndexUrl: getUrl("/star/index"),
-  testTypeInfoListUrl: getUrl("/test/testTypeInfoList")
+  testTypeInfoListUrl: getUrl("/test/testTypeInfoList"),
+  testTypeInfoViewUrl: getUrl("/test/testTypeInfoView"),
+  testTextResultUrl: getUrl("/test/testTextResult")
 }
 

@@ -65,41 +65,37 @@ Page({
 
     appInfo: {},
 
-    iscanusenavigator: false,
-
-    starInfo: {
-      img: "../../assets/images/constellation.png",
-      name: "处女座",
-      date: "8月23日-9月22日"
-    }
+    iscanusenavigator: false
   },
   onLoad: function() {
     let thiz = this
+    app.index = this
     co(function*() {
       let value = wx.getStorageSync("constellation")
       thiz.data.starInfo = value
+      console.log(value)
       thiz.setData({
-          iscanusenavigator: getApp().canUseNavigator(),
-          isswitch: value ? true : false,
-          starInfo: value
+        iscanusenavigator: getApp().canUseNavigator(),
+        isswitch: value ? true : false,
+        starInfo: value
       })
       let res = yield kkservice.getAppInfo()
       if (res && res.data && res.data.code == 1) {
         let appInfo = res.data.data
         appInfo.day_commend_list.forEach((v, k) => {
-            thiz.data.topItemInfos[k] = { ...thiz.data.topItemInfos[k],
-              ...v
-            }
+          thiz.data.topItemInfos[k] = { ...thiz.data.topItemInfos[k],
+            ...v
+          }
         })
         let starLuckInfo = {}
-        if (thiz.data.starInfo){
+        if (thiz.data.starInfo) {
           let sex = wx.getStorageSync("sex")
-          res = kkservice.starIndex(thiz.data.starInfo.name, "today", sex==1 ? "boy" : "girl")
+          res = yield kkservice.starIndex(thiz.data.starInfo.name, "today", sex == 1 ? "boy" : "girl")
           starLuckInfo = res.data.data
-          if (starLuckInfo && starLuckInfo.intro){
-              starLuckInfo.intro.forEach((v,k)=>{
-                  starLuckInfo.intro[k] = v.split("：")[1]
-              })
+          if (starLuckInfo && starLuckInfo.intro) {
+            starLuckInfo.intro.forEach((v, k) => {
+              starLuckInfo.intro[k] = v.split("：")[1]
+            })
           }
         }
         thiz.setData({
@@ -113,6 +109,28 @@ Page({
           state: kkconfig.status.stateStatus.NODATA
         })
       }
+    })
+  },
+  switchConstellation(obj) {
+    let thiz = this
+    let starLuckInfo = {}
+    thiz.data.starInfo = obj
+    co(function*() {
+      if (thiz.data.starInfo) {
+        let sex = wx.getStorageSync("sex")
+        let res = yield kkservice.starIndex(thiz.data.starInfo.name, "today", sex == 1 ? "boy" : "girl")
+        starLuckInfo = res.data.data
+        if (starLuckInfo && starLuckInfo.intro) {
+          starLuckInfo.intro.forEach((v, k) => {
+            starLuckInfo.intro[k] = v.split("：")[1]
+          })
+        }
+      }
+      thiz.setData({
+        isswitch: true,
+        starInfo: obj,
+        starLuckInfo: starLuckInfo
+      })
     })
   },
   onShow(e) {
@@ -248,7 +266,7 @@ Page({
       appId: e.currentTarget.dataset.appid,
     })
   },
-  nav2like(e){
+  nav2like(e) {
 
   },
   nav2top(e) {
@@ -261,15 +279,17 @@ Page({
     let item = e.currentTarget.dataset.obj
     app.nav2test(item)
   },
-  nav2constellation(res){
-      if (res.detail && res.detail.userInfo) {
-          wx.setStorageSync("sex", res.detail.userInfo.gender)
-      }
-      app.login("/pages/constellation/constellation")
+  nav2constellation(res) {
+    if (res.detail && res.detail.userInfo) {
+      wx.setStorageSync("sex", res.detail.userInfo.gender)
+    }
+    wx.navigateTo({
+      url: "/pages/constellation/constellation"
+    })
   },
-  nav2constellationdetail(e){
-      wx.navigateTo({
-        url: '/pages/constellationdetail/constellationdetail',
-      })
+  nav2constellationdetail(e) {
+    wx.navigateTo({
+      url: '/pages/constellationdetail/constellationdetail',
+    })
   }
 })
