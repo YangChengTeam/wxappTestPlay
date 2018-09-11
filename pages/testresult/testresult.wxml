@@ -1,2 +1,5 @@
-<!--pages/test_result/test_result.wxml-->
-<text>pages/test_result/test_result.wxml</text>
+<content>
+  <nav title="心理测试库"></nav>
+  <stateview state="{{state}}">
+  </stateview>
+</content>

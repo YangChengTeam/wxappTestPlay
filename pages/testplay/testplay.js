@@ -34,31 +34,118 @@ Page({
       title: '你的荣格心理原型'
     });
     console.log(app.testInfo)
+
+
+    
+
   },
   //事件处理函数
   onReady() {
-    this.connect();
     this.setData({
       totalTopHeight: app.totalTopHeight
     })
+
+    this.guide();
   },
 
   start: function () {
-    current_index++
-    let lastId = msgs[current_index].id;
-    let messages = this.data.messages;
-    messages.push(msgs[current_index])
 
-    console.log('head url --->' + user_head_url)
+    let messages = this.data.messages;
+    let nums = messages.length;
+
+    let add_start_data = {
+      id: `msg${++nums}`,
+      sub_title: '开始测试',
+      messageType: 0,
+      url: '../../assets/images/logo.png'
+    };
+
+    messages.push(add_start_data);
+    nums = messages.length
+
+    let options = []
+
+    let option_item1 = {
+      sub_type: 0,
+      sub_value: '第一个题目开始测试'
+    }
+
+    let option_item2 = {
+      sub_type: 0,
+      sub_value: '第一个题目选项'
+    }
+
+    let option_item3 = {
+      sub_type: 0,
+      sub_value: '第一个题目选项'
+    }
+    options.push(option_item1)
+    options.push(option_item2)
+    options.push(option_item3)
+
+    let subject_item_data = {
+      id: `msg${++nums}`,
+      sub_title: '第一个题目',
+      messageType: 2,
+      url: '../../assets/images/logo.png',
+      options : options
+    };
+    messages.push(subject_item_data);
+    let temp_lastId = messages[messages.length - 1].id;
     this.setData({
       messages,
-      user_head_url,
-      test_state:1
+      temp_lastId,
+      user_head_url
     });
 
     // 延迟页面向顶部滑动
     this.delayPageScroll();
   },
+
+  guide:function(){
+
+    let messages = this.data.messages;
+    let nums = messages.length;
+
+    let options = []
+
+    let option_item1 = {
+      sub_type : 0,
+      sub_value: '测试题目'
+    }
+
+    let option_item2 = {
+      sub_type: 1,
+      sub_value: '../../assets/images/temp1.png'
+    }
+
+    let option_item3 = {
+      sub_type: 0,
+      sub_value: '测试题目'
+    }
+    options.push(option_item1)
+    options.push(option_item2)
+    options.push(option_item3)
+
+    const add_data = {
+      id: `msg${++nums}`,
+      sub_title: '文字测试题目',
+      messageType: 2,
+      url: '../../assets/images/logo.png',
+      options: options
+    };
+
+    messages.push(add_data);
+    const length = messages.length;
+    let temp_lastId = messages[length - 1].id;
+    this.setData({
+      messages,
+      temp_lastId
+    });
+    // 延迟页面向顶部滑动
+    this.delayPageScroll();
+  },
+
   connect: function () {
     const isFirstSend = this.data.isFirstSend;
 

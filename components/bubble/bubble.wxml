@@ -5,7 +5,7 @@
       <view class="icon">
         <image src='../../assets/images/triangle.png' class='caret-left'></image>
         <view class="photo">
-          <image src="{{ url }}" class='head-img'></image>
+          <image src="{{ url }}" class='head-img' mode='aspectFit'></image>
         </view>
       </view>
       <view class='title_bg'>
@@ -19,12 +19,14 @@
           <view class="icon">
             <image src='../../assets/images/triangle.png' class='caret-left'></image>
             <view class="photo">
-              <image src="{{ url }}" class='head-img'></image>
+              <image src="{{ url }}" class='head-img' mode='aspectFit'></image>
             </view>
           </view>
-          <view class='title_bg'>{{ item.sub_title }}</view>
+          <view class='title_bg' wx:if='{{item.sub_type == 0}}'>{{ item.sub_value }}</view>
+          <view class='subject-img-view' wx:if='{{item.sub_type == 1}}'>
+              <image class='subject-img' src='{{item.sub_value}}'></image>
+          </view>
         </view>
-        <!-- <view><button class='start-btn' open-type='getUserInfo' bindgetuserinfo='onGotUserInfo'>开始测试</button></view> -->
       </view>
   </view>
   <view id="{{ id }}" class="bubble-container" wx:if="{{ messageType === 1 }}">
@@ -33,7 +35,7 @@
         <view class="icon">
           <image src='../../assets/images/triangle.png' class='caret-left'></image>
           <view class="photo">
-            <image src="{{ url }}" class='head-img'></image>
+            <image src="{{ url }}" class='head-img' mode='aspectFit'></image>
           </view>
         </view>
         <view class='title_bg'>{{ sub_title }}</view>
@@ -44,7 +46,7 @@
         <view class="icon">
           <image src='../../assets/images/triangle.png' class='caret-left'></image>
           <view class="photo">
-            <image src="{{ url }}" class='head-img'></image>
+            <image src="{{ url }}" class='head-img' mode='aspectFit'></image>
           </view>
         </view>
         <view class='title_bg1'>{{ sub_title1 }}</view>
@@ -65,7 +67,7 @@
     </view>
     <view class="icon-right">
       <view class="photo">
-        <image src="{{ user_head_url }}" class='head-img'></image>
+        <image src="{{ user_head_url }}" class='head-img' mode='aspectFit'></image>
       </view>
       <view class="caret-right"></view>
     </view>
