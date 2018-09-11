@@ -1,7 +1,7 @@
 <!--components/testplayitem/testplayitem.wxml-->
 <view class="test-play-item" bindtap='nav2test'>
   <view wx:if="{{info.test_type==3}}" class="test-play-navigator">
-    <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
+    <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{info.url}}"></view>
     <navigator wx:if="{{iscanusenavigator}}"></navigator>
   </view>
   <image src='{{info.ico}}'></image>
