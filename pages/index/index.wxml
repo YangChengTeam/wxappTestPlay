@@ -35,8 +35,8 @@
           <view class="top-list-wrapper">
             <view class="top-item top-item1" style='z-index: {{zindex1}};' wx:for="{{[topItemInfos[0]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
               <view wx:if="{{item.test_type==3}}" class="test-play-navigator">
-                  <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
-                  <navigator wx:if="{{iscanusenavigator}}"></navigator>
+                <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
+                <navigator wx:if="{{iscanusenavigator}}"></navigator>
               </view>
               <view bindtap='nav2test' data-obj="{{item}}" class="top-item-wrapper" animation="{{item.animation2}}" bindtouchmove='touchmove' bindtouchstart='touchstart' bindtouchend='touchend'>
                 <image src='{{item.ico}}'></image>
@@ -51,9 +51,9 @@
               </view>
             </view>
             <view class="top-item top-item2" style='z-index: {{zindex2}};' wx:for="{{[topItemInfos[1]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
-               <view wx:if="{{item.test_type==3}}" class="test-play-navigator">
-                  <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
-                  <navigator wx:if="{{iscanusenavigator}}"></navigator>
+              <view wx:if="{{item.test_type==3}}" class="test-play-navigator">
+                <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
+                <navigator wx:if="{{iscanusenavigator}}"></navigator>
               </view>
               <view bindtap='nav2test' data-obj="{{item}}" animation="{{item.animation2}}" class="top-item-wrapper" bindtouchmove='touchmove' bindtouchstart='touchstart' bindtouchend='touchend'>
                 <image src='{{item.ico}}'></image>
@@ -69,8 +69,8 @@
             </view>
             <view class="top-item top-item3" style='z-index: {{zindex3}};' wx:for="{{[topItemInfos[2]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
               <view wx:if="{{item.test_type==3}}" class="test-play-navigator">
-                  <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
-                  <navigator wx:if="{{iscanusenavigator}}"></navigator>
+                <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
+                <navigator wx:if="{{iscanusenavigator}}"></navigator>
               </view>
               <view bindtap='nav2test' data-obj="{{item}}" animation="{{item.animation2}}" class="top-item-wrapper" bindtouchmove='touchmove' bindtouchstart='touchstart' bindtouchend='touchend'>
                 <image src='{{item.ico}}'></image>
@@ -164,7 +164,20 @@
         </view>
       </view>
       <view class="ad" style='margin-top:{{isswitch ? "20rpx;" : "0;"}}'>
-        <image src='{{item.img}}' wx:for="{{appInfo.ad_list}}" wx:for-index="index" wx:for-item="item" wx:key="id" bindtap='nav2test' data-index='{{index}}'></image>
+        <block src='{{item.img}}' wx:for="{{appInfo.ad_list}}" wx:for-index="index" wx:for-item="item" wx:key="id">
+          <block wx:if="{{item.type==3}}">
+            <image class="pulse-loading" src='{{item.img}}' bindtap='previewImg' data-img="{{item.xcx_img}}"></image>
+          </block>
+          <block wx:if="{{item.type==2}}">
+            <image class="pulse-loading" src='{{item.img}}' wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></image>
+            <navigator class="swiper-item-nav" wx:if="{{iscanusenavigator}}" target="miniProgram" app-id='{{item.url}}' appId='{{item.url}}'>
+              <image class="pulse-loading" src='{{item.img}}'></image>
+            </navigator>
+          </block>
+          <block wx:if="{{item.type==1}}">
+            <image class="pulse-loading" src='{{item.img}}'></image>
+          </block>
+        </block>
       </view>
       <view class="hot">
         <view class="hot-header" bindtap='nav2like'>

@@ -27,9 +27,9 @@
 .test-play-item-info-title {
   color: #000;
   font-size: 32rpx;
-  margin-bottom: 5rpx;
   overflow: hidden;
-  height: 50rpx;
+  height: 36rpx;
+  margin-bottom: 10rpx;
 }
 
 .test-play-item-info-desp {

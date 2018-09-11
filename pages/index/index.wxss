@@ -178,9 +178,9 @@ swiper image {
 .top-item-info-title {
    color: #000;
    font-size: 28rpx;
-   margin-bottom: 5rpx;
+   margin-bottom: 10rpx;
    overflow: hidden;
-   height: 40rpx;
+   height: 32rpx;
 }
 
 .top-item-info-desp {
@@ -333,9 +333,10 @@ view.avatar {
    margin-left: 20rpx;
    width: 710rpx;
    height: 200rpx;
+   position: relative;
 }
 
-.ad > image {
+.ad  image {
    width: 710rpx;
    height: 200rpx;
    background: #cecece;
