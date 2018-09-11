@@ -5,7 +5,6 @@
    background: #f5f5f5;
 }
 
-
 .top {
    position: absolute;
    right: 0;

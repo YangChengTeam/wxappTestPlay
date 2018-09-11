@@ -1,0 +1,73 @@
+<!--components/bubble /bubble.wxml-->
+<template name="bubble">
+  <view id="{{ id }}" class="bubble-container" wx:if="{{ messageType === 3 }}">
+    <view class='start-item'>
+      <view class="icon">
+        <image src='../../assets/images/triangle.png' class='caret-left'></image>
+        <view class="photo">
+          <image src="{{ url }}" class='head-img'></image>
+        </view>
+      </view>
+      <view class='title_bg'>
+        <image class='res-img' src='{{result_path}}' bindtap='toResult'></image>
+      </view>
+    </view>
+  </view>
+  <view id="{{ id }}" class="bubble-container" wx:if="{{ messageType === 2 }}">
+    <view class='start-view'>
+        <view class='start-item' wx:for='{{options}}' wx:key='{{id}}'>
+          <view class="icon">
+            <image src='../../assets/images/triangle.png' class='caret-left'></image>
+            <view class="photo">
+              <image src="{{ url }}" class='head-img'></image>
+            </view>
+          </view>
+          <view class='title_bg'>{{ item.sub_title }}</view>
+        </view>
+        <!-- <view><button class='start-btn' open-type='getUserInfo' bindgetuserinfo='onGotUserInfo'>开始测试</button></view> -->
+      </view>
+  </view>
+  <view id="{{ id }}" class="bubble-container" wx:if="{{ messageType === 1 }}">
+    <view class="content">
+      <view class='title-view'>
+        <view class="icon">
+          <image src='../../assets/images/triangle.png' class='caret-left'></image>
+          <view class="photo">
+            <image src="{{ url }}" class='head-img'></image>
+          </view>
+        </view>
+        <view class='title_bg'>{{ sub_title }}</view>
+        <!-- <view class='title_bg'>{{ sub_title1 }}</view> -->
+      </view>
+      
+      <view class='title-view' wx:if='{{sub_title1}}'>
+        <view class="icon">
+          <image src='../../assets/images/triangle.png' class='caret-left'></image>
+          <view class="photo">
+            <image src="{{ url }}" class='head-img'></image>
+          </view>
+        </view>
+        <view class='title_bg1'>{{ sub_title1 }}</view>
+      </view>
+
+      <view class='options-view' style='padding-bottom:{{totalTopHeight}}px'>
+        <view class='option-item' wx:for='{{options}}' wx:key='{{id}}' bindtap='choose' data-options_item='{{item.options_item}}' data-snum='{{snum}}'>
+<image class='options-img' src='{{item.img}}'></image>
+<button class='left-btn'>{{item.btn_name}}</button>
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <view id="{{ id }}" class="container-right" wx:if="{{ messageType === 0 }}">
+    <view class="content-right">
+      <text>{{ sub_title }}</text>
+    </view>
+    <view class="icon-right">
+      <view class="photo">
+        <image src="{{ user_head_url }}" class='head-img'></image>
+      </view>
+      <view class="caret-right"></view>
+    </view>
+  </view>
+</template>

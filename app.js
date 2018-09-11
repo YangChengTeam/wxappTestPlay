@@ -5,7 +5,7 @@ const co = require('/libs/co')
 const kkservice = require("/libs/yc/yc-service.js")
 
 App({
-  onLaunch: function() {
+  onLaunch: function () {
     this.tabIndex = 0
   },
   nav2test(item) {
