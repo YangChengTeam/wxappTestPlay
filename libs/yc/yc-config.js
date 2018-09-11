@@ -2,8 +2,8 @@
 
 const debug = false
 const host = {
-  dev: "https://cj.198254.com",  //测试服务器
-  pro: "https://cj.198254.com"   //正式服务器
+  dev: "https://cj.197854.com",  //测试服务器
+  pro: "https://cj.197854.com"   //正式服务器
 }
 
 function getBaseUrl() {
@@ -25,6 +25,11 @@ const status = {
   authStatus: {
     authOK: 10000,     //授权成功
     authFail: -10000  //授权失败
+  },
+  stateStatus: {
+      LOADING: 0,
+      NODATA: 1,
+      NORMAL: 2
   }
 }
 
@@ -32,7 +37,7 @@ const status = {
 const net = {
   defaultParams: {
     app_type: 'wx',
-    app_id: 46
+    app_id: 37
   }
 }
 
@@ -40,12 +45,16 @@ module.exports = {
   global: global,
   status: status,
   net: net,
-  isSign: false,
+  issign: true,
 
   loginUrl: getUrl("/v1.user/login"),
   getUserInfoUrl: getUrl("/v1.game/getUserInfo"),
-  
-  topListUrl: getUrl("/v1.game/topList"),
-  appInfoUrl: getUrl("/v1.game/getAppInfo")
+  appInfoUrl: getUrl("/v1.game/getAppInfo"),
+
+  setScoreUrl: getUrl("/v1.test/setScore"),
+  waterInitUrl: getUrl("/water/init"),
+  waterRengeUrl: getUrl("/water/renge"),
+  starIndexUrl: getUrl("/star/index"),
+  testTypeInfoListUrl: getUrl("/test/testTypeInfoList")
 }
 

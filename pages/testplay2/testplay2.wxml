@@ -3,7 +3,7 @@
 
 <view class='img-content-view'>
     <nav title="心理测试库" is_back></nav>
-    <stateview state="0" title="loading"></stateview>
+    <stateview state="2" title="loading"></stateview>
     <view class="container">
       <scroll-view scroll-y scroll-with-animation class="chat-content" scroll-top="{{ scrollTop }}" scroll-into-view="{{ lastId }}">
         <block wx:for="{{ messages }}" wx:key="messages{{ index }}">

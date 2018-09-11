@@ -33,12 +33,11 @@ Page({
     wx.setNavigationBarTitle({
       title: '你的荣格心理原型'
     });
+    console.log(app.testInfo)
   },
   //事件处理函数
   onReady() {
-    
     this.connect();
-    console.log(app.globalData.statusBarHeight + '---' + app.globalData.titleBarHeight)
     this.setData({
       totalTopHeight: app.totalTopHeight
     })

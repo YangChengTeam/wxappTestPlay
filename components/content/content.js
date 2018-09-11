@@ -37,7 +37,7 @@ Component({
             isShowTop: rpx >= offset
         })
       }
-      this.triggerEvent('scroll', e) 
+      this.triggerEvent('scroll', e.detail) 
     },
     scrolltolower(e){
       this.triggerEvent('scrolltolower', e)

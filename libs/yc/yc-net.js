@@ -5,7 +5,7 @@ const kkcommon = require('yc-common')
 const kkconfig = require('yc-config')
 
 function getHeader(data){
-    if(!kkconfig.isSign) return
+    if(!kkconfig.issign) return
     var header = {
       'content-type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json'

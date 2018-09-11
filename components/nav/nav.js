@@ -6,52 +6,40 @@ Component({
   properties: {
     is_back: {
       type: Boolean,
-      value: false,
-      observer: function (newVal, oldVal, changedPath) {
-
-      }
+      value: false
     },
     back_icon_path: {
       type: String,
-      value: 'back.png',
-      observer: function (newVal, oldVal, changedPath) {
-
-      }
+      value: 'back.png'
     },
     title: {
       type: String,
-      value: '',
-      observer: function (newVal, oldVal, changedPath) {
-
-      }
+      value: ''
     },
     color: {
       type: String,
-      value: '#000',
-      observer: function (newVal, oldVal, changedPath) {
-
-      }
+      value: '#000'
     },
     background: {
       type: String,
-      value: '#fff',
-      observer: function (newVal, oldVal, changedPath) {
-
-      }
+      value: '#fff'
     },
     path: {
       type: String,
-      value: '',
-      observer: function (newVal, oldVal, changedPath) {
-
-      }
+      value: ''
     }
   },
   ready() {
-    console.log(this.properties)
-    this.setData({
-      ...this.properties.title
-    })
+    let thiz = this
+    setTimeout(function(){
+      thiz.setData({
+        ...thiz.properties.title,
+        hidden: false
+      })
+    }, 20)
+  },
+  data: {
+    hidden: true
   },
   /**
    * 组件的方法列表

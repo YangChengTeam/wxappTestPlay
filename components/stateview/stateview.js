@@ -6,7 +6,12 @@ Component({
   properties: {
     state: {
       type: Number,
-      value: 0
+      value: 0,
+      observer: function (newVal, oldVal, changedPath) {
+        this.setData({
+            state: newVal
+        })
+      }
     },
     title: {
       type: String,

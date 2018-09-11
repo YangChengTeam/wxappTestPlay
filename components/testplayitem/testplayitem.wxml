@@ -1,2 +1,17 @@
 <!--components/testplayitem/testplayitem.wxml-->
-<text>components/testplayitem/testplayitem.wxml</text>
+<view class="test-play-item" bindtap='nav2test'>
+  <view wx:if="{{info.test_type==3}}" class="test-play-navigator">
+    <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
+    <navigator wx:if="{{iscanusenavigator}}"></navigator>
+  </view>
+  <image src='{{info.ico}}'></image>
+  <view class="test-play-item-info">
+    <view class="test-play-item-info-title">{{info.name}}</view>
+    <view class="test-play-item-info-desp">{{info.title}}</view>
+  </view>
+  <view class="test-play-item-btn">
+    <image src='../../assets/images/test-play-btn.png'></image>
+    <view>去测</view>
+  </view>
+</view>
+<view wx:if="{{!islast}}" class="test-play-item-bottom"></view>

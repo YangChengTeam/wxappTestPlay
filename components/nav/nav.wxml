@@ -1,10 +1,9 @@
 <!--components/nav/nav.wxml-->
-<basenav title="好的">
+<basenav>
   <view class="back" wx:if="{{is_back}}">
     <view class="back-wrapper" bindtap='navigateBack'>
       <image src="../../assets/images/{{back_icon_path}}"></image>
-      <view>{{title}}</view>
     </view>
   </view>
-  <view wx:if="{{!is_back}}">{{title}}</view>
+  <view hidden='{{hidden}}'>{{title}}</view>
 </basenav>

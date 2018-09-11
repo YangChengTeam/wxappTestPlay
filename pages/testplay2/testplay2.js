@@ -46,9 +46,7 @@ Page({
   },
   //事件处理函数
   onReady() {
-    
     this.connect();
-    console.log(app.globalData.statusBarHeight + '---' + app.globalData.titleBarHeight)
     this.setData({
       totalTopHeight: app.totalTopHeight
     })
@@ -102,7 +100,7 @@ Page({
   // 延迟页面向顶部滑动
   delayPageScroll() {
     console.log('delayPageScroll--->' + current_index)
-
+    this.data.msg = ''
     const messages = this.data.messages;
     const length = messages.length;
     const lastId = messages[length - 1].id;
