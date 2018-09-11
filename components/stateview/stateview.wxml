@@ -5,5 +5,10 @@
 
 <view class="state nodata" wx:if="{{state == 1}}">
     <image  src="../../assets/images/nodata.png"></image>
-    <view>{{title && title.length ? title : "暂无数据"}}</view>
+    <view>{{title && title.length ? title : ""}}</view>
+</view>
+
+
+<view  wx:if="{{state == 2}}">
+  <slot></slot>
 </view>

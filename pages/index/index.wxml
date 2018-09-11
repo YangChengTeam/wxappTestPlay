@@ -1,86 +1,106 @@
 <!--index.wxml-->
+
 <view class="index" hidden='{{index==1}}'>
-  <content hidden='{{isshow}}'>
+  <content>
     <nav title="心理测试库"></nav>
-    <stateview state="2" title="sssssss"></stateview>
-    <swiper>
-      <swiper-item>
-        <image class="pulse-loading" src=''></image>
-      </swiper-item>
-    </swiper>
-
-    <view class="menu">
-      <view class="meun-item" wx:for="{{menuInfo}}" wx:for-index="index" wx:for-item="item" wx:key="id" bindtap='nav2test' data-index='{{index}}'>
-        <image src='{{item.iconPath}}'></image>
-        <view>{{item.text}}</view>
+    <stateview state="{{state}}">
+      <swiper indicator-dots>
+        <swiper-item wx:for="{{appInfo.banner_list}}" wx:for-index="index" wx:for-item="item" wx:key="id">
+          <block wx:if="{{item.type==3}}">
+            <image class="pulse-loading" src='{{item.img}}' bindtap='previewImg' data-img="{{item.xcx_img}}"></image>
+          </block>
+          <block wx:if="{{item.type==2}}">
+            <image class="pulse-loading" src='{{item.img}}' wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></image>
+            <navigator class="swiper-item-nav" wx:if="{{iscanusenavigator}}" target="miniProgram" app-id='{{item.url}}' appId='{{item.url}}'>
+              <image class="pulse-loading" src='{{item.img}}'></image>
+            </navigator>
+          </block>
+          <block wx:if="{{item.type==1}}">
+            <image class="pulse-loading" src='{{item.img}}'></image>
+          </block>
+        </swiper-item>
+      </swiper>
+      <view class="menu">
+        <view class="meun-item" wx:for="{{appInfo.test_type_list}}" wx:for-index="index" wx:for-item="item" wx:key="id" bindtap='nav2category' data-index='{{item.id}}' data-title="{{item.name}}">
+          <image src='{{item.ico}}'></image>
+          <view>{{item.name}}</view>
+        </view>
       </view>
-    </view>
-
-    <view class="top">
-      <view class="header">
-        <image class='header-img' src='../../assets/images/top-header.png'></image>
-        <image class='header-img2' src='../../assets/images/top-header2.png'></image>
-      </view>
-      <view class="top-list">
-        <view class="top-list-wrapper">
-             <view class="top-item top-item1" style='z-index: {{zindex1}};' wx:for="{{[topItemInfos[0]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
-            <view class="top-item-wrapper" animation="{{item.animation2}}" bindtouchmove='touchmove' bindtouchstart='touchstart' bindtouchend='touchend'>
-              <image src=''></image>
-              <view class="top-item-info">
-                <view class="top-item-info-title">你的五大优点</view>
-                <view class="top-item-info-desp">我喜欢你身上，别人都不曾的优点</view>
+      <view class="top">
+        <view class="header" bindtap='nav2top'>
+          <image class='header-img' src='../../assets/images/top-header.png'></image>
+          <image class='header-img2' src='../../assets/images/top-header2.png'></image>
+        </view>
+        <view class="top-list">
+          <view class="top-list-wrapper">
+            <view class="top-item top-item1" style='z-index: {{zindex1}};' wx:for="{{[topItemInfos[0]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
+              <view wx:if="{{item.test_type==3}}" class="test-play-navigator">
+                  <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
+                  <navigator wx:if="{{iscanusenavigator}}"></navigator>
               </view>
-              <view class="top-item-btn">
-                <image src='../../assets/images/top-btn.png'></image>
-                <view>去测</view>
+              <view bindtap='nav2test' data-obj="{{item}}" class="top-item-wrapper" animation="{{item.animation2}}" bindtouchmove='touchmove' bindtouchstart='touchstart' bindtouchend='touchend'>
+                <image src='{{item.ico}}'></image>
+                <view class="top-item-info">
+                  <view class="top-item-info-title">{{item.name}}</view>
+                  <view class="top-item-info-desp">{{item.title}}</view>
+                </view>
+                <view class="top-item-btn">
+                  <image src='../../assets/images/top-btn.png'></image>
+                  <view>去测</view>
+                </view>
               </view>
             </view>
-          </view>
-           <view class="top-item top-item2" style='z-index: {{zindex2}};' wx:for="{{[topItemInfos[1]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
-            <view animation="{{item.animation2}}" class="top-item-wrapper" bindtouchmove='touchmove' bindtouchstart='touchstart' bindtouchend='touchend'>
-              <image src=''></image>
-              <view class="top-item-info">
-                <view class="top-item-info-title">你的五大优点</view>
-                <view class="top-item-info-desp">我喜欢你身上，别人都不曾的优点</view>
+            <view class="top-item top-item2" style='z-index: {{zindex2}};' wx:for="{{[topItemInfos[1]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
+               <view wx:if="{{item.test_type==3}}" class="test-play-navigator">
+                  <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
+                  <navigator wx:if="{{iscanusenavigator}}"></navigator>
               </view>
-              <view class="top-item-btn">
-                <image src='../../assets/images/top-btn.png'></image>
-                <view>去测</view>
+              <view bindtap='nav2test' data-obj="{{item}}" animation="{{item.animation2}}" class="top-item-wrapper" bindtouchmove='touchmove' bindtouchstart='touchstart' bindtouchend='touchend'>
+                <image src='{{item.ico}}'></image>
+                <view class="top-item-info">
+                  <view class="top-item-info-title">{{item.name}}</view>
+                  <view class="top-item-info-desp">{{item.title}}</view>
+                </view>
+                <view class="top-item-btn">
+                  <image src='../../assets/images/top-btn.png'></image>
+                  <view>去测</view>
+                </view>
               </view>
             </view>
-          </view>
-           <view class="top-item top-item3" style='z-index: {{zindex3}};' wx:for="{{[topItemInfos[2]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
-            <view animation="{{item.animation2}}" class="top-item-wrapper" bindtouchmove='touchmove' bindtouchstart='touchstart' bindtouchend='touchend'>
-              <image src=''></image>
-              <view class="top-item-info">
-                <view class="top-item-info-title">你的五大优点</view>
-                <view class="top-item-info-desp">我喜欢你身上，别人都不曾的优点</view>
+            <view class="top-item top-item3" style='z-index: {{zindex3}};' wx:for="{{[topItemInfos[2]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
+              <view wx:if="{{item.test_type==3}}" class="test-play-navigator">
+                  <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
+                  <navigator wx:if="{{iscanusenavigator}}"></navigator>
               </view>
-              <view class="top-item-btn">
-                <image src='../../assets/images/top-btn.png'></image>
-                <view>去测</view>
+              <view bindtap='nav2test' data-obj="{{item}}" animation="{{item.animation2}}" class="top-item-wrapper" bindtouchmove='touchmove' bindtouchstart='touchstart' bindtouchend='touchend'>
+                <image src='{{item.ico}}'></image>
+                <view class="top-item-info">
+                  <view class="top-item-info-title">{{item.name}}</view>
+                  <view class="top-item-info-desp">{{item.title}}</view>
+                </view>
+                <view class="top-item-btn">
+                  <image src='../../assets/images/top-btn.png'></image>
+                  <view>去测</view>
+                </view>
               </view>
             </view>
           </view>
         </view>
       </view>
-    </view>
-    <view class="hot">
-      <view class="hot-header">
-        <image src='../../assets/images/hot-header.png'></image>
-        <view>查看更多></view>
+      <view class="hot">
+        <view class="hot-header" bindtap='nav2more'>
+          <image src='../../assets/images/hot-header.png'></image>
+          <view>查看更多></view>
+        </view>
+        <item wx:for="{{appInfo.hot_list}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="id" islast="{{index+1==appInfo.hot_list.length}}"></item>
       </view>
-      <item></item>
-      <item></item>
-      <item></item>
-      <item></item>
-    </view>
-    <view style='height: 100rpx;'></view>
+      <view style='height: 100rpx;'></view>
+    </stateview>
   </content>
 </view>
 
 <view class="my" hidden='{{index==0}}'>
-  <content hidden='{{isshow}}' bindscroll="scroll">
+  <content bindscroll="scroll">
     <image class="my-header-bg" src='../../assets/images/my-header-bg.png'></image>
     <basenav background="rgba(68,33,144,{{navopacity}})" color="#fff">
       <view class="user">
@@ -144,23 +164,20 @@
         </view>
       </view>
       <view class="ad" style='margin-top:{{isswitch ? "20rpx;" : "0;"}}'>
-        <image></image>
+        <image src='{{item.img}}' wx:for="{{appInfo.ad_list}}" wx:for-index="index" wx:for-item="item" wx:key="id" bindtap='nav2test' data-index='{{index}}'></image>
       </view>
       <view class="hot">
-        <view class="hot-header">
+        <view class="hot-header" bindtap='nav2like'>
           <image src='../../assets/images/like-header.png'></image>
           <view>换一换</view>
         </view>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item wx:for="{{appInfo.you_like}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="id" islast="{{index+1==appInfo.you_like.length}}"></item>
       </view>
     </view>
     <view style='height: 100rpx;'></view>
   </content>
 </view>
-<view class="tab" hidden='{{isshow}}'>
+<view class="tab" hidden='{{state==0}}'>
   <view class="main-tab">
     <block wx:for="{{tabInfos}}" wx:key="text" wx:for-index="cindex" wx:for-item="item">
       <view class="tab-item tab-item-{{cindex == index ? 'selected' : '' }}" data-index='{{cindex}}' bindtap='tab'>

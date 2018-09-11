@@ -11,7 +11,9 @@ const kkpromise = require("../../libs/yc/yc-promise.js")
 
 Page({
   data: {
-    isshow: false,
+    navopacity: 0,
+    state: 0,
+
     index: 0,
     tabInfos: [{
         text: '精选',
@@ -24,26 +26,8 @@ Page({
         selectedIconPath: '../../assets/images/tab-my-selected.png',
       }
     ],
-
-    menuInfo: [{
-        text: '趣味测试',
-        iconPath: '../../assets/images/menu1.png'
-      },
-      {
-        text: '智商测试',
-        iconPath: '../../assets/images/menu2.png'
-      },
-      {
-        text: '心理测试',
-        iconPath: '../../assets/images/menu3.png'
-      },
-      {
-        text: '脱单测试',
-        iconPath: '../../assets/images/menu4.png'
-      },
-    ],
     isswitch: false,
-    navopacity: 0,
+
     topItemInfos: [{
       animation: {},
       zindex: 2
@@ -62,14 +46,14 @@ Page({
         index: 2
       },
       {
-        duration: 400,
+        duration: 250,
         left: "20rpx",
         top: "10rpx",
         height: "100rpx",
         index: 1
       },
       {
-        duration: 500,
+        duration: 350,
         left: "35rpx",
         top: "20rpx",
         height: "80rpx",
@@ -78,13 +62,47 @@ Page({
     ],
     zindex1: 2,
     zindex2: 1,
-    zindex3: 0
+    zindex3: 0,
+
+    appInfo: {},
+
+    iscanusenavigator: false
   },
   onLoad: function() {
-      
+    let thiz = this
+    co(function*() {
+      thiz.setData({
+        iscanusenavigator: getApp().canUseNavigator()
+      })
+      let res = yield kkservice.getAppInfo()
+      if (res && res.data && res.data.code == 1) {
+        let appInfo = res.data.data
+        appInfo.day_commend_list.forEach((v, k) => {
+          thiz.data.topItemInfos[k] = { ...thiz.data.topItemInfos[k],
+            ...v
+          }
+        })
+        thiz.setData({
+          state: kkconfig.status.stateStatus.NORMAL,
+          appInfo: appInfo,
+          topItemInfos: appInfo.day_commend_list,
+        })
+      } else {
+        thiz.setData({
+          state: kkconfig.status.stateStatus.NODATA
+        })
+      }
+    })
   },
-  onShow(e){
+  onShow(e) {
     this.startAnimation()
+  },
+  nav2category(e) {
+    let id = e.currentTarget.dataset.index
+    let title = e.currentTarget.dataset.title
+    wx.navigateTo({
+      url: '/pages/category/category?id=' + id + "&title=" + title,
+    })
   },
   tab(e) {
     let index = e.currentTarget.dataset.index
@@ -102,43 +120,44 @@ Page({
     })
   },
   touchmove(e) {
-     if(!this.moving){
-       this.moving = true
-     }
+    if (!this.moving) {
+      this.moving = true
+    }
+    this.epageX = e.touches[0].pageX
   },
   touchstart(e) {
-    console.log(e)
+    this.spageX = e.touches[0].pageX
   },
   touchend(e) {
-    if (this.moving){
-      if (this.clear){
+    if (this.moving && Math.abs(this.spageX - this.epageX) > 20) {
+      if (this.clear) {
         clearTimeout(this.clear)
       }
       this.clearAnimation()
       this.topAnimate()
       this.moving = false
-      this.clear = setTimeout(()=>{
+      this.clear = setTimeout(() => {
         this.startAnimation()
       }, 500)
     }
   },
-  startAnimation(){
+  startAnimation() {
     if (!this.animationTimer) {
       this.animationTimer = setInterval(() => {
         this.topAnimate()
       }, 3000)
     }
   },
-  clearAnimation(){
+  clearAnimation() {
     if (this.animationTimer) {
       clearInterval(this.animationTimer)
       this.animationTimer = undefined
     }
   },
-  onHide(){
+  onHide() {
     this.clearAnimation()
   },
-  topAnimate(){
+  topAnimate() {
     this.animations = []
     this.animations2 = []
 
@@ -204,5 +223,26 @@ Page({
         topItemInfos: topItemInfos
       })
     }, 20)
+  },
+  previewImg(e) {
+    wx.previewImage({
+      urls: [e.currentTarget.dataset.img],
+    })
+  },
+  natiageToMiniProgram(e) {
+    console.log(e.currentTarget.dataset.appid)
+    wx.navigateToMiniProgram({
+      appId: e.currentTarget.dataset.appid,
+    })
+  },
+  nav2top(e) {
+
+  },
+  nav2more(e) {
+
+  },
+  nav2test(e) {
+    let item = e.currentTarget.dataset.obj
+    app.nav2test(item)
   }
 })

@@ -20,3 +20,16 @@ page {
 .pulse-loading {
   animation: pulse 1s infinite ease-in-out;
 }
+
+.test-play-navigator {
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   left: 0;
+   top: 0;
+}
+
+.test-play-navigator view,.test-play-navigator navigator {
+   width: 100%;
+   height: 100%;
+}

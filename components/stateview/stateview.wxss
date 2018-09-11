@@ -23,6 +23,6 @@
 }
 
 .nodata image {
-   width: 350rpx;
-   height: 350rpx;
+   width: 250rpx;
+   height: 250rpx;
 }

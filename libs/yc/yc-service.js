@@ -66,6 +66,23 @@ function getUserInfo() {
   })()
 }
 
+function getAppInfo() {
+  return co.wrap(function* () {
+    return yield kknet.post(kkconfig.appInfoUrl)
+  })()
+}
+
+function testTypeInfoList(type_id) {
+  return co.wrap(function* () {
+    return yield kknet.post(kkconfig.testTypeInfoListUrl, {
+        type_id: type_id
+    })
+  })()
+}
+
+
+
+
 function setScore(sex, username){
   return co.wrap(function* () {
     return yield kknet.post(kkconfig.setScoreUrl, {
@@ -114,5 +131,7 @@ module.exports = {
   setScore: setScore,
   waterInit: waterInit,
   waterRenge: waterRenge,
-  starIndex: starIndex
+  starIndex: starIndex,
+  getAppInfo: getAppInfo,
+  testTypeInfoList: testTypeInfoList
 }

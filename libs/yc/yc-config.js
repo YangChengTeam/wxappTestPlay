@@ -2,8 +2,8 @@
 
 const debug = false
 const host = {
-  dev: "https://cj.198254.com",  //测试服务器
-  pro: "https://cj.198254.com"   //正式服务器
+  dev: "https://cj.197854.com",  //测试服务器
+  pro: "https://cj.197854.com"   //正式服务器
 }
 
 function getBaseUrl() {
@@ -25,6 +25,11 @@ const status = {
   authStatus: {
     authOK: 10000,     //授权成功
     authFail: -10000  //授权失败
+  },
+  stateStatus: {
+      LOADING: 0,
+      NODATA: 1,
+      NORMAL: 2
   }
 }
 
@@ -40,7 +45,7 @@ module.exports = {
   global: global,
   status: status,
   net: net,
-  issign: false,
+  issign: true,
 
   loginUrl: getUrl("/v1.user/login"),
   getUserInfoUrl: getUrl("/v1.game/getUserInfo"),
@@ -50,5 +55,6 @@ module.exports = {
   waterInitUrl: getUrl("/water/init"),
   waterRengeUrl: getUrl("/water/renge"),
   starIndexUrl: getUrl("/star/index"),
+  testTypeInfoListUrl: getUrl("/test/testTypeInfoList")
 }
 
