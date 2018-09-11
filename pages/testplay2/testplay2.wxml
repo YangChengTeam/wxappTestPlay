@@ -1,2 +1,43 @@
-<!--pages/testplay2/testplay2.wxml-->
-<text>pages/testplay2/testplay2.wxml</text>
+<!--chat.wxml-->
+<import src="../../components/img_bubble/img_bubble.wxml" />
+
+<view class='img-content-view'>
+    <nav title="心理测试库" is_back></nav>
+    <stateview state="0" title="loading"></stateview>
+    <view class="container">
+      <scroll-view scroll-y scroll-with-animation class="chat-content" scroll-top="{{ scrollTop }}" scroll-into-view="{{ lastId }}">
+        <block wx:for="{{ messages }}" wx:key="messages{{ index }}">
+          <template id="msg{{ index }}" is="img_bubble" data="{{ ...item,user_head_url,totalTopHeight}}" />
+        </block>
+      </scroll-view>
+
+      <view class='bottom-start-view' wx:if='{{test_state == 0}}'>
+          <button class='bottom-btn' open-type='getUserInfo' bindgetuserinfo='onGotUserInfo'>开始测试</button>
+      </view>
+
+      <view class='sex-view' wx:if='{{test_state == 1}}'>
+          <radio-group class="radio-group" bindchange="radioChange">
+            <label class="radio" wx:for="{{sexs}}" wx:key='id'>
+              <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
+            </label>
+          </radio-group>
+          <view class='config-sex'>确定</view>
+      </view>
+
+      <form class="chat-input" id="hei" wx:if='{{test_state == 2}}'>
+        <view class="chat-input-wrapper">
+          <view class="chat-input-record"></view>
+          <view class="chat-input-main">
+            <input value="{{ msg }}" class='input-name' cursor-spacing="16" adjust-position="{{ true }}" cursor="16" confirm-type="send" confirm-hold="{{ true }}" bindinput="onInput" bindconfirm="send" bindfocus="onFocus" maxlength='4'/>
+          </view>
+          <view class="chat-input-other">
+            <view class='send-view' bindtap="send">确定</view>
+          </view>
+        </view>
+      </form>
+
+      <view class='bottom-submit-view' wx:if='{{test_state == 3}}'>
+          <button class='bottom-btn'>再测一次</button>
+      </view>
+    </view>
+</view>
