@@ -30,7 +30,7 @@ Page({
       if (options.id){
         res = yield kkservice.testTypeInfoList(options.id)
       } else {
-        res = yield kkservice.testTypeInfoList(options.status)
+        res = yield kkservice.testClassInfoList(options.status)
       }
       if (res && res.data && res.data.code == 1) {
         let list = res.data.data 

@@ -1,23 +1,24 @@
 <!--pages/constellation.wxml-->
 <content background="#7234e1">
   <image class="my-header-bg" src='../../assets/images/my-header-bg2.png'></image>
-  
-  <basenav background="rgba(68,33,144,{{navopacity}})" color="#fff">
+  <stateview state="{{state}}">
+    <basenav background="rgba(68,33,144,{{navopacity}})" color="#fff">
       <view class="user">
         <view class="avatar">
-            <open-data type="userAvatarUrl"></open-data>
-        </view> 
+          <open-data type="userAvatarUrl"></open-data>
+        </view>
       </view>
       <view>心理测试库</view>
-  </basenav>
-  <view  class="title" >
-    <image src='../../assets/images/select-constellation.png'></image>
-  </view>
-  <view class="list">
-     <view data-obj="{{item}}" bindtap='selectConstellation' class="item" style='margin-right: {{(index+1)%4 != 0 ? "23.3rpx;" : "0;"}}'  wx:for="{{starInfos}}" wx:for-index="index" wx:for-item="item" wx:key="id">
-         <image src='{{item.img}}'></image>
-         <view>{{item.name}}</view>
-         <view>{{item.date}}</view>
-     </view>
-  </view>
+    </basenav>
+    <view class="title">
+      <image src='../../assets/images/select-constellation.png'></image>
+    </view>
+    <view class="list">
+      <view data-obj="{{item}}" bindtap='selectConstellation' class="item" style='margin-right: {{(index+1)%4 != 0 ? "23.3rpx;" : "0;"}}' wx:for="{{starInfos}}" wx:for-index="index" wx:for-item="item" wx:key="id">
+        <image src='{{item.img}}'></image>
+        <view>{{item.name}}</view>
+        <view>{{item.date}}</view>
+      </view>
+    </view>
+  </stateview>
 </content>

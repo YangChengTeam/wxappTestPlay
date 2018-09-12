@@ -65,7 +65,8 @@ Page({
 
     appInfo: {},
 
-    iscanusenavigator: false
+    iscanusenavigator: false,
+    you_like: []
   },
   onLoad: function() {
     let thiz = this
@@ -73,7 +74,6 @@ Page({
     co(function*() {
       let value = wx.getStorageSync("constellation")
       thiz.data.starInfo = value
-      console.log(value)
       thiz.setData({
         iscanusenavigator: getApp().canUseNavigator(),
         isswitch: value ? true : false,
@@ -102,7 +102,8 @@ Page({
           state: kkconfig.status.stateStatus.NORMAL,
           appInfo: appInfo,
           topItemInfos: appInfo.day_commend_list,
-          starLuckInfo: starLuckInfo
+          starLuckInfo: starLuckInfo,
+          you_like: appInfo.you_like
         })
       } else {
         thiz.setData({
@@ -126,6 +127,7 @@ Page({
           })
         }
       }
+      console.log(obj)
       thiz.setData({
         isswitch: true,
         starInfo: obj,
@@ -140,7 +142,7 @@ Page({
     let id = e.currentTarget.dataset.index
     let title = e.currentTarget.dataset.title
     wx.navigateTo({
-      url: '/pages/category/category?id=' + id + "&title=" + title,
+       url: '/pages/category/category?id=' + id + "&title=" + title,
     })
   },
   tab(e) {
@@ -267,7 +269,15 @@ Page({
     })
   },
   nav2like(e) {
-    
+     let thiz = this
+     co(function*(){
+       let res = yield kkservice.testClassInfoList(-1)
+        if(res && res.data && res.data.code == 1){
+            thiz.setData({
+               you_like: res.data.data
+            })
+        }
+     })
   },
   nav2top(e) {
     wx.navigateTo({

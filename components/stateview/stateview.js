@@ -9,8 +9,13 @@ Component({
       value: 0,
       observer: function (newVal, oldVal, changedPath) {
         this.setData({
-            state: newVal
+          state: newVal
         })
+        if (newVal == 2){
+          if (this.loading_timer) {
+            clearInterval(this.loading_timer)
+          }
+        }
       }
     },
     title: {
@@ -22,7 +27,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    loading_img: "../../assets/images/loading1.png"
+    loading_img: "../../assets/images/frame-0.png"
   },
   ready() {
     this.setData({
@@ -42,13 +47,13 @@ Component({
    */
   methods: {
     loading() {
-      let n = 1
+      let n = 0
       this.loading_timer = setInterval(() => {
-        n = n > 8 ? 1 : n
+        n = n > 29 ? 1 : n
         this.setData({
-          loading_img: `../../assets/images/loading${n++}.png`
+          loading_img: `../../assets/images/frame-${n++}.png`
         })
-      }, 300)
+      }, 1000/30)
     }
   }
 })

@@ -33,7 +33,7 @@
         </view>
         <view class="top-list">
           <view class="top-list-wrapper">
-            <view class="top-item top-item1" style='z-index: {{zindex1}};' wx:for="{{[topItemInfos[0]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
+            <view class="top-item top-item1" style='z-index: {{zindex1}};' wx:for="{{[topItemInfos[0]]}}" wx:key="id" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
               <view wx:if="{{item.test_type==3}}" class="test-play-navigator">
                 <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
                 <navigator wx:if="{{iscanusenavigator}}"></navigator>
@@ -50,7 +50,7 @@
                 </view>
               </view>
             </view>
-            <view class="top-item top-item2" style='z-index: {{zindex2}};' wx:for="{{[topItemInfos[1]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
+            <view class="top-item top-item2" style='z-index: {{zindex2}};' wx:for="{{[topItemInfos[1]]}}" wx:key="id" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
               <view wx:if="{{item.test_type==3}}" class="test-play-navigator">
                 <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
                 <navigator wx:if="{{iscanusenavigator}}"></navigator>
@@ -67,7 +67,7 @@
                 </view>
               </view>
             </view>
-            <view class="top-item top-item3" style='z-index: {{zindex3}};' wx:for="{{[topItemInfos[2]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
+            <view class="top-item top-item3" style='z-index: {{zindex3}};' wx:for="{{[topItemInfos[2]]}}" wx:key="id" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
               <view wx:if="{{item.test_type==3}}" class="test-play-navigator">
                 <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
                 <navigator wx:if="{{iscanusenavigator}}"></navigator>
@@ -186,7 +186,7 @@
           <image src='../../assets/images/like-header.png'></image>
           <view>换一换</view>
         </view>
-        <item wx:for="{{appInfo.you_like}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="id" islast="{{index+1==appInfo.you_like.length}}"></item>
+        <item wx:for="{{you_like}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="id" islast="{{index+1==appInfo.you_like.length}}"></item>
       </view>
     </view>
     <view style='height: 100rpx;'></view>

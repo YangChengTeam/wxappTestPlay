@@ -81,5 +81,12 @@ Page({
 
       })
     }, 1000)
+  },
+  onLoad(e){
+     setTimeout(()=>{
+       this.setData({
+          state: 2
+       })
+     }, 200)
   }
 })
