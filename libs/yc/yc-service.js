@@ -141,6 +141,17 @@ function testTextResult(id, test_type, result_id, nickname, headimg) {
   })()
 }
 
+
+function testClassInfoList(status) {
+  return co.wrap(function* () {
+    return yield kknet.post(kkconfig.testClassInfoListUrl, {
+      status: status
+    })
+  })()
+}
+
+
+
 module.exports = {
   authPermission: authPermission,
   login: login,
@@ -153,5 +164,6 @@ module.exports = {
   getAppInfo: getAppInfo,
   testTypeInfoList: testTypeInfoList,
   testTypeInfoView: testTypeInfoView,
-  testTextResult: testTextResult
+  testTextResult: testTextResult,
+  testClassInfoList: testClassInfoList
 }

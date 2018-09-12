@@ -155,7 +155,7 @@ Page({
   scroll(e) {
     let top = (e.detail.scrollTop)
     this.setData({
-      navopacity: top / app.totalTopHeight
+      navopacity: top / app.titleBarHeight
     })
   },
   touchmove(e) {
@@ -267,13 +267,17 @@ Page({
     })
   },
   nav2like(e) {
-
+    
   },
   nav2top(e) {
-
+    wx.navigateTo({
+      url: "/pages/category/category?status=2&title=每日推荐"
+    })
   },
   nav2more(e) {
-
+    wx.navigateTo({
+      url: "/pages/category/category?status=1&title=精选热门"
+    })
   },
   nav2test(e) {
     let item = e.currentTarget.dataset.obj
