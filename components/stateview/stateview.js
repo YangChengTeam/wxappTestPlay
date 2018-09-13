@@ -1,4 +1,5 @@
 // components/stateview/stateview.js
+
 Component({
   /**
    * 组件的属性列表
@@ -30,6 +31,7 @@ Component({
     loading_img: "../../assets/images/frame-0.png"
   },
   ready() {
+    
     this.setData({
        ...this.properties
     })

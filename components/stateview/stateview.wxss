@@ -1,4 +1,8 @@
 /* components/stateview/stateview.wxss */
+canvas {
+   border: none;
+}
+
 .state {
    display: flex;
    width: 100%;
