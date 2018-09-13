@@ -92,7 +92,7 @@
           <image src='../../assets/images/hot-header.png'></image>
           <view>查看更多></view>
         </view>
-        <item wx:for="{{appInfo.hot_list}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="id" islast="{{index+1==appInfo.hot_list.length}}"></item>
+        <item wx:for="{{appInfo.hot_list}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="name" islast="{{index+1==appInfo.hot_list.length}}"></item>
       </view>
     </stateview>
     <view style='height: 100rpx;'></view>
@@ -186,7 +186,7 @@
           <image src='../../assets/images/like-header.png'></image>
           <view>换一换</view>
         </view>
-        <item wx:for="{{you_like}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="id" islast="{{index+1==appInfo.you_like.length}}"></item>
+        <item wx:for="{{you_like}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="name" islast="{{index+1==appInfo.you_like.length}}"></item>
       </view>
     </view>
     <view style='height: 100rpx;'></view>

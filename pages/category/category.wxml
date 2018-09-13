@@ -2,6 +2,6 @@
 <content>
   <nav is_back title="{{title}}"></nav>
   <stateview state="{{state}}">
-    <item wx:for="{{list}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="id" islast="{{index+1==list.length}}"></item>
+    <item wx:for="{{list}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="name" islast="{{index+1==list.length}}"></item>
   </stateview>
 </content>
