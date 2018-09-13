@@ -39,23 +39,11 @@
           </view>
         </view>
         <view class='title_bg'>{{ sub_title }}</view>
-        <!-- <view class='title_bg'>{{ sub_title1 }}</view> -->
       </view>
       
-      <view class='title-view' wx:if='{{sub_title1}}'>
-        <view class="icon">
-          <image src='../../assets/images/triangle.png' class='caret-left'></image>
-          <view class="photo">
-            <image src="{{ url }}" class='head-img' mode='aspectFit'></image>
-          </view>
-        </view>
-        <view class='title_bg1'>{{ sub_title1 }}</view>
-      </view>
-
       <view class='options-view' style='padding-bottom:{{totalTopHeight}}px'>
-        <view class='option-item' wx:for='{{options}}' wx:key='{{id}}' bindtap='choose' data-options_item='{{item.options_item}}' data-snum='{{snum}}'>
-<image class='options-img' src='{{item.img}}'></image>
-<button class='left-btn'>{{item.btn_name}}</button>
+        <view class="option-item {{cindex == index?item-selected:''}}" wx:for='{{options}}' wx:key='{{id}}' bindtap='choose' data-selectvalue='{{item.option_value}}' data-item='{{item}}' data-i='{{index}}'>
+            <text class='option-item-txt'>{{item.option_value}}</text>
         </view>
       </view>
 

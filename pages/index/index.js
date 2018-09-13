@@ -7,7 +7,6 @@ const co = require('../../libs/co')
 const kkservice = require("../../libs/yc/yc-service.js")
 const kkconfig = require("../../libs/yc/yc-config.js")
 const kkcommon = require("../../libs/yc/yc-common.js")
-const kkpromise = require("../../libs/yc/yc-promise.js")
 
 Page({
   data: {
@@ -70,9 +69,15 @@ Page({
   },
   onLoad: function() {
     let thiz = this
+    app.index = this
     co(function*() {
+      let value = wx.getStorageSync("constellation")
+      thiz.data.starInfo = value
+      console.log(value)
       thiz.setData({
-        iscanusenavigator: getApp().canUseNavigator()
+        iscanusenavigator: getApp().canUseNavigator(),
+        isswitch: value ? true : false,
+        starInfo: value
       })
       let res = yield kkservice.getAppInfo()
       if (res && res.data && res.data.code == 1) {
@@ -82,16 +87,50 @@ Page({
             ...v
           }
         })
+        let starLuckInfo = {}
+        if (thiz.data.starInfo) {
+          let sex = wx.getStorageSync("sex")
+          res = yield kkservice.starIndex(thiz.data.starInfo.name, "today", sex == 1 ? "boy" : "girl")
+          starLuckInfo = res.data.data
+          if (starLuckInfo && starLuckInfo.intro) {
+            starLuckInfo.intro.forEach((v, k) => {
+              starLuckInfo.intro[k] = v.split("：")[1]
+            })
+          }
+        }
         thiz.setData({
           state: kkconfig.status.stateStatus.NORMAL,
           appInfo: appInfo,
           topItemInfos: appInfo.day_commend_list,
+          starLuckInfo: starLuckInfo
         })
       } else {
         thiz.setData({
           state: kkconfig.status.stateStatus.NODATA
         })
       }
+    })
+  },
+  switchConstellation(obj) {
+    let thiz = this
+    let starLuckInfo = {}
+    thiz.data.starInfo = obj
+    co(function*() {
+      if (thiz.data.starInfo) {
+        let sex = wx.getStorageSync("sex")
+        let res = yield kkservice.starIndex(thiz.data.starInfo.name, "today", sex == 1 ? "boy" : "girl")
+        starLuckInfo = res.data.data
+        if (starLuckInfo && starLuckInfo.intro) {
+          starLuckInfo.intro.forEach((v, k) => {
+            starLuckInfo.intro[k] = v.split("：")[1]
+          })
+        }
+      }
+      thiz.setData({
+        isswitch: true,
+        starInfo: obj,
+        starLuckInfo: starLuckInfo
+      })
     })
   },
   onShow(e) {
@@ -159,22 +198,14 @@ Page({
   },
   topAnimate() {
     this.animations = []
-    this.animations2 = []
-
     let animationInfos = this.data.animationInfos
     animationInfos.forEach(v => {
       var animation = wx.createAnimation({
         duration: v.duration,
         timingFunction: 'ease',
       })
-      var animation2 = wx.createAnimation({
-        duration: v.duration,
-        timingFunction: 'ease',
-      })
       animation.height(v.height).top(v.top).left(v.left).step()
-      animation2.opacity(v.opacity).step()
       this.animations.push(animation.export())
-      this.animations2.push(animation2.export())
     })
     let topItemInfos = this.data.topItemInfos
     topItemInfos.forEach((v, k) => {
@@ -235,6 +266,9 @@ Page({
       appId: e.currentTarget.dataset.appid,
     })
   },
+  nav2like(e) {
+
+  },
   nav2top(e) {
 
   },
@@ -244,5 +278,18 @@ Page({
   nav2test(e) {
     let item = e.currentTarget.dataset.obj
     app.nav2test(item)
+  },
+  nav2constellation(res) {
+    if (res.detail && res.detail.userInfo) {
+      wx.setStorageSync("sex", res.detail.userInfo.gender)
+    }
+    wx.navigateTo({
+      url: "/pages/constellation/constellation"
+    })
+  },
+  nav2constellationdetail(e) {
+    wx.navigateTo({
+      url: '/pages/constellationdetail/constellationdetail',
+    })
   }
 })

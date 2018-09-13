@@ -94,8 +94,8 @@
         </view>
         <item wx:for="{{appInfo.hot_list}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="id" islast="{{index+1==appInfo.hot_list.length}}"></item>
       </view>
-      <view style='height: 100rpx;'></view>
     </stateview>
+    <view style='height: 100rpx;'></view>
   </content>
 </view>
 
@@ -105,9 +105,9 @@
     <basenav background="rgba(68,33,144,{{navopacity}})" color="#fff">
       <view class="user">
         <view class="avatar">
-          <open-data type="userAvatarUrl"></open-data>
+            <open-data type="userAvatarUrl"></open-data>
         </view>
-        <view class="switch" wx:if="{{isswitch}}">
+        <view class="switch" wx:if="{{isswitch}}" bindtap='nav2constellation'>
           <image src='../../assets/images/constellation-switch.png'></image>
           <view>切换星座</view>
         </view>
@@ -119,44 +119,46 @@
         <view class="constellation-header">
           <image src='../../assets/images/constellation-header.png'></image>
           <view class="constellation-btn">
+                
             <image src="../../assets/images/constellation-btn.png"></image>
             <view>查看今日运势</view>
+            <button data-url="{{item.url}}" open-type='getUserInfo' bindgetuserinfo="nav2constellation"></button>
           </view>
         </view>
       </view>
       <view class="constellation-switch" wx:if="{{isswitch}}">
         <view class="constellation-switch-wrapper">
           <view class="constellation-switch-img">
-            <image src='../../assets/images/constellation.png' class="constellation-img"></image>
+            <image mode='aspectFit' src='{{starInfo.img}}' class="constellation-img"></image>
             <view class="constellation-switch-time">
               <image src='../../assets/images/constellation-time-bg.png'></image>
               <view class='constellation-switch-time-info'>
-                <view>处女座</view>
-                <view>8月23日-9月22日</view>
+                <view>{{starInfo.name}}</view>
+                <view>{{starInfo.date2}}</view>
               </view>
             </view>
           </view>
           <view class="constellation-switch-info">
             <view class="constellation-switch-info-item">
               <view class="constellation-switch-info-item-header">速配星座</view>
-              <view class="constellation-switch-info-item-info-1">天蝎座</view>
+              <view class="constellation-switch-info-item-info-1">{{starLuckInfo.intro[8]}}</view>
             </view>
             <view class="constellation-switch-info-item">
               <view class="constellation-switch-info-item-header">幸运颜色</view>
-              <view class="constellation-switch-info-item-info-2">粉红色</view>
+              <view class="constellation-switch-info-item-info-2">{{starLuckInfo.intro[6]}}</view>
             </view>
             <view class="constellation-switch-info-item">
               <view class="constellation-switch-info-item-header">健康指数</view>
-              <view class="constellation-switch-info-item-info-1">78%</view>
+              <view class="constellation-switch-info-item-info-1">{{starLuckInfo.intro[4]}}</view>
             </view>
             <view class="constellation-switch-info-item">
               <view class="constellation-switch-info-item-header">幸运数字</view>
-              <view class="constellation-switch-info-item-info-1">5</view>
+              <view class="constellation-switch-info-item-info-1">{{starLuckInfo.intro[7]}}</view>
             </view>
           </view>
 
           <view class="constellation-detail-btn">
-            <view class="constellation-btn ">
+            <view class="constellation-btn" bindtap='nav2constellationdetail'>
               <image src='../../assets/images/constellation-btn.png'></image>
               <view>查看详情</view>
             </view>

@@ -1,1 +1,8 @@
-{}
+{
+  "usingComponents": {
+    "nav": "/components/nav/nav",
+    "stateview": "/components/stateview/stateview",
+    "content": "/components/content/content",
+    "item": "/components/testplayitem/testplayitem"
+  }
+}

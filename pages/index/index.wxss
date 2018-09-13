@@ -261,7 +261,17 @@ view.avatar {
    overflow: hidden;
    border-radius: 50%;
    margin-left: 20rpx;
+   margin-right: 20rpx;
    position: relative;
+}
+
+view.avatar > image, view.avatar > open-data {
+   height: 60rpx;
+   width: 60rpx;
+   left: 0;
+   top: 0;
+   position: absolute;
+   border-radius: 50%;
 }
 
 .switch {
@@ -312,13 +322,17 @@ view.avatar {
    height: 82rpx;
 }
 
-.constellation-btn > image, .constellation-btn > view {
+.constellation-btn > image, .constellation-btn > view, .constellation-btn > button  {
    position: absolute;
    width: 402rpx;
    height: 82rpx;
    left: 0;
    top: 0;
 }
+
+.constellation-btn > button {
+   opacity: 0;
+} 
 
 .constellation-btn > view {
    text-align: center;
@@ -378,7 +392,7 @@ view.avatar {
 
 .constellation-img {
    width: 255rpx;
-   height: 253rpx; 
+   height: 255rpx; 
 }
 
 .constellation-switch-time {

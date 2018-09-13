@@ -1,15 +1,20 @@
 //app.js
+const regeneratorRuntime = global.regeneratorRuntime = require('/libs/runtime')
+
+const co = require('/libs/co')
+const kkservice = require("/libs/yc/yc-service.js")
+
 App({
   onLaunch: function () {
     this.tabIndex = 0
   },
-  nav2test(item){
+  nav2test(item) {
     this.testInfo = item
     if (item.test_type == 1) {
-        wx.navigateTo({
-            url: '/pages/testplay/testplay',
-        })
-    } else if (item.test_type == 2){
+      wx.navigateTo({
+        url: '/pages/testplay/testplay',
+      })
+    } else if (item.test_type == 2) {
       wx.navigateTo({
         url: '/pages/testplay2/testplay2',
       })
@@ -50,5 +55,38 @@ App({
 
     }
     return mini > -1
+  },
+  login(userInfo, url, callback) {
+    let thiz = this
+    if (thiz.isLogin) {
+      if (url) {
+        wx.navigateTo({
+          url: url,
+        })
+      }
+      return
+    }
+    wx.showLoading({
+      title: '正在登录...',
+      icon: 'none'
+    })
+    console.log("正在登录")
+    co(function*() {
+      if (yield kkservice.login(userInfo)) {
+        thiz.isLogin = true
+        wx.hideLoading()
+        console.log("zzzz")
+        // let res = yield kkservice.getUserInfo()
+        // thiz.userInfo = res.data.data
+        if (url) {
+          wx.navigateTo({
+            url: url,
+          })
+        }
+        if (callback) {
+          callback()
+        }
+      }
+    })
   }
 })

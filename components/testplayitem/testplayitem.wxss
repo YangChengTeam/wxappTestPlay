@@ -29,7 +29,7 @@
   font-size: 32rpx;
   overflow: hidden;
   height: 36rpx;
-  margin-bottom: 10rpx;
+  margin-bottom: 15rpx;
 }
 
 .test-play-item-info-desp {

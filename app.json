@@ -1,12 +1,12 @@
 {
   "pages": [
-    "pages/testplay/testplay",
     "pages/index/index",
+    "pages/testplay/testplay",
+    "pages/testplay2/testplay2",
     "pages/category/category",
     "pages/constellation/constellation",
     "pages/myconstellation/myconstellation",
     "pages/constellationdetail/constellationdetail",
-    "pages/testplay2/testplay2",
     "pages/testresult/testresult"
   ],
   "window": {

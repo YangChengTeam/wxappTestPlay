@@ -10,9 +10,9 @@ function authPermission(scope) {
   return co.wrap(function* () {
     let res = yield kkpromise.getSetting()
     if (res && res.authSetting[scope]) {
-      return kkconfig.status.authStatus.authOK  //已授权
+      return kkconfig.status.authStatus.authOK //已授权
     }
-    return kkconfig.status.authStatus.authFail  //未授权
+    return kkconfig.status.authStatus.authFail //未授权
   })()
 }
 
@@ -75,7 +75,7 @@ function getAppInfo() {
 function testTypeInfoList(type_id) {
   return co.wrap(function* () {
     return yield kknet.post(kkconfig.testTypeInfoListUrl, {
-        type_id: type_id
+      type_id: type_id
     })
   })()
 }
@@ -83,7 +83,7 @@ function testTypeInfoList(type_id) {
 
 
 
-function setScore(sex, username){
+function setScore(sex, username) {
   return co.wrap(function* () {
     return yield kknet.post(kkconfig.setScoreUrl, {
       sex: sex,
@@ -120,6 +120,36 @@ function starIndex(star, day, sex) {
   })()
 }
 
+function testTypeInfoView(id, test_type) {
+  return co.wrap(function* () {
+    return yield kknet.post(kkconfig.testTypeInfoViewUrl, {
+      id: id,
+      test_type: test_type
+    })
+  })()
+}
+
+function testTextResult(id, test_type, result_id, nickname, headimg,sex) {
+  return co.wrap(function* () {
+    return yield kknet.post(kkconfig.testTextResultUrl, {
+      id: id,
+      test_type: test_type,
+      result_id: result_id,
+      nickname: nickname,
+      headimg: headimg,
+      sex:sex
+    })
+  })()
+}
+
+
+function testClassInfoList(status) {
+  return co.wrap(function* () {
+    return yield kknet.post(kkconfig.testClassInfoListUrl, {
+      status: status
+    })
+  })()
+}
 
 
 
@@ -133,5 +163,8 @@ module.exports = {
   waterRenge: waterRenge,
   starIndex: starIndex,
   getAppInfo: getAppInfo,
-  testTypeInfoList: testTypeInfoList
+  testTypeInfoList: testTypeInfoList,
+  testTypeInfoView: testTypeInfoView,
+  testTextResult: testTextResult,
+  testClassInfoList: testClassInfoList
 }

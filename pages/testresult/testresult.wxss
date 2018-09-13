@@ -1,1 +1,89 @@
 /* pages/test_result/test_result.wxss */
+.result-view {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-img {
+  width: 710rpx;
+  margin-top: 20rpx;
+}
+
+.btn-view {
+  width: 100%;
+  height: 100rpx;
+  margin-top: 24rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.share-view{
+  width: 342rpx;
+  height: 84rpx;
+  position: relative;
+}
+
+.share-img {
+  width: 342rpx;
+  height: 84rpx;
+}
+
+.share-btn {
+  width: 342rpx;
+  height: 84rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(255, 255, 255, 0)
+}
+
+.save-view{
+  width: 342rpx;
+  height: 84rpx;
+  position: relative;
+}
+
+.save-img {
+  width: 342rpx;
+  height: 84rpx;
+}
+
+.save-btn {
+  width: 342rpx;
+  height: 84rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(255, 255, 255, 0)
+}
+
+.again-view{
+  width: 712rpx;
+  height: 84rpx;
+  position: relative;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+.again-img {
+  width: 712rpx;
+  height: 84rpx;
+}
+
+.again-btn {
+  width: 712rpx;
+  height: 84rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(255, 255, 255, 0)
+}
+
+.button,button::after{
+  border: 0;
+}
