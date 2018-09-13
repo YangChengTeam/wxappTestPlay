@@ -79,7 +79,10 @@ Page({
         isswitch: value ? true : false,
         starInfo: value
       })
-      let res = yield kkservice.getAppInfo()
+      var [status, res] = yield [kkservice.authPermission("scope.userInfo"), yield kkservice.getAppInfo()]
+      if (status == kkconfig.status.authStatus.authOK) {
+           app.login()
+      }
       if (res && res.data && res.data.code == 1) {
         let appInfo = res.data.data
         appInfo.day_commend_list.forEach((v, k) => {
@@ -89,8 +92,8 @@ Page({
         })
         let starLuckInfo = {}
         if (thiz.data.starInfo) {
-          let sex = wx.getStorageSync("sex")
-          res = yield kkservice.starIndex(thiz.data.starInfo.name, "today", sex == 1 ? "boy" : "girl")
+          let userInfo = wx.getStorageSync("userInfo")
+          res = yield kkservice.starIndex(thiz.data.starInfo.name, "today", userInfo && userInfo.gender == 1 ? "boy" : "girl")
           starLuckInfo = res.data.data
           if (starLuckInfo && starLuckInfo.intro) {
             starLuckInfo.intro.forEach((v, k) => {
@@ -118,8 +121,8 @@ Page({
     thiz.data.starInfo = obj
     co(function*() {
       if (thiz.data.starInfo) {
-        let sex = wx.getStorageSync("sex")
-        let res = yield kkservice.starIndex(thiz.data.starInfo.name, "today", sex == 1 ? "boy" : "girl")
+        let userInfo = wx.getStorageSync("userInfo")
+        let res = yield kkservice.starIndex(thiz.data.starInfo.name, "today", userInfo && userInfo.gender == 1 ? "boy" : "girl")
         starLuckInfo = res.data.data
         if (starLuckInfo && starLuckInfo.intro) {
           starLuckInfo.intro.forEach((v, k) => {
@@ -295,7 +298,8 @@ Page({
   },
   nav2constellation(res) {
     if (res.detail && res.detail.userInfo) {
-      wx.setStorageSync("sex", res.detail.userInfo.gender)
+      app.userInfo = res.detail.userInfo
+      wx.setStorageSync("userInfo", res.detail.userInfo)
     }
     wx.navigateTo({
       url: "/pages/constellation/constellation"

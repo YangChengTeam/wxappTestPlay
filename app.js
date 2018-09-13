@@ -66,16 +66,9 @@ App({
       }
       return
     }
-    wx.showLoading({
-      title: '正在登录...',
-      icon: 'none'
-    })
     co(function*() {
       if (yield kkservice.login()) {
         thiz.isLogin = true
-        let res = yield kkservice.getUserInfo()
-        wx.hideLoading()
-        thiz.userInfo = res.data.data
         if (url) {
           wx.navigateTo({
             url: url,
