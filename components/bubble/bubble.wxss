@@ -39,6 +39,7 @@
   justify-content: flex-start;
   margin-left: 206rpx;
   margin-top: 15rpx;
+  box-shadow: 0px 2px #d3d3d3;
 }
 
 .option-item-txt {
@@ -49,6 +50,10 @@
 
 .item-selected {
   background: #ff9090;
+}
+
+.txt-item-selected {
+  color: #fff;
 }
 
 .left-btn {

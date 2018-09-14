@@ -27,11 +27,26 @@ Page({
     resultImgUrl = options.img_url
     resultSavePath = options.save_img_url
     console.log('save path--->' + resultSavePath)
-    console.log(app.index.data.appInfo)
-    this.setData({
-      result_img: resultImgUrl,
-      appInfo: app.index.data.appInfo
-    })
+    
+    var that = this
+    var temp_app_info = app.index.data.appInfo
+    if(!temp_app_info){
+      co(function* () {
+        let res = yield kkservice.getAppInfo()
+        if (res && res.data && res.data.code == 1) {
+          temp_app_info = res.data.data
+          that.setData({
+            result_img: resultImgUrl,
+            appInfo: temp_app_info
+          })
+        }
+      })
+    }else{
+      this.setData({
+        result_img: resultImgUrl,
+        appInfo: temp_app_info
+      })
+    }
   },
 
   /**
@@ -150,7 +165,7 @@ Page({
     
     return {
       title: app.testplay.data.share_title,
-      path: '/pages/testplay/testplay',
+      path: '/pages/testplay/testplay?img_url=' + resultImgUrl + '&save_img_url=' + resultSavePath,
       imageUrl: app.testplay.data.share_img
     }
   },

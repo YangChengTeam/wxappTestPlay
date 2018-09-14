@@ -36,7 +36,9 @@ Page({
     totalTopHeight: 0,
     test_state: 0,
     share_title:'',
-    share_img:''
+    share_img:'',
+    tid:'',
+    test_type:''
   },
   onLoad(option) {
     current_index = 0
@@ -52,8 +54,41 @@ Page({
     app.testplay = this
   },
 
+  //事件处理函数
+  onReady:function(options) {
+    
+    this.setData({
+      totalTopHeight: app.totalTopHeight
+    })
+    
+    test_info = app.testInfo
+    if(test_info){
+      this.data.tid = test_info.id
+      this.data.test_type = test_info.test_type
+    }else{
+      this.data.tid = options.tid
+      this.data.test_type = options.test_type
+    }
+
+    var that = this
+    co(function* () {
+      let res = yield kkservice.testTypeInfoView(that.data.tid, that.data.test_type)
+      console.log(res)
+      if (res && res.data && res.data.code == 1) {
+        subject_title = res.data.data.desc
+        subject_img = res.data.data.image
+        that.setData({
+          share_title: res.data.data.share_title[0],
+          share_img: res.data.data.share_ico[0]
+        })
+        that.recombineData(res.data.data.list)
+        that.guide();
+      }
+    })
+  },
+
   //重新封装结果数据
-  recombineData: function(result) {
+  recombineData: function (result) {
     let questions = result.question
     console.log(questions)
     let answers = result.answer
@@ -67,52 +102,28 @@ Page({
 
       var options = []
 
-      for(let m=0;m<temp_answers.length;m++){
+      for (let m = 0; m < temp_answers.length; m++) {
         var temp_option_item = {
           option_value: temp_answers[m],
           option_jump_num: temp_jump[m],
-          result_answer_id: choose_answers[m]
+          result_answer_id: choose_answers[m],
         }
         options.push(temp_option_item)
       }
 
       let subject_item_data = {
-        id: `msg${(i+1)*2 + 1}`,
+        id: `msg${(i + 1) * 2 + 1}`,
         sub_title: questions[i],
         messageType: 1,
         url: '../../assets/images/logo.png',
         jump_type: jumps[i].jump_type,
+        current_select_index: -1,
         options: options
       }
 
       msgs.push(subject_item_data)
     }
     console.log(msgs)
-  },
-
-  //事件处理函数
-  onReady() {
-    test_info = app.testInfo
-    
-    this.setData({
-      totalTopHeight: app.totalTopHeight
-    })
-    
-    var that = this
-    co(function* () {
-      let res = yield kkservice.testTypeInfoView(test_info.id, test_info.test_type)
-      console.log(res)
-      if (res && res.data && res.data.code == 1) {
-        subject_title = res.data.data.desc
-        subject_img = res.data.data.image
-        that.setData({
-          share_title: res.data.data.share_title[0],
-          share_img: res.data.data.share_ico[0]
-        })
-        that.recombineData(res.data.data.list)
-        that.guide();
-      }
-    })
   },
 
   start: function() {
@@ -305,9 +316,16 @@ Page({
     console.log('i--->' + e.currentTarget.dataset.i)
     this.data.msg = e.currentTarget.dataset.selectvalue
     var i = e.currentTarget.dataset.i
-    this.setData({
-      cindex: i
-    })
+    
+    if(this.data.messages){
+      var temp_item = this.data.messages[this.data.messages.length-1]
+      console.log(temp_item)
+      temp_item.current_select_index = i
+      
+      this.setData({
+        messages: this.data.messages
+      })
+    }
 
     if (item.option_jump_num){
       let temp_index = parseInt(item.option_jump_num)
@@ -351,7 +369,7 @@ Page({
     })
     var that = this
     co(function* () {
-      let res = yield kkservice.testTextResult(4, 1,result_id,user_name,user_head_url,0)
+      let res = yield kkservice.testTextResult(that.data.tid, that.data.test_type,result_id,user_name,user_head_url,0)
       console.log(res)
       if (res && res.data && res.data.code == 1) {
         wx.hideLoading()
@@ -380,7 +398,7 @@ Page({
     var that = this
     return {
       title: that.data.share_title,
-      path: '/pages/testplay/testplay',
+      path: '/pages/testplay/testplay?tid='+that.data.tid + '&test_type='+ that.data.test_type,
       imageUrl: that.data.share_img
     }
   },

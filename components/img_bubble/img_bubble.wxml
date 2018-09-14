@@ -1,15 +1,15 @@
 <!--components/bubble /bubble.wxml-->
 <template name="img_bubble">
   <view id="{{ id }}" class="bubble-container" wx:if="{{ messageType === 3 }}">
-    <view class='start-item'>
+    <view class='result-item'>
       <view class="icon">
         <image src='../../assets/images/triangle.png' class='caret-left'></image>
         <view class="head_photo">
           <image src="{{ url }}" style='width:72rpx;height:72rpx' mode='aspectFit'></image>
         </view>
       </view>
-      <view class='title_bg'>
-        <image class='res-img' src='{{result_path}}' bindtap='toResult'></image>
+      <view class='title-bg'>
+        <image class='res-img' src='{{result_path}}' mode='widthFix' bindtap='toResult'></image>
       </view>
     </view>
   </view>
@@ -22,9 +22,9 @@
               <image src="{{ url }}" style='width:72rpx;height:72rpx'></image>
             </view>
           </view>
-          <view class='img-title-bg' wx:if='{{item.sub_type == 0}}'>{{ item.sub_title }}</view>
+          <view class='img-title-bg' wx:if='{{item.sub_type == 0}}'>{{ item.sub_value }}</view>
           <view class='subject-img-view' wx:if='{{item.sub_type == 1}}'>
-              <image class='subject-img' src='{{item.sub_title}}'></image>
+              <image class='subject-img' src='{{item.sub_value}}'></image>
           </view>
         </view>
         <!-- <view><button class='start-btn' open-type='getUserInfo' bindgetuserinfo='onGotUserInfo'>开始测试</button></view> -->

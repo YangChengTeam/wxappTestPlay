@@ -7,7 +7,7 @@
     <view class="container">
       <scroll-view scroll-y scroll-with-animation class="chat-content" scroll-top="{{ scrollTop }}" scroll-into-view="{{ lastId }}">
         <block wx:for="{{ messages }}" wx:key="messages{{ index }}">
-          <template id="msg{{ index }}" is="img_bubble" data="{{ ...item,user_head_url,totalTopHeight}}" />
+          <template id="msg{{ index }}" is="img_bubble" data="{{ ...item,user_head_url,totalTopHeight,is_over}}" />
         </block>
       </scroll-view>
 
@@ -21,7 +21,7 @@
               <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
             </label>
           </radio-group>
-          <view class='config-sex'>确定</view>
+          <view class='config-sex' bindtap="send">确定</view>
       </view>
 
       <form class="chat-input" id="hei" wx:if='{{test_state == 2}}'>
@@ -36,7 +36,7 @@
         </view>
       </form>
 
-      <view class='bottom-submit-view' wx:if='{{test_state == 3}}'>
+      <view class='bottom-submit-view' wx:if='{{test_state == 4}}'>
           <button class='bottom-btn'>再测一次</button>
       </view>
     </view>

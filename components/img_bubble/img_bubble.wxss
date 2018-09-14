@@ -4,7 +4,6 @@
   position: relative;
   display: flex;
   padding: 20rpx;
-  min-height: 400rpx;
 }
 
 .quest-bubble-container {
@@ -73,7 +72,6 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-top: 10rpx;
 }
 
 .start-item {
@@ -82,10 +80,18 @@
   margin-top: 12rpx;
 }
 
+.result-item {
+  display: flex;
+  flex-direction: row;
+  margin-top: 12rpx;
+  padding-bottom: 260rpx;
+}
+
 .title-view {
   display: flex;
   flex-direction: row;
-  margin-top: 20rpx;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
 }
 
 .img-title-bg {
@@ -105,7 +111,6 @@
 }
 
 .subject-img-view {
-  max-width: 66%;
   background: #fff;
   border-radius: 4px;
   display: flex;
@@ -115,9 +120,9 @@
 }
 
 .subject-img {
-  width: 316rpx;
-  height: 250rpx;
-  padding: 12rpx;
+  width: 495rpx;
+  height: 198rpx;
+  padding: 6rpx;
 }
 
 .title-txt {
@@ -126,14 +131,13 @@
   color: #333;
 }
 
-.title_bg1 {
+.title-bg {
   max-width: 72%;
   padding-left: 20rpx;
   padding-right: 20rpx;
   padding-top: 10rpx;
-  padding-bottom: 10rpx;
-  min-height: 70rpx;
-  background: #fff;
+  border:12rpx solid #fff;
+  padding-bottom: 20rpx;
   border-radius: 14px;
   display: flex;
   align-items: center;
@@ -223,6 +227,6 @@
 }
 
 .res-img {
-  width: 350rpx;
-  height: 660rpx;
+  width: 420rpx;
+  filter: blur(3px);
 }
