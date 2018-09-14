@@ -181,6 +181,7 @@ swiper image {
    margin-bottom: 10rpx;
    overflow: hidden;
    height: 32rpx;
+   line-height: 32rpx;
 }
 
 .top-item-info-desp {
@@ -188,6 +189,7 @@ swiper image {
   font-size: 20rpx;
   overflow: hidden;
   height: 32rpx;
+  line-height: 32rpx;
 }
 
 .top-item-btn {
