@@ -1,0 +1,43 @@
+<!--components/constellationdetailinfo/constellationdetailinfo.wxml-->
+<view class="constellation-switch" wx:if="{{isswitch}}">
+  <view class="constellation-switch-wrapper">
+    <view class="constellation-switch-img">
+      <image mode='aspectFit' src='{{starInfo.img}}' class="constellation-img"></image>
+      <view class="constellation-switch-time">
+        <image src='../../assets/images/constellation-time-bg.png'></image>
+        <view class='constellation-switch-time-info'>
+          <view>{{starInfo.name}}</view>
+          <view>{{starInfo.date2}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="constellation-switch-info">
+      <view class="constellation-switch-info-item">
+        <view class="constellation-switch-info-item-header">速配星座</view>
+        <view class="constellation-switch-info-item-info-1">{{starLuckInfo.intro[8]}}</view>
+      </view>
+      <view class="constellation-switch-info-item">
+        <view class="constellation-switch-info-item-header">幸运颜色</view>
+        <view class="constellation-switch-info-item-info-2">{{starLuckInfo.intro[6]}}</view>
+      </view>
+      <view class="constellation-switch-info-item">
+        <view class="constellation-switch-info-item-header">健康指数</view>
+        <view class="constellation-switch-info-item-info-1">{{starLuckInfo.intro[4]}}</view>
+      </view>
+      <view class="constellation-switch-info-item">
+        <view class="constellation-switch-info-item-header">幸运数字</view>
+        <view class="constellation-switch-info-item-info-1">{{starLuckInfo.intro[7]}}</view>
+      </view>
+    </view>
+
+    <view class="constellation-detail-btn">
+      <view class="constellation-btn" bindtap='nav2constellationdetail'>
+        <image src='../../assets/images/constellation-btn.png'></image>
+        <view>查看详情</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view>
+</view>

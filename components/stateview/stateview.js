@@ -49,7 +49,7 @@ Component({
    */
   methods: {
     loading() {
-      let n = 0
+      let n = 1
       this.loading_timer = setInterval(() => {
         n = n > 29 ? 1 : n
         this.setData({

@@ -1,10 +1,9 @@
 <!--index.wxml-->
-
 <view class="index" hidden='{{index==1}}'>
   <content>
     <nav title="心理测试库"></nav>
-    <stateview state="{{state}}">
-      <swiper indicator-dots>
+    <stateview state="{{state}}" >
+      <swiper indicator-dots autoplay interval="3000">
         <swiper-item wx:for="{{appInfo.banner_list}}" wx:for-index="index" wx:for-item="item" wx:key="id">
           <block wx:if="{{item.type==3}}">
             <image class="pulse-loading" src='{{item.img}}' bindtap='previewImg' data-img="{{item.xcx_img}}"></image>
@@ -105,7 +104,7 @@
     <basenav background="rgba(68,33,144,{{navopacity}})" color="#fff">
       <view class="user">
         <view class="avatar">
-            <open-data type="userAvatarUrl"></open-data>
+          <open-data type="userAvatarUrl"></open-data>
         </view>
         <view class="switch" wx:if="{{isswitch}}" bindtap='nav2constellation'>
           <image src='../../assets/images/constellation-switch.png'></image>
@@ -119,7 +118,7 @@
         <view class="constellation-header">
           <image src='../../assets/images/constellation-header.png'></image>
           <view class="constellation-btn">
-                
+
             <image src="../../assets/images/constellation-btn.png"></image>
             <view>查看今日运势</view>
             <button data-url="{{item.url}}" open-type='getUserInfo' bindgetuserinfo="nav2constellation"></button>

@@ -28,7 +28,8 @@
   color: #000;
   font-size: 32rpx;
   overflow: hidden;
-  height: 36rpx;
+  height: 40rpx;
+  line-height: 40rpx;
   margin-bottom: 15rpx;
 }
 
