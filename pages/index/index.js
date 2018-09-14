@@ -65,7 +65,8 @@ Page({
 
     appInfo: {},
 
-    iscanusenavigator: false
+    iscanusenavigator: false,
+    you_like: []
   },
   onLoad: function() {
     let thiz = this
@@ -73,13 +74,15 @@ Page({
     co(function*() {
       let value = wx.getStorageSync("constellation")
       thiz.data.starInfo = value
-      console.log(value)
       thiz.setData({
         iscanusenavigator: getApp().canUseNavigator(),
         isswitch: value ? true : false,
         starInfo: value
       })
-      let res = yield kkservice.getAppInfo()
+      var [status, res] = yield [kkservice.authPermission("scope.userInfo"), yield kkservice.getAppInfo()]
+      if (status == kkconfig.status.authStatus.authOK) {
+           app.login()
+      }
       if (res && res.data && res.data.code == 1) {
         let appInfo = res.data.data
         appInfo.day_commend_list.forEach((v, k) => {
@@ -89,8 +92,8 @@ Page({
         })
         let starLuckInfo = {}
         if (thiz.data.starInfo) {
-          let sex = wx.getStorageSync("sex")
-          res = yield kkservice.starIndex(thiz.data.starInfo.name, "today", sex == 1 ? "boy" : "girl")
+          let userInfo = wx.getStorageSync("userInfo")
+          res = yield kkservice.starIndex(thiz.data.starInfo.name, "today", userInfo && userInfo.gender == 1 ? "boy" : "girl")
           starLuckInfo = res.data.data
           if (starLuckInfo && starLuckInfo.intro) {
             starLuckInfo.intro.forEach((v, k) => {
@@ -102,7 +105,8 @@ Page({
           state: kkconfig.status.stateStatus.NORMAL,
           appInfo: appInfo,
           topItemInfos: appInfo.day_commend_list,
-          starLuckInfo: starLuckInfo
+          starLuckInfo: starLuckInfo,
+          you_like: appInfo.you_like
         })
       } else {
         thiz.setData({
@@ -117,8 +121,8 @@ Page({
     thiz.data.starInfo = obj
     co(function*() {
       if (thiz.data.starInfo) {
-        let sex = wx.getStorageSync("sex")
-        let res = yield kkservice.starIndex(thiz.data.starInfo.name, "today", sex == 1 ? "boy" : "girl")
+        let userInfo = wx.getStorageSync("userInfo")
+        let res = yield kkservice.starIndex(thiz.data.starInfo.name, "today", userInfo && userInfo.gender == 1 ? "boy" : "girl")
         starLuckInfo = res.data.data
         if (starLuckInfo && starLuckInfo.intro) {
           starLuckInfo.intro.forEach((v, k) => {
@@ -126,6 +130,7 @@ Page({
           })
         }
       }
+      console.log(obj)
       thiz.setData({
         isswitch: true,
         starInfo: obj,
@@ -140,7 +145,7 @@ Page({
     let id = e.currentTarget.dataset.index
     let title = e.currentTarget.dataset.title
     wx.navigateTo({
-      url: '/pages/category/category?id=' + id + "&title=" + title,
+       url: '/pages/category/category?id=' + id + "&title=" + title,
     })
   },
   tab(e) {
@@ -155,7 +160,7 @@ Page({
   scroll(e) {
     let top = (e.detail.scrollTop)
     this.setData({
-      navopacity: top / app.totalTopHeight
+      navopacity: top / app.titleBarHeight
     })
   },
   touchmove(e) {
@@ -267,13 +272,25 @@ Page({
     })
   },
   nav2like(e) {
-
+     let thiz = this
+     co(function*(){
+       let res = yield kkservice.testClassInfoList(-1)
+        if(res && res.data && res.data.code == 1){
+            thiz.setData({
+               you_like: res.data.data
+            })
+        }
+     })
   },
   nav2top(e) {
-
+    wx.navigateTo({
+      url: "/pages/category/category?status=2&title=每日推荐"
+    })
   },
   nav2more(e) {
-
+    wx.navigateTo({
+      url: "/pages/category/category?status=1&title=精选热门"
+    })
   },
   nav2test(e) {
     let item = e.currentTarget.dataset.obj
@@ -281,7 +298,8 @@ Page({
   },
   nav2constellation(res) {
     if (res.detail && res.detail.userInfo) {
-      wx.setStorageSync("sex", res.detail.userInfo.gender)
+      app.userInfo = res.detail.userInfo
+      wx.setStorageSync("userInfo", res.detail.userInfo)
     }
     wx.navigateTo({
       url: "/pages/constellation/constellation"

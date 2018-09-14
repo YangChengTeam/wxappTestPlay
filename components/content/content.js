@@ -1,7 +1,7 @@
 // components/content.js
 const app = getApp()
 
-let offset = 300
+let offset = 1000
 
 Component({
   /**
@@ -49,6 +49,9 @@ Component({
     },
     scrolltolower(e){
       this.triggerEvent('scrolltolower', e)
+    },
+    scrolltoupper(e){
+      this.triggerEvent('scrolltoupper', e)
     }
   }
 })

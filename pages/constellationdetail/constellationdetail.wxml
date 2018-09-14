@@ -1,2 +1,26 @@
 <!--pages/constellation_detail/constellation_detail.wxml-->
-<text>pages/constellation_detail/constellation_detail.wxml</text>
+<view class="main-content">
+  <image class="my-header-bg" src='../../assets/images/my-header-bg3.png' style='height:{{totalTopHeight}}px'></image>
+  <nav back_icon_path="back2.png" title="运势" is_back background="rgba(68,33,144,0)" color="#fff"></nav>
+  <stateview state="{{state}}">
+    
+  </stateview>
+  <view class="tab">
+      <view class="tab-wrapper">
+        <view class="tab-item tab-item-current">
+          <view>今日运势</view>
+        </view>
+        <view class="tab-item">
+          <view>本周运势</view>
+        </view>
+        <view class="tab-item">
+          <view>本月运势</view>
+        </view>
+      </view>
+    </view>
+    <swiper>
+      <swiper-item>
+          
+      </swiper-item>
+    </swiper>
+</view>

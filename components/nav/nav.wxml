@@ -1,6 +1,6 @@
 <!--components/nav/nav.wxml-->
-<basenav>
-  <view class="back" wx:if="{{is_back}}">
+<basenav background="{{background}}" color="{{color}}">
+  <view hidden='{{hidden}}' class="back" wx:if="{{is_back}}">
     <view class="back-wrapper" bindtap='navigateBack'>
       <image src="../../assets/images/{{back_icon_path}}"></image>
     </view>

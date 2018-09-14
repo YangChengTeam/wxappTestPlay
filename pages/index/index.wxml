@@ -1,10 +1,9 @@
 <!--index.wxml-->
-
 <view class="index" hidden='{{index==1}}'>
   <content>
     <nav title="心理测试库"></nav>
-    <stateview state="{{state}}">
-      <swiper indicator-dots>
+    <stateview state="{{state}}" >
+      <swiper indicator-dots autoplay interval="3000">
         <swiper-item wx:for="{{appInfo.banner_list}}" wx:for-index="index" wx:for-item="item" wx:key="id">
           <block wx:if="{{item.type==3}}">
             <image class="pulse-loading" src='{{item.img}}' bindtap='previewImg' data-img="{{item.xcx_img}}"></image>
@@ -33,7 +32,7 @@
         </view>
         <view class="top-list">
           <view class="top-list-wrapper">
-            <view class="top-item top-item1" style='z-index: {{zindex1}};' wx:for="{{[topItemInfos[0]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
+            <view class="top-item top-item1" style='z-index: {{zindex1}};' wx:for="{{[topItemInfos[0]]}}" wx:key="id" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
               <view wx:if="{{item.test_type==3}}" class="test-play-navigator">
                 <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
                 <navigator wx:if="{{iscanusenavigator}}"></navigator>
@@ -50,7 +49,7 @@
                 </view>
               </view>
             </view>
-            <view class="top-item top-item2" style='z-index: {{zindex2}};' wx:for="{{[topItemInfos[1]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
+            <view class="top-item top-item2" style='z-index: {{zindex2}};' wx:for="{{[topItemInfos[1]]}}" wx:key="id" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
               <view wx:if="{{item.test_type==3}}" class="test-play-navigator">
                 <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
                 <navigator wx:if="{{iscanusenavigator}}"></navigator>
@@ -67,7 +66,7 @@
                 </view>
               </view>
             </view>
-            <view class="top-item top-item3" style='z-index: {{zindex3}};' wx:for="{{[topItemInfos[2]]}}" wx:key="text" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
+            <view class="top-item top-item3" style='z-index: {{zindex3}};' wx:for="{{[topItemInfos[2]]}}" wx:key="id" wx:for-index="index" wx:for-item="item" animation="{{item.animation}}">
               <view wx:if="{{item.test_type==3}}" class="test-play-navigator">
                 <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{item.url}}"></view>
                 <navigator wx:if="{{iscanusenavigator}}"></navigator>
@@ -92,7 +91,7 @@
           <image src='../../assets/images/hot-header.png'></image>
           <view>查看更多></view>
         </view>
-        <item wx:for="{{appInfo.hot_list}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="id" islast="{{index+1==appInfo.hot_list.length}}"></item>
+        <item wx:for="{{appInfo.hot_list}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="name" islast="{{index+1==appInfo.hot_list.length}}"></item>
       </view>
     </stateview>
     <view style='height: 100rpx;'></view>
@@ -105,7 +104,7 @@
     <basenav background="rgba(68,33,144,{{navopacity}})" color="#fff">
       <view class="user">
         <view class="avatar">
-            <open-data type="userAvatarUrl"></open-data>
+          <open-data type="userAvatarUrl"></open-data>
         </view>
         <view class="switch" wx:if="{{isswitch}}" bindtap='nav2constellation'>
           <image src='../../assets/images/constellation-switch.png'></image>
@@ -119,7 +118,7 @@
         <view class="constellation-header">
           <image src='../../assets/images/constellation-header.png'></image>
           <view class="constellation-btn">
-                
+
             <image src="../../assets/images/constellation-btn.png"></image>
             <view>查看今日运势</view>
             <button data-url="{{item.url}}" open-type='getUserInfo' bindgetuserinfo="nav2constellation"></button>
@@ -186,7 +185,7 @@
           <image src='../../assets/images/like-header.png'></image>
           <view>换一换</view>
         </view>
-        <item wx:for="{{appInfo.you_like}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="id" islast="{{index+1==appInfo.you_like.length}}"></item>
+        <item wx:for="{{you_like}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="name" islast="{{index+1==appInfo.you_like.length}}"></item>
       </view>
     </view>
     <view style='height: 100rpx;'></view>

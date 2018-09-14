@@ -1,4 +1,8 @@
 /* components/stateview/stateview.wxss */
+canvas {
+   border: none;
+}
+
 .state {
    display: flex;
    width: 100%;
@@ -13,9 +17,15 @@
    top: 0;
 }
 
+svg{
+  width: 200rpx;
+  height: 200rpx;
+  display:block;
+}
+
 .loading image{
-   width: 250rpx;
-   height: 80rpx;
+   width: 200rpx;
+   height: 200rpx;
 }
 
 .nodata view {

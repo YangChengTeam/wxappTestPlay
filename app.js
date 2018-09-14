@@ -56,7 +56,7 @@ App({
     }
     return mini > -1
   },
-  login(userInfo, url, callback) {
+  login(url, callback) {
     let thiz = this
     if (thiz.isLogin) {
       if (url) {
@@ -66,18 +66,9 @@ App({
       }
       return
     }
-    wx.showLoading({
-      title: '正在登录...',
-      icon: 'none'
-    })
-    console.log("正在登录")
     co(function*() {
-      if (yield kkservice.login(userInfo)) {
+      if (yield kkservice.login()) {
         thiz.isLogin = true
-        wx.hideLoading()
-        console.log("zzzz")
-        // let res = yield kkservice.getUserInfo()
-        // thiz.userInfo = res.data.data
         if (url) {
           wx.navigateTo({
             url: url,

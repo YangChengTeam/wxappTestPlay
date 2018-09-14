@@ -57,6 +57,7 @@ module.exports = {
   starIndexUrl: getUrl("/star/index"),
   testTypeInfoListUrl: getUrl("/test/testTypeInfoList"),
   testTypeInfoViewUrl: getUrl("/test/testTypeInfoView"),
-  testTextResultUrl: getUrl("/test/testTextResult")
+  testTextResultUrl: getUrl("/test/testTextResult"),
+  testClassInfoListUrl: getUrl("/test/testClassInfoList"),
 }
 
