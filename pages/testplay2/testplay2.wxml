@@ -16,11 +16,17 @@
       </view>
 
       <view class='sex-view' wx:if='{{test_state == 1}}'>
-          <radio-group class="radio-group" bindchange="radioChange">
+          <!-- <radio-group class="radio-group" bindchange="radioChange">
             <label class="radio" wx:for="{{sexs}}" wx:key='id'>
               <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
             </label>
-          </radio-group>
+          </radio-group> -->
+          <view class="radio-group">
+            <view wx:for="{{radio}}" class='sex-item-view' wx:key="id" data-id="{{index}}" bindtap='getradio'>
+              <image class='sex-item-img' src="{{item.checked?sex_checked:sex_normal}}"></image>
+              <text class="{{item.checked?'sex-checked-txt':'sex-normal-txt'}}">{{item.value}}</text>
+            </view>
+          </view>
           <view class='config-sex' bindtap="send">确定</view>
       </view>
 
@@ -37,7 +43,7 @@
       </form>
 
       <view class='bottom-submit-view' wx:if='{{test_state == 4}}'>
-          <button class='bottom-btn'>再测一次</button>
+          <button class='bottom-btn' bindtap='toResult'>查看结果</button>
       </view>
     </view>
 </view>

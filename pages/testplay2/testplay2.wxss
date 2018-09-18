@@ -16,6 +16,7 @@ page {
   justify-content: space-between;
   box-sizing: border-box;
   position: relative;
+  padding-bottom: 200rpx;
 }
 
 .img-content-view {
@@ -29,7 +30,6 @@ page {
   flex: 1;
   overflow: scroll;
   background: #f4f2f4;
-  padding-bottom: 100rpx;
 }
 .chat-input {
   width: 100%;
@@ -151,7 +151,7 @@ button,button::after{
 .sex-view {
   width: 100%;
   height: 100rpx;
-  background: #7234e1;
+  background: #fff;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -179,5 +179,43 @@ button,button::after{
   align-items: center;
   justify-content: center;
   color: #fff;
+  background: #7234e1;
   font-size: 32rpx;
+}
+
+.checkbox {
+  display: inline-block;
+  padding: 10rpx;
+  background: #eee;
+  margin: 10rpx;
+  border-radius: 50%;
+}
+ 
+.checkedActive {
+  background: red;
+  color: #fff;
+}
+
+.sex-item-view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.sex-item-img {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.sex-normal-txt {
+  color: #aaa;
+  font-size: 38rpx;
+  margin-left: 20rpx;
+}
+
+.sex-checked-txt {
+  color: #7234e1;
+  font-size: 38rpx;
+  margin-left: 20rpx;
 }

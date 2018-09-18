@@ -8,7 +8,7 @@ const kkservice = require("../../libs/yc/yc-service.js")
 const kkconfig = require("../../libs/yc/yc-config.js")
 const kkcommon = require("../../libs/yc/yc-common.js")
 
-const msgs = require('./subjects.js');
+var msgs = require('./subjects.js');
 var is_send = false
 var current_index = 0
 var is_over = false
@@ -43,7 +43,18 @@ Page({
       value: '1'
     }],
     tid: '',
-    test_type: ''
+    test_type: '',
+    radio: [{
+        'index_num':0,
+        'value': '男'
+      },
+      {
+        'index_num': 1,
+        'value': '女'
+      }
+    ],
+    sex_normal:'../../assets/images/sex_normal.png',
+    sex_checked:'../../assets/images/sex_checked.png'
   },
   onLoad(option) {
     current_index = 0
@@ -55,21 +66,27 @@ Page({
     wx.setNavigationBarTitle({
       title: '你的荣格心理原型'
     });
+    app.testplay = this
   },
   //事件处理函数
-  onReady() {
+  onReady: function(options) {
 
     this.setData({
       totalTopHeight: app.totalTopHeight
     })
 
-    test_info = app.testInfo
-    if (test_info) {
-      this.data.tid = test_info.id
-      this.data.test_type = test_info.test_type
+    if (app.testInfo) {
+      test_info = app.testInfo
+      this.setData({
+        tid: test_info.id,
+        test_type: test_info.test_type
+      })
     } else {
-      this.data.tid = options.tid
-      this.data.test_type = options.test_type
+
+      this.setData({
+        tid: options.tid,
+        test_type: options.test_type
+      })
     }
 
     var that = this
@@ -116,7 +133,7 @@ Page({
     options.push(option_item2)
     options.push(option_item3)
 
-    const add_data = {
+    let add_data = {
       id: `msg${messages.length}`,
       sub_title: '',
       messageType: 2,
@@ -162,8 +179,8 @@ Page({
   // 延迟页面向顶部滑动
   delayPageScroll() {
     this.data.msg = ''
-    const messages = this.data.messages;
-    const lastId = messages[messages.length - 1].id;
+    let messages = this.data.messages;
+    let lastId = messages[messages.length - 1].id;
 
     setTimeout(() => {
       this.setData({
@@ -181,7 +198,7 @@ Page({
 
   // 输入
   onInput(event) {
-    const value = event.detail.value;
+    let value = event.detail.value;
     user_name = value
     this.setData({
       msg: value
@@ -199,11 +216,11 @@ Page({
     let nums = messages.length;
     let msg = this.data.msg;
 
-    if(select_sex > -1){
+    if (select_sex > -1) {
       this.setData({
         test_state: 2
       })
-    }else{
+    } else {
       wx.showToast({
         title: '请选择性别',
         icon: 'none'
@@ -219,7 +236,7 @@ Page({
       return false;
     }
 
-    const add_data = {
+    let add_data = {
       id: `msg${++nums}`,
       sub_title: msg,
       messageType: 0,
@@ -227,7 +244,7 @@ Page({
     };
 
     messages.push(add_data);
-    const length = messages.length;
+    let length = messages.length;
     let temp_lastId = messages[length - 1].id;
     this.setData({
       messages,
@@ -264,7 +281,7 @@ Page({
     }
 
     messages.push(add_data);
-    const length = messages.length;
+    let length = messages.length;
     let temp_lastId = messages[length - 1].id;
     this.setData({
       messages,
@@ -279,7 +296,7 @@ Page({
     console.log(e.detail.value)
     select_sex = e.detail.value
     this.data.msg = e.detail.value == 0 ? '男' : '女'
-    
+
     //this.send()
   },
 
@@ -296,7 +313,7 @@ Page({
     if (app.isLogin) {
       that.start();
     } else {
-      app.login(res.detail, "", function() {
+      app.login("", function() {
         that.start();
       });
     }
@@ -318,7 +335,7 @@ Page({
         let nums = messages.length;
         result_path = res.data.data.image_nocode
         result_save_path = res.data.data.image
-        const result_data = {
+        let result_data = {
           id: `msg100`,
           sub_title: '',
           messageType: 3,
@@ -326,14 +343,24 @@ Page({
           url: '../../assets/images/logo.png'
         };
 
-        messages.push(result_data);
+        let look_result_data = {
+          id: `msg101`,
+          sub_title: '点击图片查看结果',
+          messageType: 1,
+          url: '../../assets/images/logo.png'
+        }
+
+        messages.push(result_data)
+        messages.push(look_result_data)
+
         let temp_lastId = messages[messages.length - 1].id;
 
         setTimeout(() => {
           that.setData({
             messages,
             lastId: temp_lastId,
-            test_state: 4
+            test_state: 4,
+            is_over: is_over
           });
         }, 500);
 
@@ -365,4 +392,30 @@ Page({
       imageUrl: that.data.share_img
     }
   },
+  //单选
+  getradio: function(e) {
+    let index = e.currentTarget.dataset.id;
+    let radio = this.data.radio;
+    for (let i = 0; i < radio.length; i++) {
+      this.data.radio[i].checked = false;
+    }
+    if (radio[index].checked) {
+      this.data.radio[index].checked = false;
+    } else {
+      this.data.radio[index].checked = true;
+    }
+    // let userRadio = radio.filter((item, index) => {
+    //   return item.checked == true;
+    // })
+    this.setData({
+      radio: this.data.radio
+    })
+    //console.log(userRadio)
+
+    let index_num = this.data.radio[index].index_num
+    console.log(index_num)
+
+    select_sex = index_num
+    this.data.msg = index_num == 0 ? '男' : '女'
+  }
 })

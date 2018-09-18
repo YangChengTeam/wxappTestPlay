@@ -20,6 +20,18 @@ App({
       })
     }
   },
+  navRedirectTest(item) {
+    this.testInfo = item
+    if (item.test_type == 1) {
+      wx.redirectTo({
+        url: '/pages/testplay/testplay',
+      })
+    } else if (item.test_type == 2) {
+      wx.redirectTo({
+        url: '/pages/testplay2/testplay2',
+      })
+    }
+  },
   compareVersion(v1, v2) {
     v1 = v1.split('.')
     v2 = v2.split('.')

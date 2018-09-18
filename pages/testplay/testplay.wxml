@@ -1,11 +1,10 @@
 <!--chat.wxml-->
 <import src="../../components/bubble/bubble.wxml" />
 
-<content>
   <nav title="心理测试库" is_back></nav>
   <stateview state="2" title=""></stateview>
   <view class="container">
-    <scroll-view scroll-y scroll-with-animation class="chat-content" style='margin-bottom:{{is_over?100:0}}rpx' scroll-top="{{ scrollTop }}" scroll-into-view="{{ lastId }}">
+    <scroll-view scroll-y scroll-with-animation class="chat-content" scroll-top="{{ scrollTop }}" scroll-into-view="{{ lastId }}">
       <block wx:for="{{ messages }}" wx:key="messages{{ index }}">
         <template id="msg{{ index }}" is="bubble" data="{{ ...item,user_head_url,totalTopHeight}}" />
       </block>
@@ -30,5 +29,3 @@
       <button class='bottom-btn' bindtap='createResult'>提交</button>
     </view>
   </view>
-
-</content>
