@@ -8,8 +8,9 @@
 }
 
 .result-img {
-  width: 710rpx;
   margin-top: 20rpx;
+  border: 15rpx solid #fff;
+  border-radius: 3px;
 }
 
 .btn-view {

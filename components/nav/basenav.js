@@ -19,6 +19,10 @@ Component({
       observer: function (newVal, oldVal, changedPath) {
 
       }
+    },
+    ishidenod: {
+      type: Number,
+      value: 1
     }
   },
   ready(){

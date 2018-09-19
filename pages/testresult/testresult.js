@@ -67,6 +67,21 @@ Page({
     }
   },
 
+  loadresult(e){
+      let w = e.detail.width
+      let h = e.detail.height
+      let margin = 80
+      let border = 15
+      if( w > 750 - 190 ){
+         w = 560
+         h = parseInt(560/750 * h)
+      }
+      this.setData({
+         w: w,
+         h: h
+      })
+  },
+
   testAgain:function(e){
     var isagain = e.currentTarget.dataset.isagain
     console.log('isagain--->' + isagain + '---tid--->' + this.data.tid)

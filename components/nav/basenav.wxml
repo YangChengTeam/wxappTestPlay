@@ -1,5 +1,5 @@
 <!--components/nav/nav.wxml-->
-<view style='height: {{totalTopHeight}}px; width:750rpx;'>
+<view wx:if="{{ishidenod==1}}" style='height: {{totalTopHeight}}px; width:750rpx;'>
 </view>
 <view class="bar" style='background:{{background}}; height: {{totalTopHeight}}px;'>
   <view class="statusBar" style='height: {{statusBarHeight}}px; width:750rpx;'>

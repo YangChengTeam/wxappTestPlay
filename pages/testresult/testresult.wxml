@@ -2,7 +2,7 @@
   <nav is_back title="心理测试库"></nav>
   <stateview state="{{state}}">
     <view class='result-view'>
-      <image class='result-img' src='{{result_img}}' mode='widthFix' bindtap='preimage'></image>
+      <image class='result-img' style='width: {{w}}rpx; height: {{h}}rpx;' bindload="loadresult" src='{{result_img}}'  bindtap='preimage'></image>
       <view class='btn-view' wx:if='{{!is_share}}'>
         <view class='share-view'>
           <image class='share-img' src='../../assets/images/share_friends.png'></image>

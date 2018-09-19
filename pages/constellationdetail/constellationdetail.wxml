@@ -1,26 +1,289 @@
 <!--pages/constellation_detail/constellation_detail.wxml-->
 <view class="main-content">
   <image class="my-header-bg" src='../../assets/images/my-header-bg3.png' style='height:{{totalTopHeight}}px'></image>
-  <nav back_icon_path="back2.png" title="运势" is_back background="rgba(68,33,144,0)" color="#fff"></nav>
-  <stateview state="{{state}}">
-    
-  </stateview>
-  <view class="tab">
-      <view class="tab-wrapper">
-        <view class="tab-item tab-item-current">
-          <view>今日运势</view>
-        </view>
-        <view class="tab-item">
-          <view>本周运势</view>
-        </view>
-        <view class="tab-item">
-          <view>本月运势</view>
-        </view>
+  <nav ishidenod="0" back_icon_path="back2.png" title="运势" is_back background="rgba(68,33,144,0)" color="#fff"></nav>
+  <view class="tab" style='top:{{totalTopHeight}}px;'>
+    <view class="tab-wrapper">
+      <view class="tab-item {{currentData == 0 ? 'tab-item-current' : ''}}" data-current="0" bindtap='checkCurrent'>
+        <text>今日运势</text>
+      </view>
+      <view class="tab-item {{currentData == 1 ? 'tab-item-current' : ''}}" data-current="1" bindtap='checkCurrent'>
+        <text>本周运势</text>
+      </view>
+      <view class="tab-item {{currentData == 2 ? 'tab-item-current' : ''}}" data-current="2" bindtap='checkCurrent'>
+        <text>本月运势</text>
       </view>
     </view>
-    <swiper>
-      <swiper-item>
-          
-      </swiper-item>
-    </swiper>
+  </view>
+  <stateview state="{{state}}">
+
+  </stateview>
+
+  <swiper current='{{currentData}}' hidden="{{state!=2}}" bindchange="bindChange">
+    <swiper-item class='swiper-item'>
+      <scroll-view class='scroll-view' scroll-y>
+        <view style='height:{{margin_top}}rpx;'></view>
+        <view class="constellation-switch-wrapper">
+          <view class='fortune-view'>
+            <view class='index-view'>
+              <view class='comp-view'>
+                <text class='start-index-txt'>综合指数：</text>
+                <view class='starts-view' wx:for='{{comp_starts}}' wx:key='id'>
+                  <view class='star-current-view'>
+                    <image class='star-img' src='{{star_normal}}'></image>
+                    <image wx:if='{{index < comp_index}}' class='star-current-img' src='{{star_current}}'></image>
+                  </view>
+                </view>
+              </view>
+              <view class='comp-view'>
+                <text class='start-index-txt'>爱情指数：</text>
+                <view class='starts-view' wx:for='{{comp_starts}}' wx:key='id'>
+                  <view class='star-current-view'>
+                    <image class='star-img' src='{{star_normal}}'></image>
+                    <image wx:if='{{index < love_index}}' class='star-current-img' src='{{star_current}}'></image>
+                  </view>
+                </view>
+              </view>
+              <view class='comp-view'>
+                <text class='start-index-txt'>事业指数：</text>
+                <view class='starts-view' wx:for='{{comp_starts}}' wx:key='id'>
+                  <view class='star-current-view'>
+                    <image class='star-img' src='{{star_normal}}'></image>
+                    <image wx:if='{{index < career_index}}' class='star-current-img' src='{{star_current}}'></image>
+                  </view>
+                </view>
+              </view>
+
+              <view class='comp-view'>
+                <text class='start-index-txt'>财富指数：</text>
+                <view class='starts-view' wx:for='{{comp_starts}}' wx:key='id'>
+                  <view class='star-current-view'>
+                    <image class='star-img' src='{{star_normal}}'></image>
+                    <image wx:if='{{index < money_index}}' class='star-current-img' src='{{star_current}}'></image>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="constellation-switch-img">
+              <image mode='aspectFit' src='{{starInfo.img}}' class="constellation-img"></image>
+              <view class="constellation-switch-time">
+                <image src='../../assets/images/constellation-time-bg.png'></image>
+                <view class='constellation-switch-time-info'>
+                  <view>{{starInfo.name}}</view>
+                  <view>{{starInfo.date2}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="constellation-switch-info">
+            <view class="constellation-switch-info-item">
+              <view class="constellation-switch-info-item-header">速配星座</view>
+              <view class="constellation-switch-info-item-info-1">{{starLuckInfo.intro[8]}}</view>
+            </view>
+            <view class="constellation-switch-info-item">
+              <view class="constellation-switch-info-item-header">幸运颜色</view>
+              <view class="constellation-switch-info-item-info-2">{{starLuckInfo.intro[6]}}</view>
+            </view>
+            <view class="constellation-switch-info-item">
+              <view class="constellation-switch-info-item-header">健康指数</view>
+              <view class="constellation-switch-info-item-info-1">{{starLuckInfo.intro[4]}}</view>
+            </view>
+            <view class="constellation-switch-info-item">
+              <view class="constellation-switch-info-item-header">幸运数字</view>
+              <view class="constellation-switch-info-item-info-1">{{starLuckInfo.intro[7]}}</view>
+            </view>
+          </view>
+        </view>
+
+        <view wx:for='{{fortune_list}}' wx:key='id' class='fortune-item'>
+          <view class='type-item-view'>
+            <image class='type-img' src='{{item.type_img}}'></image>
+            <text class='type-txt' style='color:{{item.color}}'>{{item.type_name}}</text>
+          </view>
+          <view class='type-content-view'>
+            <text class='type-content-txt'>{{item.value}}</text>
+          </view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+
+    <!--week-->
+    <swiper-item class='swiper-item'>
+      <scroll-view class='scroll-view' scroll-y>
+        <view style='height:{{margin_top}}rpx;'></view>
+        <view class="constellation-switch-wrapper">
+          <view class='fortune-view'>
+            <view class='index-view'>
+              <view class='comp-view'>
+                <text class='start-index-txt'>综合指数：</text>
+                <view class='starts-view' wx:for='{{comp_starts}}' wx:key='id'>
+                  <view class='star-current-view'>
+                    <image class='star-img' src='{{star_normal}}'></image>
+                    <image wx:if='{{index < week_comp_index}}' class='star-current-img' src='{{star_current}}'></image>
+                  </view>
+                </view>
+              </view>
+              <view class='comp-view'>
+                <text class='start-index-txt'>爱情指数：</text>
+                <view class='starts-view' wx:for='{{comp_starts}}' wx:key='id'>
+                  <view class='star-current-view'>
+                    <image class='star-img' src='{{star_normal}}'></image>
+                    <image wx:if='{{index < week_love_index}}' class='star-current-img' src='{{star_current}}'></image>
+                  </view>
+                </view>
+              </view>
+              <view class='comp-view'>
+                <text class='start-index-txt'>事业指数：</text>
+                <view class='starts-view' wx:for='{{comp_starts}}' wx:key='id'>
+                  <view class='star-current-view'>
+                    <image class='star-img' src='{{star_normal}}'></image>
+                    <image wx:if='{{index < week_career_index}}' class='star-current-img' src='{{star_current}}'></image>
+                  </view>
+                </view>
+              </view>
+
+              <view class='comp-view'>
+                <text class='start-index-txt'>财富指数：</text>
+                <view class='starts-view' wx:for='{{comp_starts}}' wx:key='id'>
+                  <view class='star-current-view'>
+                    <image class='star-img' src='{{star_normal}}'></image>
+                    <image wx:if='{{index < week_money_index}}' class='star-current-img' src='{{star_current}}'></image>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="constellation-switch-img">
+              <image mode='aspectFit' src='{{starInfo.img}}' class="constellation-img"></image>
+              <view class="constellation-switch-time">
+                <image src='../../assets/images/constellation-time-bg.png'></image>
+                <view class='constellation-switch-time-info'>
+                  <view>{{starInfo.name}}</view>
+                  <view>{{starInfo.date2}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="constellation-switch-info">
+            <view class="constellation-switch-info-item">
+              <view class="constellation-switch-info-item-header">速配星座</view>
+              <view class="constellation-switch-info-item-info-1">{{week_starLuckInfo.hui.xyxz}}</view>
+            </view>
+            <view class="constellation-switch-info-item">
+              <view class="constellation-switch-info-item-header">幸运颜色</view>
+              <view class="constellation-switch-info-item-info-2">{{week_starLuckInfo.hui.xyys}}</view>
+            </view>
+            <view class="constellation-switch-info-item">
+              <view class="constellation-switch-info-item-header">健康指数</view>
+              <view class="constellation-switch-info-item-info-1">{{week_starLuckInfo.hui.jkzs}}%</view>
+            </view>
+            <view class="constellation-switch-info-item">
+              <view class="constellation-switch-info-item-header">幸运数字</view>
+              <view class="constellation-switch-info-item-info-1">{{week_starLuckInfo.hui.xysz}}</view>
+            </view>
+          </view>
+        </view>
+
+        <view wx:for='{{week_fortune_list}}' wx:key='id' class='fortune-item'>
+          <view class='type-item-view'>
+            <image class='type-img' src='{{item.type_img}}'></image>
+            <text class='type-txt' style='color:{{item.color}}'>{{item.type_name}}</text>
+          </view>
+          <view class='type-content-view'>
+            <text class='type-content-txt'>{{item.value}}</text>
+          </view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+
+    <!--month-->
+    <swiper-item class='swiper-item'>
+      <scroll-view class='scroll-view' scroll-y>
+        <view style='height:{{margin_top}}rpx;'></view>
+        <view class="constellation-switch-wrapper">
+          <view class='fortune-view'>
+            <view class='index-view'>
+              <view class='comp-view'>
+                <text class='start-index-txt'>综合指数：</text>
+                <view class='starts-view' wx:for='{{comp_starts}}' wx:key='id'>
+                  <view class='star-current-view'>
+                    <image class='star-img' src='{{star_normal}}'></image>
+                    <image wx:if='{{index < month_comp_index}}' class='star-current-img' src='{{star_current}}'></image>
+                  </view>
+                </view>
+              </view>
+              <view class='comp-view'>
+                <text class='start-index-txt'>爱情指数：</text>
+                <view class='starts-view' wx:for='{{comp_starts}}' wx:key='id'>
+                  <view class='star-current-view'>
+                    <image class='star-img' src='{{star_normal}}'></image>
+                    <image wx:if='{{index < month_love_index}}' class='star-current-img' src='{{star_current}}'></image>
+                  </view>
+                </view>
+              </view>
+              <view class='comp-view'>
+                <text class='start-index-txt'>事业指数：</text>
+                <view class='starts-view' wx:for='{{comp_starts}}' wx:key='id'>
+                  <view class='star-current-view'>
+                    <image class='star-img' src='{{star_normal}}'></image>
+                    <image wx:if='{{index < month_career_index}}' class='star-current-img' src='{{star_current}}'></image>
+                  </view>
+                </view>
+              </view>
+
+              <view class='comp-view'>
+                <text class='start-index-txt'>财富指数：</text>
+                <view class='starts-view' wx:for='{{comp_starts}}' wx:key='id'>
+                  <view class='star-current-view'>
+                    <image class='star-img' src='{{star_normal}}'></image>
+                    <image wx:if='{{index < month_money_index}}' class='star-current-img' src='{{star_current}}'></image>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="constellation-switch-img">
+              <image mode='aspectFit' src='{{starInfo.img}}' class="constellation-img"></image>
+              <view class="constellation-switch-time">
+                <image src='../../assets/images/constellation-time-bg.png'></image>
+                <view class='constellation-switch-time-info'>
+                  <view>{{starInfo.name}}</view>
+                  <view>{{starInfo.date2}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="constellation-switch-info">
+            <view class="constellation-switch-info-item">
+              <view class="constellation-switch-info-item-header">速配星座</view>
+              <view class="constellation-switch-info-item-info-1">{{month_starLuckInfo.hui.xyxz}}</view>
+            </view>
+            <view class="constellation-switch-info-item">
+              <view class="constellation-switch-info-item-header">幸运颜色</view>
+              <view class="constellation-switch-info-item-info-2">{{month_starLuckInfo.hui.xyys}}</view>
+            </view>
+            <view class="constellation-switch-info-item">
+              <view class="constellation-switch-info-item-header">健康指数</view>
+              <view class="constellation-switch-info-item-info-1">{{month_starLuckInfo.hui.jkzs}}%</view>
+            </view>
+            <view class="constellation-switch-info-item">
+              <view class="constellation-switch-info-item-header">幸运数字</view>
+              <view class="constellation-switch-info-item-info-1">{{month_starLuckInfo.hui.xysz}}</view>
+            </view>
+          </view>
+        </view>
+
+        <view wx:for='{{month_fortune_list}}' wx:key='id' class='fortune-item'>
+          <view class='type-item-view'>
+            <image class='type-img' src='{{item.type_img}}'></image>
+            <text class='type-txt' style='color:{{item.color}}'>{{item.type_name}}</text>
+          </view>
+          <view class='type-content-view'>
+            <text class='type-content-txt'>{{item.value}}</text>
+          </view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
 </view>
