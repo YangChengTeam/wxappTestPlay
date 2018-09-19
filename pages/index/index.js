@@ -160,7 +160,7 @@ Page({
   },
   scroll(e) {
     let top = (e.detail.scrollTop)
-    this.top = top
+    console.log(top)
     this.setData({
       navopacity: top / app.titleBarHeight,
       top: top

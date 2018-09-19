@@ -99,7 +99,7 @@
 </view>
 
 <view class="my" hidden='{{index==0}}'>
-  <content bindscroll="scroll"  scrollTop="{{top}}">
+  <content bindscroll="scroll">
     <image class="my-header-bg" src='../../assets/images/my-header-bg.png'></image>
     <basenav background="rgba(68,33,144,{{navopacity}})" color="#fff">
       <view class="user">
@@ -183,7 +183,7 @@
       <view class="hot">
         <view class="hot-header">
           <image src='../../assets/images/like-header.png'></image>
-          <view bindtap='nav2like' wx:if="{{top==0}}">换一换</view>
+          <view bindtap='nav2like' wx:if="{{top<=0}}">换一换</view>
         </view>
         <item wx:for="{{you_like}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="name" islast="{{index+1==appInfo.you_like.length}}"></item>
       </view>
