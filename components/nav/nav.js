@@ -27,6 +27,10 @@ Component({
     path: {
       type: String,
       value: ''
+    },
+    ishidenod: {
+      type: Number,
+      value: 1
     }
   },
   ready() {

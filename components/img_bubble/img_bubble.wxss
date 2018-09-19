@@ -238,6 +238,6 @@
 
 .res-img {
   max-width: 420rpx;
-  height: 600rpx;
+  height: 250rpx;
   filter: blur(3px);
 }

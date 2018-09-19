@@ -7,7 +7,7 @@ module.exports = [{
     options: []
   },
   {
-    id: 'msg3',
+    id: 'msg5',
     snum: 3,
     sub_title: '告诉我你的名字',
     url: '../../assets/images/logo.png',
