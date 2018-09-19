@@ -18,48 +18,73 @@ Page({
     state:2,
     result_img: '',//https://cj.197854.com/uploads/Testing/5b99b30788441.png
     appInfo: {},
+    share_title:'',
+    share_img:'',
+    test_type:'',
+    tid:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(kkconfig.global.userInfo)
+
     resultImgUrl = options.img_url
-    resultSavePath = options.save_img_url
-    console.log('save path--->' + resultSavePath)
-    
+    console.log('result tid --->' + options.tid)
     var that = this
-    var temp_app_info = app.index.data.appInfo
-    if(!temp_app_info){
+    var is_share = options.is_share
+    if(is_share && is_share == 1){
+      this.setData({
+        share_title: options.share_title,
+        share_img: options.share_img,
+        test_type: options.test_type,
+        tid: options.tid,
+      })
+
       co(function* () {
         let res = yield kkservice.getAppInfo()
         if (res && res.data && res.data.code == 1) {
-          temp_app_info = res.data.data
           that.setData({
             result_img: resultImgUrl,
-            appInfo: temp_app_info
+            appInfo: res.data.data,
+            is_share:true
           })
         }
       })
     }else{
+      resultSavePath = options.save_img_url
+      console.log('save path--->' + resultSavePath)
       this.setData({
+        share_title: app.testplay.data.share_title,
+        share_img: app.testplay.data.share_img,
+        test_type: app.testInfo.test_type,
+        tid: app.testInfo.id,
+        is_share:false,
         result_img: resultImgUrl,
-        appInfo: temp_app_info
+        appInfo: app.index.data.appInfo
       })
     }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-  
-  testAgain:function(){
-    wx.redirectTo({
-      url: '/pages/testplay/testplay',
-    })
+  testAgain:function(e){
+    var isagain = e.currentTarget.dataset.isagain
+    console.log('isagain--->' + isagain + '---tid--->' + this.data.tid)
+
+    if (isagain == 0){
+        app.navRedirectTest(app.testInfo)
+    }else{
+      if(this.data.test_type == 1){
+        wx.redirectTo({
+          url: '/pages/testplay/testplay?tid=' + this.data.tid+ '&test_type=' + this.data.test_type
+        })
+      }else{
+        
+        wx.redirectTo({
+          url: '/pages/testplay2/testplay2?tid=' + this.data.tid + '&test_type=' + this.data.test_type
+        })
+      }
+    }
   },
 
   preimage: function (e) {
@@ -162,11 +187,22 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+
+    var temp_title = this.data.share_title
+   
+    if(temp_title.indexOf('#!') > -1){
+      if (kkconfig.global && kkconfig.global.userInfo){
+        temp_title = temp_title.replace('#!', kkconfig.global.userInfo.nickName)
+      }
+    }
+
+    console.log('处理后sharetitle--->' + temp_title + '---tid-->' + this.data.tid)
+
+    var that = this
     return {
-      title: app.testplay.data.share_title,
-      path: '/pages/testplay/testplay?img_url=' + resultImgUrl + '&save_img_url=' + resultSavePath,
-      imageUrl: app.testplay.data.share_img
+      title: temp_title,
+      path: '/pages/testresult/testresult?img_url=' + resultImgUrl + '&save_img_url=' + resultSavePath + '&is_share=1&share_title=' + temp_title + '&share_img=' + that.data.share_img + '&test_type=' + that.data.test_type + '&tid=' + that.data.tid,
+      imageUrl: that.data.share_img
     }
   },
 })

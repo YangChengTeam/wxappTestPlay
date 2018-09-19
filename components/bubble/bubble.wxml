@@ -29,7 +29,7 @@
         </view>
       </view>
   </view>
-  <view id="{{ id }}" class="bubble-container" wx:if="{{ messageType === 1 }}">
+  <view id="{{ id }}" class="bubble-container" wx:if="{{ messageType === 1 }}" >
     <view class="content">
       <view class='title-view'>
         <view class="icon">
@@ -41,17 +41,20 @@
         <view class='title_bg'>{{ sub_title }}</view>
       </view>
       
-      <view class='options-view' style='padding-bottom:{{totalTopHeight}}px'>
-        <view class="option-item {{current_select_index == index?'item-selected':''}}" wx:for='{{options}}' wx:key='{{id}}' bindtap='choose' data-selectvalue='{{item.option_value}}' data-item='{{item}}' data-i='{{index}}'>
-            <text class="option-item-txt {{current_select_index == index?'txt-item-selected':''}}">{{item.option_value}}</text>
+      <view class='options-view'>
+        <view class="option-item {{current_select_index == idx?'item-selected':''}}" wx:for-index="idx" wx:for='{{options}}' wx:key='{{id}}' bindtap='choose' data-selectvalue='{{item.option_value}}' data-item='{{item}}' data-idx='{{idx}}' data-i='{{sindex}}'>
+            <text class="option-item-txt {{current_select_index == idx?'txt-item-selected':''}}">{{item.option_value}}</text>
         </view>
       </view>
 
     </view>
   </view>
   <view id="{{ id }}" class="container-right" wx:if="{{ messageType === 0 }}">
-    <view class="content-right">
-      <text>{{ sub_title }}</text>
+    <view class='content-right-wrapper'>
+      <view class="content-right">
+        <text>{{ sub_title }}</text>
+      </view>
+      <image src='../../assets/images/card_right.png' class='caret-right-img'></image>
     </view>
     <view class="icon-right">
       <view class="photo">

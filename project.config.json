@@ -9,10 +9,14 @@
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
+<<<<<<< HEAD
 		"nodeModules": true
+=======
+		"nodeModules": false
+>>>>>>> 5bf3327d465dee6d66fd1961ead8b98d6e8ff0c0
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.2.5",
+	"libVersion": "2.3.0",
 	"appid": "wxa92333f3e88499ed",
 	"projectname": "wxappTestPlay",
 	"isGameTourist": false,
