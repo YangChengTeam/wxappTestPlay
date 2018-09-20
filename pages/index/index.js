@@ -109,6 +109,7 @@ Page({
           starLuckInfo: starLuckInfo,
           you_like: appInfo.you_like
         })
+        
       } else {
         thiz.setData({
           state: kkconfig.status.stateStatus.NODATA

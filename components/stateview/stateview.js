@@ -49,13 +49,13 @@ Component({
    */
   methods: {
     loading() {
-      let n = 1
+      let n = 0
       this.loading_timer = setInterval(() => {
-        n = n > 29 ? 1 : n
+        n = n > 8 ? 1 : n
         this.setData({
           loading_img: `../../assets/images/frame-${n++}.png`
         })
-      }, 1000/30)
+      }, 300)
     }
   }
 })
