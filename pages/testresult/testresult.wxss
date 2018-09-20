@@ -9,7 +9,6 @@
 
 .result-img {
   margin-top: 20rpx;
-  border: 15rpx solid #fff;
   border-radius: 3px;
 }
 
@@ -87,4 +86,32 @@
 
 .button,button::after{
   border: 0;
+}
+
+
+.hot {
+   width: 100%;
+   background: #fff;
+}
+
+.hot-header {
+   display: flex;
+   height: 80rpx;
+   justify-content: space-between;
+   font-size: 24rpx;
+   color: #999;
+}
+
+.hot-header image {
+  width: 145rpx;
+  height: 39rpx;
+  margin-left: 20rpx;
+  margin-top: 30rpx;
+}
+
+.hot-header view {
+  margin-right: 20rpx;
+  margin-top: 28rpx;
+  color: #7234e1;
+  font-size: 28rpx;
 }

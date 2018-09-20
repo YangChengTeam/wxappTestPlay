@@ -1,15 +1,14 @@
 <!--chat.wxml-->
 <import src="../../components/bubble/bubble.wxml" />
 
-  <nav title="心理测试库" is_back></nav>
-  <stateview state="2" title=""></stateview>
-  <view class="container">
-    <scroll-view scroll-y scroll-with-animation class="chat-content" scroll-top="{{ scrollTop }}" scroll-into-view="{{ lastId }}">
-      <block wx:for="{{ messages }}" wx:key="messages{{ index }}">
-        <template id="msg{{ index }}" is="bubble" data="{{ ...item,user_head_url,totalTopHeight}}" />
-      </block>
-    </scroll-view>
-
+  <nav ishidenod="0" title="心理测试库" is_back></nav>
+  <stateview state="{{state}}"></stateview>
+  <view class="container" hidden='{{state!=2}}'>
+    <view style='height: {{totalTopHeight}}px; width:750rpx;'></view>
+    <block wx:for="{{ messages }}" wx:key="messages{{ index }}">
+      <template id="msg{{ index }}" is="bubble" data="{{ ...item,user_head_url,totalTopHeight}}" />
+    </block>
+    <view wx:if='{{is_over}}' style='height:100rpx;'></view>
     <form class="chat-input" id="hei" wx:if='{{is_input_name}}'>
       <view class="chat-input-wrapper">
         <view class="chat-input-record"></view>
@@ -25,6 +24,7 @@
     <view class='bottom-start-view' wx:if='{{test_state == 0}}'>
       <button class='bottom-btn' open-type='getUserInfo' bindgetuserinfo='onGotUserInfo'>开始测试</button>
     </view>
+
     <view class='bottom-submit-view' wx:if='{{test_state == 2}}'>
       <button class='bottom-btn' bindtap='createResult'>提交</button>
     </view>

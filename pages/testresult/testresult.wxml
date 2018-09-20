@@ -2,7 +2,7 @@
   <nav is_back title="心理测试库"></nav>
   <stateview state="{{state}}">
     <view class='result-view'>
-      <image class='result-img' style='width: {{w}}rpx; height: {{h}}rpx;' bindload="loadresult" src='{{result_img}}'  bindtap='preimage'></image>
+      <image class='result-img' style="width: {{w}}rpx; height: {{h}}rpx;{{test_type ==2?'border: 15rpx solid #fff;':'' }}" bindload="loadresult" src='{{result_img}}'  bindtap='preimage'></image>
       <view class='btn-view' wx:if='{{!is_share}}'>
         <view class='share-view'>
           <image class='share-img' src='../../assets/images/share_friends.png'></image>
@@ -26,6 +26,12 @@
         </view>
       </block>
     </view>
+    <view class="hot">
+        <view class="hot-header" bindtap='nav2more'>
+          <image src='../../assets/images/hot_send.png'></image>
+          <view class='more-txt'>更多测试</view>
+        </view>
     <item wx:for="{{appInfo.hot_list}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="id" islast="{{index+1==appInfo.hot_list.length}}"></item>
+    </view>
   </stateview>
 </content>

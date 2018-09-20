@@ -29,7 +29,7 @@
         </view>
       </view>
   </view>
-  <view id="{{ id }}" class="bubble-container" wx:if="{{ messageType === 1 }}" >
+  <view id="{{ id }}" class="bubble-container" wx:if="{{ messageType === 1 }}">
     <view class="content">
       <view class='title-view'>
         <view class="icon">

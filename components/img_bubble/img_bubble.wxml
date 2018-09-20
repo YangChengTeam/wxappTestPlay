@@ -5,7 +5,7 @@
       <view class="icon">
         <image src='../../assets/images/triangle.png' class='caret-left'></image>
         <view class="head_photo">
-          <image src="{{ url }}" style='width:72rpx;height:72rpx' mode='aspectFit'></image>
+          <image src="{{ url }}" style='width:72rpx;height:72rpx;border-radius: 50%;' mode='aspectFit'></image>
         </view>
       </view>
       <view class='title-bg'>
@@ -19,7 +19,7 @@
           <view class="icon">
             <image src='../../assets/images/triangle.png' class='caret-left'></image>
             <view class="head_photo">
-              <image src="{{ url }}" style='width:72rpx;height:72rpx'></image>
+              <image src="{{ url }}" style='width:72rpx;height:72rpx;border-radius: 50%;'></image>
             </view>
           </view>
           <view class='img-title-bg' wx:if='{{item.sub_type == 0}}'>{{ item.sub_value }}</view>
@@ -36,7 +36,7 @@
         <view class="icon">
           <image src='../../assets/images/triangle.png' class='caret-left'></image>
           <view class="head_photo">
-            <image src="{{ url }}" style='width:72rpx;height:72rpx'></image>
+            <image src="{{ url }}" style='width:72rpx;height:72rpx;border-radius: 50%;'></image>
           </view>
         </view>
         <view class='img-title-bg'>{{ sub_title }}</view>
@@ -52,7 +52,7 @@
     </view>
     <view class="icon-right">
       <view class="head_photo">
-        <image src="{{ user_head_url }}" style='width:72rpx;height:72rpx'></image>
+        <image src="{{ user_head_url }}" style='width:72rpx;height:72rpx;border-radius: 50%;'></image>
       </view>
       <view class="caret-right"></view>
     </view>

@@ -68,18 +68,39 @@ Page({
   },
 
   loadresult(e){
+
+    if (this.data.test_type == 1){
+      let w = e.detail.width
+      let h = e.detail.height
+      
+      let rw = 712
+      let rh = parseInt(rw / 750 * h)
+
+      this.setData({
+        w: rw,
+        h: rh
+      })
+      
+    }else{
       let w = e.detail.width
       let h = e.detail.height
       let margin = 80
       let border = 15
-      if( w > 750 - 190 ){
-         w = 560
-         h = parseInt(560/750 * h)
+      if (w > 750 - 190) {
+        w = 560
+        h = parseInt(560 / 750 * h)
       }
       this.setData({
-         w: w,
-         h: h
+        w: w,
+        h: h
       })
+    }
+  },
+
+  nav2more(e) {
+    wx.navigateTo({
+      url: "/pages/index/index"
+    })
   },
 
   testAgain:function(e){

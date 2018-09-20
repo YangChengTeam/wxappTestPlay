@@ -1,12 +1,10 @@
 /* components/bubble /bubble.wxss */
 
 .bubble-container {
-  min-height: 450rpx;
   position: relative;
   display: flex;
   padding-left: 20rpx;
-  padding-top: 20rpx;
-  padding-bottom: 60rpx;
+  padding-bottom: 20rpx;
 }
 
 .content {
@@ -21,6 +19,7 @@
 .head-img {
   width: 72rpx;
   height: 72rpx;
+  border-radius: 50%;
 }
 
 .options-view {
@@ -104,7 +103,7 @@
 .start-item {
   display: flex;
   flex-direction: row;
-  margin-top: 12rpx;
+  margin-top: 20rpx;
 }
 
 .title-view {
@@ -114,12 +113,8 @@
 }
 
 .title_bg {
-  max-width: 66%;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
-  padding-top: 12rpx;
-  padding-bottom: 12rpx;
-  min-height: 66rpx;
+  max-width: 495rpx;
+  padding: 12rpx;
   line-height: 150%;
   background: #fff;
   border-radius: 8px;
@@ -243,15 +238,16 @@
 
 .subject-img-view {
   background: #fff;
-  border-radius: 4px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.subject-img {
+image.subject-img {
   width: 495rpx;
   height: 198rpx;
-  padding: 6rpx;
+  border-radius: 5rpx;
+  margin: 12rpx;
 }

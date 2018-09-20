@@ -7,12 +7,10 @@
 }
 
 .quest-bubble-container {
-  min-height: 80rpx;
   position: relative;
   display: flex;
   padding-left: 20rpx;
   padding-top: 20rpx;
-  padding-bottom: 50rpx;
 }
 
 .content {
@@ -97,12 +95,8 @@
 }
 
 .img-title-bg {
-  max-width: 66%;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
-  padding-top: 12rpx;
-  padding-bottom: 12rpx;
-  min-height: 66rpx;
+  max-width: 495rpx;
+  padding: 12rpx;
   line-height: 150%;
   background: #fff;
   border-radius: 8px;
@@ -124,7 +118,8 @@
 .subject-img {
   width: 495rpx;
   height: 198rpx;
-  padding: 6rpx;
+  border-radius: 5rpx;
+  margin: 12rpx;
 }
 
 .title-txt {
@@ -134,6 +129,7 @@
 }
 
 .title-bg {
+  background: #fff;
   max-width: 72%;
   padding-left: 20rpx;
   padding-right: 20rpx;
@@ -172,8 +168,7 @@
   position: relative;
   display: flex;
   justify-content: flex-end;
-  padding-top: 50rpx;
-  padding-bottom: 50rpx;
+  padding-top: 20rpx;
   padding-right: 20rpx;
 }
 
@@ -239,5 +234,5 @@
 .res-img {
   max-width: 420rpx;
   height: 250rpx;
-  filter: blur(3px);
+  filter: blur(2px);
 }

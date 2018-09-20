@@ -16,13 +16,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    state: 2,
+    state: 0,
     comp_starts: ['1', '2', '3', '4', '5'],
     star_normal: '../../assets/images/star_normal.png',
     star_current: '../../assets/images/star_current_num.png',
-    type_img: ['t1.png', 't2.png', 't3.png', 't4.png', 't5.png'],
-    type_name: ['综合评语', '爱情运势', '事业运势', '财富运势', '健康运势'],
-    type_color: ['#7234e1', '#f7709d', '#0494e2', '#ffcc00', '#4ccb52'],
+    type_img: ['t0.png','t1.png', 't2.png', 't3.png', 't4.png', 't5.png'],
+    type_name: ['今日提醒','综合评语', '爱情运势', '事业运势', '财富运势', '健康运势'],
+    type_color: ['#ff6562', '#7234e1', '#f7709d', '#0494e2', '#ffcc00', '#4ccb52'],
     currentData: 0,
   },
 
@@ -30,7 +30,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    var that = this
     starLuckInfo = app.index.data.starLuckInfo
 
     let temp_list = starLuckInfo.list
@@ -41,9 +41,13 @@ Page({
     }
 
     var mtop = app.totalTopHeight * 750 / app.systemInfo.windowWidth + 100
-    console.log('mtop---' + mtop)
-    var that = this
     
+    setTimeout(function(){
+      that.setData({
+        state:2
+      })
+    },500)
+
     this.setData({
       starLuckInfo: starLuckInfo,
       totalTopHeight: app.totalTopHeight,
@@ -74,6 +78,9 @@ Page({
       let temp_list = week_starLuckInfo.list
       
       for (let i = 0; i < temp_list.length; i++) {
+        if(i==0){
+          that.data.type_name[i] = '温馨短评'
+        }
         temp_list[i]['type_img'] = '../../assets/images/' + that.data.type_img[i]
         temp_list[i]['type_name'] = that.data.type_name[i]
         temp_list[i]['type_color'] = that.data.type_color[i]
@@ -106,8 +113,11 @@ Page({
       if (temp_list.length>5){
         temp_list = temp_list.splice(0,5)
       }
-      console.log(temp_list)
+      
       for (let i = 0; i < temp_list.length; i++) {
+        if (i == 0) {
+          that.data.type_name[i] = '温馨短评'
+        }
         temp_list[i]['type_img'] = '../../assets/images/' + that.data.type_img[i]
         temp_list[i]['type_name'] = that.data.type_name[i]
         temp_list[i]['type_color'] = that.data.type_color[i]

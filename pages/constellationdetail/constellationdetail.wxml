@@ -1,8 +1,12 @@
 <!--pages/constellation_detail/constellation_detail.wxml-->
-<view class="main-content">
+
+<view class="main-content" >
+  <stateview state="{{state}}">
+
+</stateview>
   <image class="my-header-bg" src='../../assets/images/my-header-bg3.png' style='height:{{totalTopHeight}}px'></image>
   <nav ishidenod="0" back_icon_path="back2.png" title="运势" is_back background="rgba(68,33,144,0)" color="#fff"></nav>
-  <view class="tab" style='top:{{totalTopHeight}}px;'>
+  <view class="tab" style='top:{{totalTopHeight}}px;' hidden='{{state != 2}}'>
     <view class="tab-wrapper">
       <view class="tab-item {{currentData == 0 ? 'tab-item-current' : ''}}" data-current="0" bindtap='checkCurrent'>
         <text>今日运势</text>
@@ -15,11 +19,9 @@
       </view>
     </view>
   </view>
-  <stateview state="{{state}}">
+  
 
-  </stateview>
-
-  <swiper current='{{currentData}}' hidden="{{state!=2}}" bindchange="bindChange">
+  <swiper current='{{currentData}}' hidden="{{state!=2}}" bindchange="bindChange" >
     <swiper-item class='swiper-item'>
       <scroll-view class='scroll-view' scroll-y>
         <view style='height:{{margin_top}}rpx;'></view>
@@ -99,7 +101,7 @@
         <view wx:for='{{fortune_list}}' wx:key='id' class='fortune-item'>
           <view class='type-item-view'>
             <image class='type-img' src='{{item.type_img}}'></image>
-            <text class='type-txt' style='color:{{item.color}}'>{{item.type_name}}</text>
+            <text class='type-txt' style="color:{{item.type_color}}">{{item.type_name}}</text>
           </view>
           <view class='type-content-view'>
             <text class='type-content-txt'>{{item.value}}</text>
@@ -188,7 +190,7 @@
         <view wx:for='{{week_fortune_list}}' wx:key='id' class='fortune-item'>
           <view class='type-item-view'>
             <image class='type-img' src='{{item.type_img}}'></image>
-            <text class='type-txt' style='color:{{item.color}}'>{{item.type_name}}</text>
+            <text class='type-txt' style="color:{{item.type_color}}">{{item.type_name}}</text>
           </view>
           <view class='type-content-view'>
             <text class='type-content-txt'>{{item.value}}</text>
@@ -277,7 +279,7 @@
         <view wx:for='{{month_fortune_list}}' wx:key='id' class='fortune-item'>
           <view class='type-item-view'>
             <image class='type-img' src='{{item.type_img}}'></image>
-            <text class='type-txt' style='color:{{item.color}}'>{{item.type_name}}</text>
+            <text class='type-txt' style="color:{{item.type_color}}">{{item.type_name}}</text>
           </view>
           <view class='type-content-view'>
             <text class='type-content-txt'>{{item.value}}</text>

@@ -26,6 +26,7 @@ var test_info
 
 Page({
   data: {
+    state: 0,
     messages: [], // 聊天记录
     msg: '', // 当前输入
     scrollTop: 0, // 页面的滚动值
@@ -52,6 +53,8 @@ Page({
       title: '心理测试库'
     });
 
+    
+
     app.testplay = this
 
     this.setData({
@@ -74,16 +77,30 @@ Page({
         subject_title = res.data.data.desc
         subject_img = res.data.data.image
         that.setData({
+          state: kkconfig.status.stateStatus.NORMAL,
           share_title: res.data.data.share_title[0],
           share_img: res.data.data.share_ico[0]
         })
         that.recombineData(res.data.data.list)
         that.guide();
+      }else{
+        that.setData({
+          state: kkconfig.status.stateStatus.NODATA
+        })
       }
     })
 
-  },
 
+  },
+  totop(index){
+    wx.pageScrollTo({
+      scrollTop: 400 * index,
+      duration: 0
+    })
+  },
+  scroll(e){
+    console.log(e)
+  },
   //事件处理函数
   onReady: function() {},
 
@@ -170,7 +187,7 @@ Page({
     }
     let option_item3 = {
       sub_type: 0,
-      sub_value: '开始测试'
+      sub_value: '请点击开始测试'
     }
     options.push(option_item1)
     options.push(option_item2)
@@ -205,9 +222,7 @@ Page({
     const lastId = messages[length - 1].id;
     var that = this
     setTimeout(() => {
-      that.setData({
-        lastId
-      });
+      that.totop(current_index)
       if (is_send) {
         that.receive();
       }
@@ -350,7 +365,7 @@ Page({
         test_state: 2
       });
     }
-
+  
     this.send()
   },
 

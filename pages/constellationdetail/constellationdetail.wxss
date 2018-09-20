@@ -254,7 +254,6 @@ swiper {
 
 .fortune-item {
   width: 710rpx;
-  min-height: 240rpx;
   background: #fff;
   border-radius: 10rpx;
   box-shadow: 5rpx 10rpx 5rpx rgba(0, 0, 0, 0.1);
@@ -281,7 +280,7 @@ swiper {
 }
 
 .type-txt {
-  font-size: 30rpx;
+  font-size: 36rpx;
   margin-left: 16rpx;
 }
 
@@ -291,5 +290,5 @@ swiper {
 }
 
 .type-content-txt {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }

@@ -3,27 +3,17 @@
 
 page {
   width: 100%;
-  height: 100%;
   background: #f4f2f4;
+  overflow: scroll;
 }
 
 .container {
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  background-color: #f4f2f4;
   position: relative;
-  padding-bottom: 200rpx;
 }
 
 .chat-content {
   width: 100%;
-  flex: 1;
-  overflow: scroll;
 }
 
 .chat-input {

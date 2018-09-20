@@ -27,6 +27,7 @@ var test_info
 
 Page({
   data: {
+    state: 0,
     messages: [], // 聊天记录
     msg: '', // 当前输入
     scrollTop: 0, // 页面的滚动值
@@ -102,11 +103,16 @@ Page({
           current_index = 0
         }
         that.setData({
+          state: kkconfig.status.stateStatus.NORMAL,
           share_title: res.data.data.share_title[0],
           share_img: res.data.data.share_ico[0]
         })
 
         that.guide();
+      }else{
+        that.setData({
+          state: kkconfig.status.stateStatus.NODATA
+        })
       }
     })
 
@@ -181,11 +187,9 @@ Page({
     this.data.msg = ''
     let messages = this.data.messages;
     let lastId = messages[messages.length - 1].id;
-
+    var that = this
     setTimeout(() => {
-      this.setData({
-        lastId
-      });
+      that.totop(current_index)
       if (is_send) {
         this.receive();
       }
@@ -210,6 +214,14 @@ Page({
       scrollTop: 9999999
     });
   },
+
+  totop(index) {
+    wx.pageScrollTo({
+      scrollTop: 400 * index,
+      duration: 0
+    })
+  },
+
   // 发送消息
   send: function() {
     let messages = this.data.messages;
@@ -362,6 +374,7 @@ Page({
             test_state: 4,
             is_over: is_over
           });
+          that.totop(current_index)
         }, 500);
 
       } else {
@@ -376,7 +389,7 @@ Page({
   },
 
   toResult: function() {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/pages/testresult/testresult?img_url=' + result_path + '&save_img_url=' + result_save_path,
     })
   },

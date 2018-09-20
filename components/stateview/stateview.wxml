@@ -7,7 +7,6 @@
     <view>{{title && title.length ? title : ""}}</view>
 </view>
 
-
 <view wx:if="{{state == 2}}">
   <slot></slot>
 </view>
