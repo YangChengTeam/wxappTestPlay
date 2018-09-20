@@ -27,6 +27,7 @@ var test_info
 var show_sex = true
 Page({
   data: {
+    kbHeight: 0,
     state: 0,
     messages: [], // 聊天记录
     msg: '', // 当前输入
@@ -209,12 +210,17 @@ Page({
     });
   },
   // 聚焦
-  onFocus() {
+  onFocus(e) {
+    let h = e.detail.height
     this.setData({
-      scrollTop: 9999999
-    });
+        kbHeight: h
+    })
   },
-
+  blur(e){
+    this.setData({
+      kbHeight: 0
+    })
+  },
   totop(index) {
     wx.pageScrollTo({
       scrollTop: 400 * index,
