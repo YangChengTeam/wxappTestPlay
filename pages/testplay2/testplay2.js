@@ -24,7 +24,7 @@ var jump_type
 
 var select_sex = -1
 var test_info
-
+var show_sex = true
 Page({
   data: {
     state: 0,
@@ -46,7 +46,7 @@ Page({
     tid: '',
     test_type: '',
     radio: [{
-        'index_num':0,
+        'index_num': 0,
         'value': '男'
       },
       {
@@ -54,10 +54,11 @@ Page({
         'value': '女'
       }
     ],
-    sex_normal:'../../assets/images/sex_normal.png',
-    sex_checked:'../../assets/images/sex_checked.png'
+    sex_normal: '../../assets/images/sex_normal.png',
+    sex_checked: '../../assets/images/sex_checked.png'
   },
-  onLoad(option) {
+
+  onLoad(options) {
     current_index = 0
     is_over = false
     is_send = false
@@ -68,9 +69,6 @@ Page({
       title: '你的荣格心理原型'
     });
     app.testplay = this
-  },
-  //事件处理函数
-  onReady: function(options) {
 
     this.setData({
       totalTopHeight: app.totalTopHeight
@@ -97,10 +95,12 @@ Page({
       if (res && res.data && res.data.code == 1) {
         subject_title = res.data.data.desc
         subject_img = res.data.data.image
-        if (res.data.sex == 0) {
+        if (res.data.data.sex == 0) {
           current_index = 1
+          show_sex = false
         } else {
           current_index = 0
+          show_sex = true
         }
         that.setData({
           state: kkconfig.status.stateStatus.NORMAL,
@@ -109,13 +109,12 @@ Page({
         })
 
         that.guide();
-      }else{
+      } else {
         that.setData({
           state: kkconfig.status.stateStatus.NODATA
         })
       }
     })
-
   },
 
   //引导语
@@ -172,12 +171,10 @@ Page({
     this.setData({
       messages,
       temp_lastId,
-      user_head_url,
-      test_state: 1
+      user_head_url
     });
 
     is_send = true
-
     // 延迟页面向顶部滑动
     this.delayPageScroll();
   },
@@ -185,6 +182,9 @@ Page({
   // 延迟页面向顶部滑动
   delayPageScroll() {
     this.data.msg = ''
+    this.setData({
+      msg: ''
+    })
     let messages = this.data.messages;
     let lastId = messages[messages.length - 1].id;
     var that = this
@@ -233,11 +233,13 @@ Page({
         test_state: 2
       })
     } else {
-      wx.showToast({
-        title: '请选择性别',
-        icon: 'none'
-      })
-      return false;
+      if(show_sex){
+        wx.showToast({
+          title: '请选择性别',
+          icon: 'none'
+        })
+        return false;
+      }
     }
 
     if (msg === '') {
@@ -281,6 +283,9 @@ Page({
     var add_data = ''
     if (this.data.test_state < 3) {
       add_data = msgs[current_index]
+      this.setData({
+        test_state: show_sex ? 1 : 2
+      })
     } else if (this.data.test_state == 3) {
       is_send = false;
       add_data = {
@@ -297,7 +302,7 @@ Page({
     let temp_lastId = messages[length - 1].id;
     this.setData({
       messages,
-      temp_lastId
+      temp_lastId,
     });
     is_send = false
     // 延迟页面向顶部滑动
