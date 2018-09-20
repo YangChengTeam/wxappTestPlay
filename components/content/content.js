@@ -15,6 +15,15 @@ Component({
     background: {
         type: String,
         value: "#f5f5f5",
+    },
+    scrollTop: {
+      type: Number,
+      value: 0,
+      observer: function (newVal, oldVal, changedPath) {
+          this.setData({
+            scrollTop: newVal
+          })
+      }
     }
   },
 

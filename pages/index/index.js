@@ -10,6 +10,7 @@ const kkcommon = require("../../libs/yc/yc-common.js")
 
 Page({
   data: {
+    top: 0,
     navopacity: 0,
     state: 0,
 
@@ -159,8 +160,10 @@ Page({
   },
   scroll(e) {
     let top = (e.detail.scrollTop)
+    console.log(top)
     this.setData({
-      navopacity: top / app.titleBarHeight
+      navopacity: top / app.titleBarHeight,
+      top: top
     })
   },
   touchmove(e) {
@@ -273,11 +276,12 @@ Page({
   },
   nav2like(e) {
      let thiz = this
+     console.log(thiz.top)
      co(function*(){
        let res = yield kkservice.testClassInfoList(-1)
         if(res && res.data && res.data.code == 1){
             thiz.setData({
-               you_like: res.data.data
+               you_like: res.data.data,     
             })
         }
      })
