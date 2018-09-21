@@ -27,7 +27,9 @@
     <view class="chat-input-wrapper">
       <view class="chat-input-record"></view>
       <view class="chat-input-main">
+
         <input value="{{ msg }}" class='input-name' cursor-spacing="16" cursor="16" confirm-type="send" focus='{{test_state == 2?true:false}}' confirm-hold="{{ true }}" bindinput="onInput" bindblur="blur" bindconfirm="send" bindfocus="onFocus"  maxlength='4' adjust-position="{{0}}" placeholder='请输入你的姓名'/>
+
       </view>
       <view class="chat-input-other">
         <view class='send-view' bindtap="send">确定</view>

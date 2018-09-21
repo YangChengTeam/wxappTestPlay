@@ -31,6 +31,7 @@ Page({
   onLoad: function(options) {
     console.log(kkconfig.global.userInfo)
     resultImgUrl = options.img_url
+    resultSavePath = options.save_img_url
     var that = this
     this.setData({
       share_title: options.share_title,

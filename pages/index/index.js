@@ -67,7 +67,12 @@ Page({
     appInfo: {},
 
     iscanusenavigator: false,
-    you_like: []
+    you_like: [],
+    floatImg: '../../assets/images/float_img.png',
+    isUse: true,
+    share_title: '',
+    share_img: '',
+    show_new_app:false
   },
   onLoad: function() {
     let thiz = this
@@ -82,7 +87,7 @@ Page({
       })
       var [status, res] = yield [kkservice.authPermission("scope.userInfo"), yield kkservice.getAppInfo()]
       if (status == kkconfig.status.authStatus.authOK) {
-           app.login()
+        app.login()
       }
       if (res && res.data && res.data.code == 1) {
         let appInfo = res.data.data
@@ -102,19 +107,37 @@ Page({
             })
           }
         }
+
+        var index = Math.floor(Math.random() * 2);
+        var simgs = appInfo.share_ico;
+        var stitles = appInfo.share_title;
         thiz.setData({
           state: kkconfig.status.stateStatus.NORMAL,
           appInfo: appInfo,
           topItemInfos: appInfo.day_commend_list,
           starLuckInfo: starLuckInfo,
-          you_like: appInfo.you_like
+          you_like: appInfo.you_like,
+          new_app_id: appInfo.more_app_info[0].url,
+          share_img_url: '../../assets/images/share_icon.png',
+          share_img: simgs && simgs.length > 1 ? simgs[index] : '',
+          share_title: stitles && stitles.length > 1 ? stitles[index]:'',
+          show_new_app: appInfo.more_app_info[0].status==0?false:true
         })
-        
+
       } else {
         thiz.setData({
           state: kkconfig.status.stateStatus.NODATA
         })
       }
+    })
+
+    wx.getSystemInfo({
+      success: function(res) {
+        var result = app.compareVersion(res.SDKVersion, '2.0.7')
+        thiz.setData({
+          isUse: result >= 0 ? true : false
+        })
+      },
     })
   },
   switchConstellation(obj) {
@@ -147,7 +170,7 @@ Page({
     let id = e.currentTarget.dataset.index
     let title = e.currentTarget.dataset.title
     wx.navigateTo({
-       url: '/pages/category/category?id=' + id + "&title=" + title,
+      url: '/pages/category/category?id=' + id + "&title=" + title,
     })
   },
   tab(e) {
@@ -276,16 +299,16 @@ Page({
     })
   },
   nav2like(e) {
-     let thiz = this
-     console.log(thiz.top)
-     co(function*(){
-       let res = yield kkservice.testClassInfoList(-1)
-        if(res && res.data && res.data.code == 1){
-            thiz.setData({
-               you_like: res.data.data,     
-            })
-        }
-     })
+    let thiz = this
+    console.log(thiz.top)
+    co(function*() {
+      let res = yield kkservice.testClassInfoList(-1)
+      if (res && res.data && res.data.code == 1) {
+        thiz.setData({
+          you_like: res.data.data,
+        })
+      }
+    })
   },
   nav2top(e) {
     wx.navigateTo({
@@ -314,5 +337,24 @@ Page({
     wx.navigateTo({
       url: '/pages/constellationdetail/constellationdetail',
     })
-  }
+  },
+  newApp: function(e) {
+    var that = this
+    wx.navigateToMiniProgram({
+      appId: that.data.new_app_id
+    })
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function() {
+    var that = this
+    console.log(that.data.share_img)
+    return {
+      title: that.data.share_title,
+      path: '/pages/index/index',
+      imageUrl: that.data.share_img
+    }
+  },
 })

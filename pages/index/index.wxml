@@ -201,3 +201,17 @@
     </block>
   </view>
 </view>
+
+<view class='float-view' wx:if='{{show_new_app}}'>
+  <view class="float-view-wrapper">
+    <image class='float-iamge' src='{{floatImg}}' mode='widthFix' bindtap='newApp'></image>
+    <navigator class="nav-view" wx:if='{{isUse}}' target="miniProgram" open-type="navigate" app-id="{{new_app_id}}" path="" extra-data="" version="release"></navigator>
+  </view>
+</view>
+
+<view class='share-float'>
+  <view class='share-wrapper'>
+    <image class='share-img-float' src='{{share_img_url}}'></image>
+    <button class='share-btn' open-type='share'></button>
+  </view>
+</view>

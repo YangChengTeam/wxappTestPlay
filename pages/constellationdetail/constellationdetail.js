@@ -55,6 +55,14 @@ Page({
         state: 2
       })
     }, 500)
+    
+    var temp_title = app.index.data.appInfo.share_title[2]
+    if (temp_title.indexOf('#!') > -1) {
+      let userInfo = wx.getStorageSync("userInfo")
+      if(userInfo){
+        temp_title = temp_title.replace('#!', userInfo.nickName)
+      }
+    }
 
     this.setData({
       starLuckInfo: starLuckInfo,
@@ -65,7 +73,9 @@ Page({
       career_index: starLuckInfo.hui.syzs / 20,
       money_index: starLuckInfo.hui.cfzs / 20,
       fortune_list: temp_list,
-      margin_top: mtop
+      margin_top: mtop,
+      share_img: app.index.data.appInfo.share_ico[2],
+      share_title: temp_title,
     })
     this.loadWeekStarData()
     this.loadMonthStarData()
@@ -178,6 +188,10 @@ Page({
   },
 
   cancelDialog:function(){
+    wx.setStorage({
+      key: 'is_share',
+      data: 'false',
+    })
     this.setData({
       show_dialog: 0
     })
@@ -186,6 +200,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
+
     wx.setStorage({
       key: 'is_share',
       data: 'true',
@@ -196,8 +211,9 @@ Page({
     })
     var that = this
     return {
-      title: '快来跟你的好友一起测试吧',
-      path: '/pages/index/index'
+      title: that.data.share_title,
+      path: '/pages/index/index',
+      imageUrl: that.data.share_img
     }
   },
 

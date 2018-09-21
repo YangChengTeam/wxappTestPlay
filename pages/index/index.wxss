@@ -459,3 +459,55 @@ view.avatar > image, view.avatar > open-data {
   font-weight: bold;
 }
 
+.float-view {
+  position: absolute;
+  left: 20rpx;
+  bottom:26%;
+}
+
+.float-view-wrapper {
+    position: relative;
+    width: 120rpx;
+    height: 120rpx;
+}
+
+.float-iamge {
+  width: 120rpx;
+  height: 120rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+
+.share-float {
+  width: 178rpx;
+  height: 130rpx;
+  position: fixed;
+  bottom: 28%;
+  right: 20rpx;
+}
+
+.share-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.share-img-float {
+  width: 178rpx;
+  height: 130rpx;
+}
+
+.share-btn {
+  width: 178rpx;
+  height: 130rpx;
+  background: rgba(255, 255, 255, 0);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+button,button::after{
+  border: 0;
+}

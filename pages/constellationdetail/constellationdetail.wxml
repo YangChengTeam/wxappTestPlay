@@ -25,7 +25,7 @@
           <image class='dialog-bg-img' src='../../assets/images/dialog_bg.png'></image>
           <view class='dialog-txt'>
               <text class='content-txt'>
-                  糟糕，本周运势被一股强大的力量封印了，需要分享给好友解锁封印！
+                  糟了，更多星座运势被神秘力量封印，需好友助力才可查看！
               </text>
               <view class='dialog-btn-view'>
                 <button class='config-btn' open-type='share'>确定</button>
