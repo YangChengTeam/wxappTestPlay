@@ -25,6 +25,7 @@ var jump_type
 var select_sex = -1
 var test_info
 var show_sex = true
+var is_share
 Page({
   data: {
     kbHeight: 0,
@@ -66,26 +67,28 @@ Page({
     is_start = false
     result_path = ''
     result_save_path = ''
-    wx.setNavigationBarTitle({
-      title: '你的荣格心理原型'
-    });
+
     app.testplay = this
 
     this.setData({
       totalTopHeight: app.totalTopHeight
     })
 
-    if (app.testInfo) {
+    if (options.is_share) {
+      console.log('test play2 options info ---->')
+      is_share = options.is_share
+      this.setData({
+        tid: options.tid,
+        test_type: options.test_type,
+        share_img: options.share_img,
+        share_title: options.share_title,
+      })
+    } else {
+      console.log('test play2 app testinfo ---->')
       test_info = app.testInfo
       this.setData({
         tid: test_info.id,
         test_type: test_info.test_type
-      })
-    } else {
-
-      this.setData({
-        tid: options.tid,
-        test_type: options.test_type
       })
     }
 
@@ -211,12 +214,12 @@ Page({
   },
   // 聚焦
   onFocus(e) {
-    let h = e.detail.height
+    let height = e.detail.height
     this.setData({
-        kbHeight: h
+      kbHeight: height
     })
   },
-  blur(e){
+  blur(e) {
     this.setData({
       kbHeight: 0
     })
@@ -239,7 +242,7 @@ Page({
         test_state: 2
       })
     } else {
-      if(show_sex){
+      if (show_sex) {
         wx.showToast({
           title: '请选择性别',
           icon: 'none'
@@ -388,6 +391,36 @@ Page({
           that.totop(current_index)
         }, 500);
 
+      } else if (res && res.data && res.data.code == -1) {
+        console.log('code--->' + res.data.code)
+        wx.hideLoading()
+        wx.showToast({
+          title: '输入内容含有敏感词，请重新输入',
+          icon: 'none'
+        })
+      
+        let messages = that.data.messages;
+        let nums = messages.length;
+
+        var add_data = {
+            id: `msg${++nums}`,
+            sub_title: '输入内容含有敏感词，请重新输入',
+            messageType: 1,
+            url: '../../assets/images/logo.png'
+        };
+        
+        messages.push(add_data);
+        current_index++
+        is_over = false
+        setTimeout(() => {
+          that.setData({
+            messages,
+            test_state: 2,
+            is_over: is_over
+          });
+          that.totop(current_index)
+        }, 500);
+
       } else {
         wx.hideLoading()
         wx.showToast({
@@ -401,7 +434,7 @@ Page({
 
   toResult: function() {
     wx.redirectTo({
-      url: '/pages/testresult/testresult?img_url=' + result_path + '&save_img_url=' + result_save_path,
+      url: '/pages/testresult/testresult?tid=' + this.data.tid + '&test_type=' + this.data.test_type + '&img_url=' + result_path + '&save_img_url=' + result_save_path + '&share_title=' + this.data.share_title + '&share_img=' + this.data.share_img,
     })
   },
 

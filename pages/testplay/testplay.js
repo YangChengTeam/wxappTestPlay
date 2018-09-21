@@ -21,9 +21,8 @@ var subject_title
 var subject_img
 var jump_type
 var result_id
-
 var test_info
-
+var is_share = ''
 Page({
   data: {
     state: 0,
@@ -53,21 +52,22 @@ Page({
       title: '心理测试库'
     });
 
-    
-
     app.testplay = this
-
+    console.log('app.totalTopHeight--->' + app.totalTopHeight)
     this.setData({
       totalTopHeight: app.totalTopHeight,
     })
 
-    test_info = app.testInfo
-    if (test_info) {
-      this.data.tid = test_info.id
-      this.data.test_type = test_info.test_type
-    } else {
+    if (options.is_share) {
+      console.log('test play options info ---->')
+      is_share = options.is_share
       this.data.tid = options.tid
       this.data.test_type = options.test_type
+    } else {
+      console.log('test play app testinfo ---->')
+      test_info = app.testInfo
+      this.data.tid = test_info.id
+      this.data.test_type = test_info.test_type
     }
 
     var that = this
@@ -89,8 +89,6 @@ Page({
         })
       }
     })
-
-
   },
   totop(index){
     wx.pageScrollTo({
@@ -215,7 +213,7 @@ Page({
   // 延迟页面向顶部滑动
   delayPageScroll() {
 
-    console.log('delayPageScroll--->' + current_index)
+    console.log('执行delayPageScroll--->')
 
     const messages = this.data.messages;
     const length = messages.length;
@@ -282,6 +280,7 @@ Page({
   },
 
   receive() {
+    console.log('执行receive--->')
     let messages = this.data.messages;
     let nums = messages.length;
 
@@ -401,8 +400,9 @@ Page({
         that.data.messages = null
         that.msgs = null
         wx.hideLoading()
+
         wx.redirectTo({
-          url: '/pages/testresult/testresult?img_url=' + res.data.data.image_nocode + '&save_img_url=' + res.data.data.image,
+          url: '/pages/testresult/testresult?img_url=' + res.data.data.image_nocode + '&save_img_url=' + res.data.data.image + '&share_title=' + that.data.share_title + '&share_img=' + that.data.share_img + '&test_type=' + that.data.test_type + '&tid=' + that.data.tid,
         })
       } else {
         wx.hideLoading()
@@ -413,12 +413,7 @@ Page({
       }
     })
   },
-
-  toResult: function() {
-    wx.navigateTo({
-      url: '/pages/result/result?result_path=' + result_path + '&save_path=' + result_save_path
-    })
-  },
+  
   /**
    * 用户点击右上角分享
    */

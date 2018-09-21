@@ -9,7 +9,7 @@ const kkcommon = require("../../libs/yc/yc-common.js")
 var starLuckInfo
 var week_starLuckInfo
 var month_starLuckInfo
-
+var is_share = false
 Page({
 
   /**
@@ -17,11 +17,12 @@ Page({
    */
   data: {
     state: 0,
+    show_dialog:0,
     comp_starts: ['1', '2', '3', '4', '5'],
     star_normal: '../../assets/images/star_normal.png',
     star_current: '../../assets/images/star_current_num.png',
-    type_img: ['t0.png','t1.png', 't2.png', 't3.png', 't4.png', 't5.png'],
-    type_name: ['今日提醒','综合评语', '爱情运势', '事业运势', '财富运势', '健康运势'],
+    type_img: ['t0.png', 't1.png', 't2.png', 't3.png', 't4.png', 't5.png'],
+    type_name: ['今日提醒', '综合评语', '爱情运势', '事业运势', '财富运势', '健康运势'],
     type_color: ['#ff6562', '#7234e1', '#f7709d', '#0494e2', '#ffcc00', '#4ccb52'],
     currentData: 0,
   },
@@ -30,6 +31,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.getStorage({
+      key: 'is_share',
+      success: function(res) {
+        is_share = res.data
+      },
+    })
+
     var that = this
     starLuckInfo = app.index.data.starLuckInfo
 
@@ -41,12 +49,12 @@ Page({
     }
 
     var mtop = app.totalTopHeight * 750 / app.systemInfo.windowWidth + 100
-    
-    setTimeout(function(){
+
+    setTimeout(function() {
       that.setData({
-        state:2
+        state: 2
       })
-    },500)
+    }, 500)
 
     this.setData({
       starLuckInfo: starLuckInfo,
@@ -76,9 +84,9 @@ Page({
       }
 
       let temp_list = week_starLuckInfo.list
-      
+
       for (let i = 0; i < temp_list.length; i++) {
-        if(i==0){
+        if (i == 0) {
           that.data.type_name[i] = '温馨短评'
         }
         temp_list[i]['type_img'] = '../../assets/images/' + that.data.type_img[i]
@@ -97,9 +105,9 @@ Page({
     })
   },
 
-  loadMonthStarData: function () {
+  loadMonthStarData: function() {
     var that = this
-    co(function* () {
+    co(function*() {
       let userInfo = kkconfig.global.userInfo
       let res = yield kkservice.starIndex(app.index.data.starInfo.name, "month", userInfo && userInfo.gender == 1 ? "boy" : "girl")
       month_starLuckInfo = res.data.data
@@ -110,10 +118,10 @@ Page({
       }
 
       let temp_list = month_starLuckInfo.list
-      if (temp_list.length>5){
-        temp_list = temp_list.splice(0,5)
+      if (temp_list.length > 5) {
+        temp_list = temp_list.splice(0, 5)
       }
-      
+
       for (let i = 0; i < temp_list.length; i++) {
         if (i == 0) {
           that.data.type_name[i] = '温馨短评'
@@ -136,23 +144,61 @@ Page({
 
   //点击切换，滑块index赋值
   checkCurrent: function(e) {
-    
+
     let index = e.currentTarget.dataset.current
+
+    if (index >0 && !is_share) {
+      this.setData({
+        show_dialog: 1
+      })
+      return
+    }
+
     if (this.data.currentData === index) {
       return false;
     }
-
+    
     this.setData({
       currentData: index,
     })
-    
+
   },
   /*** 滑动切换tab***/
   bindChange: function(e) {
+    if(e.detail.current > 0 && !is_share){
+      this.setData({
+        show_dialog:1
+      })
+      return
+    }
     var that = this;
     that.setData({
       currentData: e.detail.current
     });
-  }
-  
+  },
+
+  cancelDialog:function(){
+    this.setData({
+      show_dialog: 0
+    })
+  },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function() {
+    wx.setStorage({
+      key: 'is_share',
+      data: 'true',
+    })
+    is_share = true
+    this.setData({
+      show_dialog:0
+    })
+    var that = this
+    return {
+      title: '快来跟你的好友一起测试吧',
+      path: '/pages/index/index'
+    }
+  },
+
 })

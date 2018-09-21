@@ -1,5 +1,5 @@
 <content>
-  <nav is_back title="心理测试库"></nav>
+  <nav is_back='{{is_share?false:true}}' title="心理测试库"></nav>
   <stateview state="{{state}}">
     <view class='result-view'>
       <image class='result-img' style="width: {{w}}rpx; height: {{h}}rpx;{{test_type ==2?'border: 15rpx solid #fff;':'' }}" bindload="loadresult" src='{{result_img}}'  bindtap='preimage'></image>

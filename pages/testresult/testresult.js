@@ -22,7 +22,7 @@ Page({
     share_img: '',
     test_type: '',
     tid: '',
-    is_share:false
+    is_share: false
   },
 
   /**
@@ -30,46 +30,28 @@ Page({
    */
   onLoad: function(options) {
     console.log(kkconfig.global.userInfo)
-
     resultImgUrl = options.img_url
-    console.log('result tid --->' + options.tid)
     var that = this
-    var is_share = options.is_share
-    if (is_share && is_share == 1) {
-      this.setData({
-        share_title: options.share_title,
-        share_img: options.share_img,
-        test_type: options.test_type,
-        tid: options.tid,
-      })
+    this.setData({
+      share_title: options.share_title,
+      share_img: options.share_img,
+      test_type: options.test_type,
+      tid: options.tid,
+    })
 
-      co(function*() {
-        let res = yield kkservice.getAppInfo()
-        if (res && res.data && res.data.code == 1) {
-          that.setData({
-            result_img: resultImgUrl,
-            appInfo: res.data.data,
-            is_share: true
-          })
-        }
-      })
-    } else {
-      resultSavePath = options.save_img_url
-      console.log('save path--->' + resultSavePath)
-      this.setData({
-        share_title: app.testplay.data.share_title,
-        share_img: app.testplay.data.share_img,
-        test_type: app.testInfo.test_type,
-        tid: app.testInfo.id,
-        is_share: false,
-        result_img: resultImgUrl,
-        appInfo: app.index.data.appInfo
-      })
-    }
+    co(function*() {
+      let res = yield kkservice.getAppInfo()
+      if (res && res.data && res.data.code == 1) {
+        that.setData({
+          result_img: resultImgUrl,
+          appInfo: res.data.data,
+          is_share: false
+        })
+      }
+    })
   },
-
+  
   loadresult(e) {
-
     if (this.data.test_type == 1) {
       let w = e.detail.width
       let h = e.detail.height
@@ -87,8 +69,8 @@ Page({
       let w = e.detail.width
       let h = e.detail.height
 
-      let rh = 600
-      let rw = w * 600 / h
+      let rh = 750
+      let rw = w * 750 / h
       this.setData({
         w: rw,
         h: rh,
@@ -98,7 +80,7 @@ Page({
   },
 
   nav2more(e) {
-    wx.navigateTo({
+    wx.reLaunch({
       url: "/pages/index/index"
     })
   },
@@ -112,12 +94,13 @@ Page({
     } else {
       if (this.data.test_type == 1) {
         wx.redirectTo({
-          url: '/pages/testplay/testplay?tid=' + this.data.tid + '&test_type=' + this.data.test_type
+          url: '/pages/testplay/testplay?tid=' + this.data.tid + '&test_type=' + this.data.test_type +
+            '&share_title=' + this.data.share_title + '&share_img=' + this.data.share_img + '&is_share=1'
         })
       } else {
-
         wx.redirectTo({
-          url: '/pages/testplay2/testplay2?tid=' + this.data.tid + '&test_type=' + this.data.test_type
+          url: '/pages/testplay2/testplay2?tid=' + this.data.tid + '&test_type=' + this.data.test_type +
+            '&share_title=' + this.data.share_title + '&share_img=' + this.data.share_img + '&is_share=1'
         })
       }
     }
@@ -230,10 +213,19 @@ Page({
 
     console.log('处理后sharetitle--->' + temp_title + '---tid-->' + this.data.tid)
 
+    var temp_path
+    if (this.data.test_type == 1) {
+      temp_path = '/pages/testplay/testplay?tid=' + this.data.tid + '&test_type=' + this.data.test_type +
+        '&share_title=' + temp_title + '&share_img=' + this.data.share_img + '&is_share=1'
+    } else {
+      temp_path = '/pages/testplay2/testplay2?tid=' + this.data.tid + '&test_type=' + this.data.test_type +
+        '&share_title=' + temp_title + '&share_img=' + this.data.share_img + '&is_share=1'
+    }
+
     var that = this
     return {
       title: temp_title,
-      path: '/pages/testresult/testresult?img_url=' + resultImgUrl + '&save_img_url=' + resultSavePath + '&is_share=1&share_title=' + temp_title + '&share_img=' + that.data.share_img + '&test_type=' + that.data.test_type + '&tid=' + that.data.tid,
+      path: temp_path,
       imageUrl: that.data.share_img
     }
   },

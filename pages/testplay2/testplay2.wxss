@@ -122,7 +122,8 @@ button,button::after{
 
 .bottom-btn{
   width: 100%;
-  height: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
   color: #fff;
   font-size: 36rpx;
   background: rgba(255,255,255,0)

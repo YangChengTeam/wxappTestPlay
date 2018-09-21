@@ -2,6 +2,7 @@
   "usingComponents": {
     "nav": "/components/nav/nav",
     "stateview": "/components/stateview/stateview",
-    "content": "/components/content/content"
+    "content": "/components/content/content",
+    "dialog": "/components/dialog/dialog"
   }
 }

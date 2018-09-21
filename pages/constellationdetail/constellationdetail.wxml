@@ -3,9 +3,9 @@
 <view class="main-content" >
   <stateview state="{{state}}">
 
-</stateview>
+  </stateview>
   <image class="my-header-bg" src='../../assets/images/my-header-bg3.png' style='height:{{totalTopHeight}}px'></image>
-  <nav ishidenod="0" back_icon_path="back2.png" title="运势" is_back background="rgba(68,33,144,0)" color="#fff"></nav>
+  <nav ishidenod="0" back_icon_path="back2.png" title="星座运势" is_back background="rgba(68,33,144,0)" color="#fff"></nav>
   <view class="tab" style='top:{{totalTopHeight}}px;' hidden='{{state != 2}}'>
     <view class="tab-wrapper">
       <view class="tab-item {{currentData == 0 ? 'tab-item-current' : ''}}" data-current="0" bindtap='checkCurrent'>
@@ -19,8 +19,22 @@
       </view>
     </view>
   </view>
-  
-
+  <dialog isshow='{{show_dialog}}'>
+      <view class='dialog-bg'>
+          <image class='dialog-top-img' src='../../assets/images/dialog_top.png'></image>
+          <image class='dialog-bg-img' src='../../assets/images/dialog_bg.png'></image>
+          <view class='dialog-txt'>
+              <text class='content-txt'>
+                  糟糕，本周运势被一股强大的力量封印了，需要分享给好友解锁封印！
+              </text>
+              <view class='dialog-btn-view'>
+                <button class='config-btn' open-type='share'>确定</button>
+                <text class='cancal-txt' bindtap='cancelDialog'>取消</text>
+              </view>
+          </view>
+      </view>
+      <image class='close-img' src='../../assets/images/close_icon.png' bindtap='cancelDialog'></image>
+  </dialog>
   <swiper current='{{currentData}}' hidden="{{state!=2}}" bindchange="bindChange" >
     <swiper-item class='swiper-item'>
       <scroll-view class='scroll-view' scroll-y>

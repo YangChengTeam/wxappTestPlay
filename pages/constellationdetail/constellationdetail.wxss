@@ -292,3 +292,107 @@ swiper {
 .type-content-txt {
   font-size: 30rpx;
 }
+
+.dialog-bg {
+  width: 524rpx;
+  height: 524rpx;
+  position: relative;
+}
+
+.dialog-top-img {
+  width: 240rpx;
+  height: 224rpx;
+  position: absolute;
+  left: 142rpx;
+  z-index: 100;
+}
+
+.dialog-bg-img {
+  width: 524rpx;
+  height: 322rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.close-img {
+  width: 60rpx;
+  height: 60rpx;
+  margin-top: 40rpx;
+  padding: 30rpx;
+}
+
+.dialog-txt {
+  width: 80%;
+  height: 322rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  margin-left: 10%;
+}
+
+.content-txt {
+  font-size: 32rpx;
+  color: #333;
+}
+
+.dialog-btn-view {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 16rpx;
+  left: 10%;
+}
+
+.config-wrapper {
+  width: 200rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #000;
+  font-size: 36rpx;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+}
+
+.config-txt {
+  width: 200rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #000;
+  font-size: 36rpx;
+  font-weight: 600;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.config-btn{
+  width: 200rpx;
+  height: 100rpx;
+  color: #000;
+  font-size: 36rpx;
+  font-weight: 600;
+  text-align: center;
+  line-height: 100rpx;
+  background: rgba(255,255,255,0);
+}
+
+button,button::after{
+  border: 0;
+}
+
+.cancal-txt {
+  width: 200rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #000;
+  font-size: 36rpx;
+  font-weight: 600;
+  text-align: center;
+}
