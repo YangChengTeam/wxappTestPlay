@@ -69,7 +69,7 @@ Page({
     } else {
       let w = e.detail.width
       let h = e.detail.height
-
+      console.log('w---'+ w + '---h--->'  + h)
       let rh = 750
       let rw = w * 750 / h
       this.setData({
@@ -77,6 +77,17 @@ Page({
         h: rh,
         state: 2
       })
+
+      
+      if(w > 700){
+        let rw = 700;
+        let rh = h / w * rw
+        this.setData({
+          w: rw,
+          h: rh,
+          state: 2
+        })
+      }
     }
   },
 

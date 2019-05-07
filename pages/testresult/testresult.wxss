@@ -115,3 +115,10 @@
   color: #7234e1;
   font-size: 28rpx;
 }
+
+.ad-view {
+  width: 750rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}

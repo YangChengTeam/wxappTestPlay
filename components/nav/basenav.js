@@ -45,9 +45,10 @@ Component({
           totalTopHeight = 64
         }
         app.systemInfo = res
-        app.totalTopHeight = totalTopHeight
+        
         app.statusBarHeight = res.statusBarHeight
-        app.titleBarHeight = totalTopHeight - res.statusBarHeight
+        app.totalTopHeight = res.statusBarHeight + 44
+        app.titleBarHeight = 44
         thiz.setData({
           totalTopHeight: app.totalTopHeight,
           statusBarHeight: app.statusBarHeight,

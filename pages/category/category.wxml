@@ -2,6 +2,8 @@
 <content isshowtop>
   <nav is_back title="{{title}}"></nav>
   <stateview state="{{state}}">
-    <item wx:for="{{list}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="name" islast="{{index+1==list.length}}"></item>
+    <item wx:for="{{list}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="name" islast="{{index+1==list.length}}">
+         <ad unit-id="adunit-8b312d263de39eea" wx:if="{{index % 10 == 0 ? 1: 0}}"></ad>
+    </item>
   </stateview>
 </content>

@@ -134,9 +134,10 @@
 .title-bg {
   background: #fff;
   max-width: 72%;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
+  width: 300rpx;
   padding-top: 10rpx;
+  padding-left: 6rpx;
+  padding-right: 6rpx;
   border: 12rpx solid #fff;
   padding-bottom: 20rpx;
   border-radius: 14px;
@@ -236,6 +237,5 @@
 
 .res-img {
   max-width: 420rpx;
-  height: 250rpx;
   filter: blur(2px);
 }

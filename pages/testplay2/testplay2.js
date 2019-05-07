@@ -69,10 +69,32 @@ Page({
     result_save_path = ''
 
     app.testplay = this
-
-    this.setData({
-      totalTopHeight: app.totalTopHeight
-    })
+    if (!app.totalTopHeight) {
+      let thiz = this
+      wx.getSystemInfo({
+        success: function (res) {
+          let totalTopHeight = 68
+          if (res.model.indexOf('iPhone X') !== -1) {
+            totalTopHeight = 88
+          } else if (res.model.indexOf('iPhone') !== -1) {
+            totalTopHeight = 64
+          }
+          app.systemInfo = res
+          app.totalTopHeight = totalTopHeight
+          app.statusBarHeight = res.statusBarHeight
+          app.titleBarHeight = totalTopHeight - res.statusBarHeight
+          thiz.setData({
+            totalTopHeight: app.totalTopHeight,
+            statusBarHeight: app.statusBarHeight,
+            titleBarHeight: app.titleBarHeight,
+          })
+        }
+      })
+    }else{
+      this.setData({
+        totalTopHeight: app.totalTopHeight
+      })
+    }
 
     if (options.is_share) {
       console.log('test play2 options info ---->')
@@ -80,8 +102,8 @@ Page({
       this.setData({
         tid: options.tid,
         test_type: options.test_type,
-        share_img: options.share_img,
-        share_title: options.share_title,
+        share_img: options.share_img || '',
+        share_title: options.share_title || '',
       })
     } else {
       console.log('test play2 app testinfo ---->')
@@ -293,8 +315,9 @@ Page({
     if (this.data.test_state < 3) {
       add_data = msgs[current_index]
       this.setData({
-        test_state: show_sex ? 1 : 2
+        test_state: show_sex && this.data.test_state < 2 ? 1 : 2
       })
+      console.log('state--->' + this.data.test_state)
     } else if (this.data.test_state == 3) {
       is_send = false;
       add_data = {

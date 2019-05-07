@@ -209,7 +209,7 @@
   </view>
 </view>
 
-<view class='share-float'>
+<view class='share-float' wx:if='{{index == 0}}'>
   <view class='share-wrapper'>
     <image class='share-img-float' src='{{share_img_url}}'></image>
     <button class='share-btn' open-type='share'></button>

@@ -12,7 +12,7 @@
           <image class='save-img' src='../../assets/images/save_img.png'></image>
           <button class='save-btn'></button>
         </view>
-      </view>
+      </view> 
       <block wx:if='{{!is_share}}'>
         <view class='again-view' bindtap='testAgain' data-isagain='1'>
           <image class='again-img' src='../../assets/images/test_again.png'></image>
@@ -26,12 +26,17 @@
         </view>
       </block>
     </view>
+    
     <view class="hot">
         <view class="hot-header" bindtap='nav2more'>
           <image src='../../assets/images/hot_send.png'></image>
           <view class='more-txt'>更多测试</view>
         </view>
-    <item wx:for="{{appInfo.hot_list}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="id" islast="{{index+1==appInfo.hot_list.length}}"></item>
+    <item wx:for="{{appInfo.hot_list}}" info="{{item}}" wx:for-index="index" wx:for-item="item" wx:key="id" islast="{{index+1==appInfo.hot_list.length}}">
+      
+    </item>
     </view>
   </stateview>
+  <view style='height:135px;'></view>
 </content>
+<view class='ad-view'><ad unit-id="adunit-c86a808cf28a200d" ></ad></view>

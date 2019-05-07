@@ -53,11 +53,34 @@ Page({
     });
 
     app.testplay = this
-    console.log('app.totalTopHeight--->' + app.totalTopHeight)
-    this.setData({
-      totalTopHeight: app.totalTopHeight,
-    })
 
+    if (!app.totalTopHeight){
+      let thiz = this
+      wx.getSystemInfo({
+        success: function (res) {
+          let totalTopHeight = 68
+          if (res.model.indexOf('iPhone X') !== -1) {
+            totalTopHeight = 88
+          } else if (res.model.indexOf('iPhone') !== -1) {
+            totalTopHeight = 64
+          }
+          app.systemInfo = res
+          app.totalTopHeight = totalTopHeight
+          app.statusBarHeight = res.statusBarHeight
+          app.titleBarHeight = totalTopHeight - res.statusBarHeight
+          thiz.setData({
+            totalTopHeight: app.totalTopHeight,
+            statusBarHeight: app.statusBarHeight,
+            titleBarHeight: app.titleBarHeight
+          })
+        }
+      })
+    }else{
+      this.setData({
+        totalTopHeight: app.totalTopHeight,
+      })
+    }
+    
     if (options.is_share) {
       console.log('test play options info ---->')
       is_share = options.is_share

@@ -11,9 +11,10 @@
   ],
   "window": {
     "navigationStyle": "custom",
-    "disableScroll": true,
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTextStyle": "black"
-  }
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false
+  },
+  "sitemapLocation": "sitemap.json"
 }

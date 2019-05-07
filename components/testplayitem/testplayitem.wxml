@@ -1,4 +1,5 @@
 <!--components/testplayitem/testplayitem.wxml-->
+<slot></slot>
 <view class="test-play-item" bindtap='nav2test'>
   <view wx:if="{{info.test_type==3}}" class="test-play-navigator">
     <view wx:if="{{!iscanusenavigator}}" bindtap='natiageToMiniProgram' data-appid="{{info.url}}"></view>
@@ -15,3 +16,4 @@
   </view>
 </view>
 <view wx:if="{{!islast}}" class="test-play-item-bottom"></view>
+

@@ -99,12 +99,26 @@ Page({
         let starLuckInfo = {}
         if (thiz.data.starInfo) {
           let userInfo = wx.getStorageSync("userInfo")
-          res = yield kkservice.starIndex(thiz.data.starInfo.name, "today", userInfo && userInfo.gender == 1 ? "boy" : "girl")
-          starLuckInfo = res.data.data
-          if (starLuckInfo && starLuckInfo.intro) {
-            starLuckInfo.intro.forEach((v, k) => {
-              starLuckInfo.intro[k] = v.split("：")[1]
+          res = yield kkservice.starIndex(thiz.data.starInfo.name, "today", userInfo && userInfo.gender == 1 ? "boy" : "girl").catch(()=>{
+            thiz.setData({
+              state: kkconfig.status.stateStatus.NORMAL,
+              appInfo: appInfo,
+              topItemInfos: appInfo.day_commend_list,
+              you_like: appInfo.you_like,
+              new_app_id: appInfo.more_app_info[0].url,
+              share_img_url: '../../assets/images/share_icon.png',
+              share_img: simgs && simgs.length > 1 ? simgs[index] : '',
+              share_title: stitles && stitles.length > 1 ? stitles[index] : '',
+              show_new_app: appInfo.more_app_info[0].status == 0 ? false : true
             })
+          });
+          if(res){
+            starLuckInfo = res.data.data
+            if (starLuckInfo && starLuckInfo.intro) {
+              starLuckInfo.intro.forEach((v, k) => {
+                starLuckInfo.intro[k] = v.split("：")[1]
+              })
+            }
           }
         }
 
@@ -147,12 +161,16 @@ Page({
     co(function*() {
       if (thiz.data.starInfo) {
         let userInfo = wx.getStorageSync("userInfo")
-        let res = yield kkservice.starIndex(thiz.data.starInfo.name, "today", userInfo && userInfo.gender == 1 ? "boy" : "girl")
-        starLuckInfo = res.data.data
-        if (starLuckInfo && starLuckInfo.intro) {
-          starLuckInfo.intro.forEach((v, k) => {
-            starLuckInfo.intro[k] = v.split("：")[1]
-          })
+        let res = yield kkservice.starIndex(thiz.data.starInfo.name, "today", userInfo && userInfo.gender == 1 ? "boy" : "girl").catch(()=>{
+              
+        });
+        if(res){
+            starLuckInfo = res.data.data
+            if (starLuckInfo && starLuckInfo.intro) {
+              starLuckInfo.intro.forEach((v, k) => {
+                starLuckInfo.intro[k] = v.split("：")[1]
+              })
+            }
         }
       }
       console.log(obj)

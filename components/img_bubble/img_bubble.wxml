@@ -9,7 +9,7 @@
         </view>
       </view>
       <view class='title-bg'>
-        <image class='res-img' src='{{result_path}}' mode='aspectFill' bindtap='toResult'></image>
+        <image class='res-img' src='{{result_path}}' mode='widthFix' bindtap='toResult'></image>
       </view>
     </view>
   </view>
